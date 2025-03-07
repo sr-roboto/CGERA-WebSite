@@ -174,37 +174,6 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Video */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/*
-          <div className="lg:text-center">
-            <PlayCircle className="mx-auto h-12 w-12 text-blue-600" />
-            <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Mire Nuestra Historia
-            </h2>
-            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-              Obtenga más información sobre la trayectoria y el impacto de CGERA
-              a través de nuestro video de introducción.
-            </p>
-          </div>
-          */}
-          <div className="mt-10 aspect-w-16 aspect-h-9">
-            <div className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
-              <div className="aspect-w-16 aspect-h-9">
-                <iframe
-                  className="w-full h-[500px]"
-                  src="https://www.youtube.com/embed/_wNmXdPKL8Q"
-                  title="About CGERA"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

@@ -96,7 +96,7 @@ const NewsPage = () => {
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+            src="https://media.istockphoto.com/id/2032406889/photo/male-leader-talking-to-his-team-about-plans-on-a-meeting-in-the-office.webp?s=2048x2048&w=is&k=20&c=PcgPvBDzKpxtr_GojaHM1D-N9g1kxZ-dpd1fyqijRrA="
             alt="News Header"
           />
           <div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-75" />

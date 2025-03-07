@@ -4,9 +4,10 @@ import NavBar from './components/NavBar';
 import Hero from './components/Hero';
 import NewSection from './components/NewSection';
 import Footer from './components/Footer';
-import AboutUs from './components/AboutUs';
+import AboutUs from './pages/AboutUsPage';
 import NewsPage from './pages/NewsPage';
 import LandingPage from './pages/LandingPage';
+import Streaming from './pages/StreamingPage';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/streaming" element={<Streaming />} />
           </Routes>
         </main>
         <Footer />

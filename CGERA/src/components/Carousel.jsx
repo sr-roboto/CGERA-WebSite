@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import img from 
 
-const Carousel = () => {
+const Carousel = ( ) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
     '/docs/images/carousel/carousel-1.svg',

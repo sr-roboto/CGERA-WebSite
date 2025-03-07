@@ -36,12 +36,12 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-white">
+                <a href="/about" className="text-gray-300 hover:text-white">
                   Sobre Nosotros
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white">
+                <a href="/news" className="text-gray-300 hover:text-white">
                   Novedades
                 </a>
               </li>
