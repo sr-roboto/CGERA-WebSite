@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   Play,
@@ -33,13 +33,24 @@ export default function CgeraTvPage() {
 const HeroSection = () => {
   return (
     <section className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+      {/* Video de fondo */}
       <div className="absolute inset-0 overflow-hidden">
-        <img
-          src="/placeholder.svg?height=600&width=1600"
-          alt="CGERA TV Background"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="object-cover w-full h-full opacity-20"
-        />
+        >
+          <source
+            src="https://media.istockphoto.com/id/2156675608/video/hispanic-latin-american-couple-software-engineer-developer-use-computer-work-on-program.mp4?s=mp4-640x640-is&k=20&c=CHzdhPE9Y2wEdr0zqltlfhgLpGB9AU1mGnuo0AU91jk="
+            type="video/mp4"
+          />
+          Tu navegador no soporta videos.
+        </video>
       </div>
+
+      {/* Contenido */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h1
@@ -86,6 +97,7 @@ const HeroSection = () => {
   );
 };
 
+
 const FeaturedVideoSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -99,7 +111,7 @@ const FeaturedVideoSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Video Destacado</h2>
+          <h2 className="text-black text-3xl font-bold mb-4">Video Destacado</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Mira nuestro contenido más reciente y relevante para el sector PYME.
           </p>
@@ -112,54 +124,23 @@ const FeaturedVideoSection = () => {
           className="max-w-5xl mx-auto"
         >
           <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-video group cursor-pointer">
-            <img
-              src="/placeholder.svg?height=720&width=1280"
-              alt="Video Destacado"
-              className="object-cover w-full h-full"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
-              <span className="bg-blue-600 text-white px-3 py-1 rounded-full mb-2 self-start">
-                Entrevista
-              </span>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Perspectivas económicas 2023: Oportunidades para PYMEs
-              </h3>
-              <p className="text-white/90 mb-4 max-w-2xl">
-                Entrevista exclusiva con reconocidos economistas sobre el
-                panorama económico y las estrategias que pueden implementar las
-                pequeñas y medianas empresas.
-              </p>
-              <div className="flex items-center gap-4 text-white/80 text-sm mb-4">
-                <span className="flex items-center gap-1">
-                  <Calendar size={14} /> 15 Mar 2023
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock size={14} /> 45:32
-                </span>
-              </div>
-              <div className="flex gap-3">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2">
-                  <Play size={16} /> Reproducir Ahora
-                </button>
-                <button className="text-white border border-white hover:bg-white/10 px-4 py-2 rounded-lg flex items-center gap-2">
-                  <Bookmark size={16} /> Guardar
-                </button>
-                <button className="text-white border border-white hover:bg-white/10 px-4 py-2 rounded-lg flex items-center gap-2">
-                  <Share2 size={16} />
-                </button>
-              </div>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white/90 rounded-full p-5 shadow-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                <Play className="h-10 w-10 text-primary group-hover:text-white" />
-              </div>
-            </div>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/_wNmXdPKL8Q?autoplay=0"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
         </motion.div>
       </div>
     </section>
   );
 };
+
 
 const VideoCategoriesSection = () => {
   const ref = useRef(null);
@@ -202,7 +183,7 @@ const VideoCategoriesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Explora por Categorías</h2>
+          <h2 className="text-black text-3xl font-bold mb-4">Explora por Categorías</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Encuentra el contenido que más te interesa organizado por temáticas.
           </p>
@@ -216,8 +197,8 @@ const VideoCategoriesSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg">
-                <div className="mx-auto w-16 h-16 relative mb-2">
+              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg  border border-gray-300 rounded-ful">
+                <div className="mx-auto w-16 h-16 relative mb-2l">
                   <img
                     src={category.icon || '/placeholder.svg'}
                     alt={category.title}
@@ -244,6 +225,10 @@ const VideoCategoriesSection = () => {
 const VideoArchiveSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const categories = ['Todos', 'Entrevistas', 'Capacitaciones', 'Análisis', 'Eventos'];
 
   const videos = [
     {
@@ -305,7 +290,7 @@ const VideoArchiveSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold">Biblioteca de Videos</h2>
+            <h2 className="text-black text-3xl font-bold">Biblioteca de Videos</h2>
             <p className="text-gray-600 mt-2">
               Explora nuestro archivo completo de contenidos
             </p>
@@ -317,15 +302,16 @@ const VideoArchiveSection = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="mt-4 md:mt-0 flex gap-4 w-full md:w-auto"
           >
-            <div className="relative flex-1 md:w-64">
+            <div className="relative flex-1 md:w-64 rounded-lg flex items-center text-gray-400">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                 size={18}
               />
               <input
                 placeholder="Buscar videos"
-                className="pl-10 border rounded-lg p-2 w-full"
+                className="pl-10 border border-gray-400 text-black rounded-lg p-2 w-full placeholder-gray-400"
               />
+
             </div>
             <button className="text-gray-600 border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2">
               <Filter size={16} /> Filtrar
@@ -333,14 +319,18 @@ const VideoArchiveSection = () => {
           </motion.div>
         </div>
 
-        <div className="mb-8 flex gap-4 overflow-x-auto">
-          <button className="text-blue-600 hover:underline">Todos</button>
-          <button className="text-gray-600 hover:underline">Entrevistas</button>
-          <button className="text-gray-600 hover:underline">
-            Capacitaciones
-          </button>
-          <button className="text-gray-600 hover:underline">Análisis</button>
-          <button className="text-gray-600 hover:underline">Eventos</button>
+        <div className="mb-8 flex gap-4 overflow-x-auto bg-gray-300 p-2 rounded-lg">
+
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedCategory(category)}
+              className={`text-black border-none hover:bg-gray-400 hover:text-white px-4 py-2 rounded-lg duration-150  ${selectedCategory === category ? 'bg-white border-none' : 'text-gray-500'
+                }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
 
         <motion.div
@@ -365,8 +355,8 @@ const VideoArchiveSection = () => {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <div className="group cursor-pointer">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
+              <div className="group cursor-pointer border border-gray-300 rounded-lg overflow-hidden shadow-lg p-4">
+                <div className="relative aspect-video rounded-lg overflow-hidden mb-3 ">
                   <img
                     src={video.image || '/placeholder.svg'}
                     alt={video.title}
@@ -384,7 +374,7 @@ const VideoArchiveSection = () => {
                     {video.category}
                   </span>
                 </div>
-                <h3 className="font-medium text-lg group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="font-medium text-gray-700 text-lg group-hover:text-primary transition-colors line-clamp-2">
                   {video.title}
                 </h3>
                 <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
