@@ -1,31 +1,28 @@
 import React from 'react';
-import {
-  Menu,
-  X,
-  Youtube,
-  Users,
-  Newspaper,
-  Info,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin as LinkedIn,
-} from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Hero from './components/Hero';
-import NewsSection from './components/NewSection';
+import NewSection from './components/NewSection';
 import Footer from './components/Footer';
+import AboutUs from './components/AboutUs';
+import NewsPage from './pages/NewsPage';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <NavBar />
-      <main>
-        <Hero />
-        <NewsSection />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <NavBar />
+        <main>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            {/* Agrega otras rutas según sea necesario */}
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

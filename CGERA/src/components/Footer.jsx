@@ -33,21 +33,21 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold mb-4">Links</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-gray-300 hover:text-white">
-                  About Us
+                  Sobre Nosotros
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-white">
-                  News
+                  Novedades
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-white">
-                  Events
+                  Eventos
                 </a>
               </li>
               <li>
@@ -59,18 +59,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact</h3>
+            <h3 className="text-white font-semibold mb-4">Contacto</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>Email: contact@cgera.org</li>
-              <li>Phone: +1 (555) 123-4567</li>
-              <li>Address: 123 Business Ave, Suite 100, City, State 12345</li>
+              <li>WhatsApp: +5491100000000</li>
+              <li>Teléfono: +1 (555) 123-4567</li>
+              <li>Dirección: Av. Rivadavia 1115 4º, (1033) CABA. Argentina.</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm text-center">
-            © {new Date().getFullYear()} CGERA. All rights reserved.
+            © {new Date().getFullYear()} CGERA. Todos los derechos reservados.
           </p>
         </div>
       </div>

@@ -24,6 +24,7 @@ const AboutUs = () => {
           cámaras sectoriales, posee representatividad en todo el territorio
           nacional por medio de federaciones, asociaciones o cámaras
           provinciales y posee cuatro regionales en el conurbano bonaerense.
+          <br></br>
           Esto se logró con el trabajo de muchos hombres y mujeres que hoy
           siguen haciendo de CGERA una entidad que crece, que es representativa,
           federal y defiende los intereses de las pequeñas y medianas empresas

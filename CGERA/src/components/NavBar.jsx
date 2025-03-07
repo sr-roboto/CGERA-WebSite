@@ -6,11 +6,10 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: 'Inicio', href: '#' },
-    { name: 'Quienes Somos', href: '#about' },
-    { name: 'Networking', href: '#networking' },
-    { name: 'CGERA TV', href: '#cgera-tv' },
-    { name: 'Novedades', href: '#news' },
+    { name: 'Inicio', href: '/' },
+    { name: 'Novedades', href: '/news' },
+    { name: 'Networking', href: 'https://networking-cgera.netlify.app/' },
+    { name: 'CGERA TV', href: 'https://educacionytecnologia.com.ar/' },
   ];
 
   return (

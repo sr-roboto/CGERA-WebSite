@@ -1,13 +1,15 @@
 import React from 'react';
-import Carousel from '../components/Carousel';
+import Hero from '../components/Hero';
+import NewSection from '../components/NewSection';
+import AboutUs from '../components/AboutUs';
+import Footer from '../components/Footer';
 
 const LandingPage = () => {
   return (
-    <div
-      className="bg-green-400 col-span-5 flex flex-col justify-center items-center mx-5 p-4"
-      data-aos="fade-right"
-    >
-      <Carousel />
+    <div>
+      <Hero />
+      <AboutUs />
+      <NewSection />
     </div>
   );
 };
