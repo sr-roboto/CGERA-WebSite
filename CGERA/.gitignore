@@ -1,4 +1,5 @@
 ### AL ###
+dist
 node_modules
 #Template for AL projects for Dynamics 365 Business Central
 #launch.json folder

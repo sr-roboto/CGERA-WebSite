@@ -17,7 +17,6 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/news" element={<NewsPage />} />
-            {/* Agrega otras rutas según sea necesario */}
           </Routes>
         </main>
         <Footer />
