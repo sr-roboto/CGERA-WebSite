@@ -97,10 +97,14 @@ const HeroSection = () => {
   );
 };
 
-
 const FeaturedVideoSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [videoUrl, setVideoUrl] = useState('');
+
+  const handlePlayVideo = () => {
+    setVideoUrl('https://www.youtube.com/embed/_wNmXdPKL8Q?autoplay=1');
+  };
 
   return (
     <section ref={ref} className="py-16 md:py-24">
@@ -111,7 +115,9 @@ const FeaturedVideoSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-black text-3xl font-bold mb-4">Video Destacado</h2>
+          <h2 className="text-3xl font-bold mb-4 text-black">
+            Video Destacado
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Mira nuestro contenido más reciente y relevante para el sector PYME.
           </p>
@@ -124,23 +130,74 @@ const FeaturedVideoSection = () => {
           className="max-w-5xl mx-auto"
         >
           <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-video group cursor-pointer">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/_wNmXdPKL8Q?autoplay=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
+            {videoUrl ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={videoUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            ) : (
+              <>
+                <img
+                  src="https://img.youtube.com/vi/_wNmXdPKL8Q/maxresdefault.jpg"
+                  alt="Video Destacado"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
+                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full mb-2 self-start">
+                    Entrevista
+                  </span>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Video Introductorio al canal de Streaming de CGERA TV
+                  </h3>
+                  <p className="text-white/90 mb-4 max-w-2xl">
+                    Descubre CGERA TV, con contenido exclusivo, entrevistas,
+                    análisis y capacitaciones para el crecimiento de las PYMEs.
+                  </p>
+                  <div className="flex items-center gap-4 text-white/80 text-sm mb-4">
+                    <span className="flex items-center gap-1">
+                      <Calendar size={14} /> 15 Mar 2023
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock size={14} /> 45:32
+                    </span>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handlePlayVideo}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+                    >
+                      <Play size={16} /> Reproducir Ahora
+                    </button>
+                    <button className="text-white border border-white hover:bg-white/10 px-4 py-2 rounded-lg flex items-center gap-2">
+                      <Bookmark size={16} /> Guardar
+                    </button>
+                    <button className="text-white border border-white hover:bg-white/10 px-4 py-2 rounded-lg flex items-center gap-2">
+                      <Share2 size={16} />
+                    </button>
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    onClick={handlePlayVideo}
+                    className="bg-white/90 rounded-full p-5 shadow-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300 cursor-pointer"
+                  >
+                    <Play className="h-10 w-10 text-primary group-hover:text-white" />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
       </div>
     </section>
   );
 };
-
 
 const VideoCategoriesSection = () => {
   const ref = useRef(null);
@@ -151,25 +208,25 @@ const VideoCategoriesSection = () => {
       title: 'Entrevistas',
       description:
         'Conversaciones con líderes empresariales y expertos del sector',
-      icon: '/placeholder.svg?height=80&width=80',
+      icon: 'https://plus.unsplash.com/premium_photo-1672997189907-220e1305bb56?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 24,
     },
     {
       title: 'Capacitaciones',
       description: 'Tutoriales y cursos para mejorar la gestión de tu empresa',
-      icon: '/placeholder.svg?height=80&width=80',
+      icon: 'https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 36,
     },
     {
       title: 'Análisis',
       description: 'Informes y análisis sobre la economía y el mercado',
-      icon: '/placeholder.svg?height=80&width=80',
+      icon: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 18,
     },
     {
       title: 'Eventos',
       description: 'Cobertura de los principales eventos del sector PYME',
-      icon: '/placeholder.svg?height=80&width=80',
+      icon: 'https://plus.unsplash.com/premium_photo-1681487469745-91d1d8a5836b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 12,
     },
   ];
@@ -183,7 +240,9 @@ const VideoCategoriesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-black text-3xl font-bold mb-4">Explora por Categorías</h2>
+          <h2 className="text-black text-3xl font-bold mb-4">
+            Explora por Categorías
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Encuentra el contenido que más te interesa organizado por temáticas.
           </p>
@@ -197,15 +256,17 @@ const VideoCategoriesSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg  border border-gray-300 rounded-ful">
-                <div className="mx-auto w-16 h-16 relative mb-2l">
+              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg  border border-gray-100 rounded-ful">
+                <div className="mx-auto relative mb-2l">
                   <img
                     src={category.icon || '/placeholder.svg'}
                     alt={category.title}
-                    className="object-contain w-full h-full"
+                    className="object-contain w-full h-full rounded-2xl shadow-lg"
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">
+                  {category.title}
+                </h3>
                 <p className="text-gray-600 mb-4">{category.description}</p>
                 <p className="text-sm text-gray-500">
                   {category.count} videos disponibles
@@ -226,9 +287,15 @@ const VideoArchiveSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
 
-  const categories = ['Todos', 'Entrevistas', 'Capacitaciones', 'Análisis', 'Eventos'];
+  const categories = [
+    'Todos',
+    'Entrevista',
+    'Capacitación',
+    'Análisis',
+    'Evento',
+  ];
 
   const videos = [
     {
@@ -237,7 +304,8 @@ const VideoArchiveSection = () => {
       duration: '28:45',
       date: '10 Mar 2023',
       views: '1.2K',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://plus.unsplash.com/premium_photo-1661376745450-08db5346075b?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: 'Entrevista: La experiencia de exportar por primera vez',
@@ -245,7 +313,8 @@ const VideoArchiveSection = () => {
       duration: '42:18',
       date: '05 Mar 2023',
       views: '856',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://images.unsplash.com/photo-1497015455546-1da71faf8d06?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: 'Análisis del mercado laboral para PYMEs en 2023',
@@ -253,7 +322,8 @@ const VideoArchiveSection = () => {
       duration: '35:22',
       date: '28 Feb 2023',
       views: '1.5K',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://plus.unsplash.com/premium_photo-1661310049066-57565d639aba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: 'Estrategias de marketing digital con bajo presupuesto',
@@ -261,7 +331,8 @@ const VideoArchiveSection = () => {
       duration: '31:07',
       date: '20 Feb 2023',
       views: '2.3K',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://plus.unsplash.com/premium_photo-1676651178953-4e4400aafa2b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: 'Mesa redonda: Desafíos del financiamiento PYME',
@@ -269,7 +340,8 @@ const VideoArchiveSection = () => {
       duration: '58:33',
       date: '15 Feb 2023',
       views: '945',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://plus.unsplash.com/premium_photo-1663089174939-5870e2e8d62e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: 'Optimización fiscal para pequeñas empresas',
@@ -277,9 +349,15 @@ const VideoArchiveSection = () => {
       duration: '26:14',
       date: '08 Feb 2023',
       views: '1.1K',
-      image: '/placeholder.svg?height=200&width=350',
+      image:
+        'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
   ];
+
+  const filteredVideos =
+    selectedCategory === 'Todos'
+      ? videos
+      : videos.filter((video) => video.category === selectedCategory);
 
   return (
     <section ref={ref} className="py-16 md:py-24">
@@ -290,7 +368,9 @@ const VideoArchiveSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-black text-3xl font-bold">Biblioteca de Videos</h2>
+            <h2 className="text-black text-3xl font-bold">
+              Biblioteca de Videos
+            </h2>
             <p className="text-gray-600 mt-2">
               Explora nuestro archivo completo de contenidos
             </p>
@@ -311,7 +391,6 @@ const VideoArchiveSection = () => {
                 placeholder="Buscar videos"
                 className="pl-10 border border-gray-400 text-black rounded-lg p-2 w-full placeholder-gray-400"
               />
-
             </div>
             <button className="text-gray-600 border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2">
               <Filter size={16} /> Filtrar
@@ -319,14 +398,16 @@ const VideoArchiveSection = () => {
           </motion.div>
         </div>
 
-        <div className="mb-8 flex gap-4 overflow-x-auto bg-gray-300 p-2 rounded-lg">
-
+        <div className="mb-8 flex overflow-x-auto bg-gray-100 p-1 rounded-lg max-w-max">
           {categories.map((category, index) => (
             <button
               key={index}
               onClick={() => setSelectedCategory(category)}
-              className={`text-black border-none hover:bg-gray-400 hover:text-white px-4 py-2 rounded-lg duration-150  ${selectedCategory === category ? 'bg-white border-none' : 'text-gray-500'
-                }`}
+              className={`text-black border-none px-4 py-2 rounded-lg duration-150  ${
+                selectedCategory === category
+                  ? 'bg-white border-none'
+                  : 'text-gray-500'
+              }`}
             >
               {category}
             </button>
@@ -347,7 +428,7 @@ const VideoArchiveSection = () => {
           }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {videos.map((video, index) => (
+          {filteredVideos.map((video, index) => (
             <motion.div
               key={index}
               variants={{
@@ -355,8 +436,8 @@ const VideoArchiveSection = () => {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <div className="group cursor-pointer border border-gray-300 rounded-lg overflow-hidden shadow-lg p-4">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-3 ">
+              <div className="group cursor-pointer rounded-lg overflow-hidden  p-4  ">
+                <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
                   <img
                     src={video.image || '/placeholder.svg'}
                     alt={video.title}
@@ -370,7 +451,7 @@ const VideoArchiveSection = () => {
                   <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                     {video.duration}
                   </div>
-                  <span className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded">
+                  <span className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded-2xl h-8 flex items-center gap-1">
                     {video.category}
                   </span>
                 </div>
