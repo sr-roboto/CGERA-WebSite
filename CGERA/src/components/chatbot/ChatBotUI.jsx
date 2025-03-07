@@ -155,7 +155,7 @@ export function ChatbotUI() {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Escribe tu mensaje..."
-                    className="flex-1 border rounded-lg p-2"
+                    className="flex-1 border rounded-lg p-2 text-black"
                   />
                   <button
                     onClick={handleSend}
