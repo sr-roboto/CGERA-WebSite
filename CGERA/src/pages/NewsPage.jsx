@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
+import Modal from 'react-modal';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -27,7 +28,7 @@ const tags = [
   'Networking',
 ];
 
-const articles = [
+const initialArticles = [
   {
     id: 1,
     title:
@@ -73,7 +74,18 @@ const articles = [
 const NewsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedTags, setSelectedTags] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  const [articles, setArticles] = useState(initialArticles);
+  const [newArticle, setNewArticle] = useState({
+    title: '',
+    category: 'Industry News',
+    tags: [],
+    excerpt: '',
+    content: '',
+    author: '',
+    date: '',
+    image: '',
+  });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const filteredArticles = articles.filter((article) => {
     const categoryMatch =
@@ -88,6 +100,33 @@ const NewsPage = () => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
     );
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewArticle((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddArticle = () => {
+    setArticles((prev) => [
+      ...prev,
+      {
+        ...newArticle,
+        id: prev.length + 1,
+        date: new Date().toISOString().split('T')[0],
+      },
+    ]);
+    setNewArticle({
+      title: '',
+      category: 'Industry News',
+      tags: [],
+      excerpt: '',
+      content: '',
+      author: '',
+      date: '',
+      image: '',
+    });
+    setModalIsOpen(false);
   };
 
   return (
@@ -173,6 +212,18 @@ const NewsPage = () => {
         </div>
       </section>
 
+      {/* Add Article Button */}
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <button
+            onClick={() => setModalIsOpen(true)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            Agregar Nueva Publicación
+          </button>
+        </div>
+      </section>
+
       {/* Articles Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -234,6 +285,101 @@ const NewsPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal for Adding Article */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        contentLabel="Agregar Nueva Publicación"
+        className="fixed inset-0 flex items-center justify-center z-50 "
+        overlayClassName="fixed inset-0 bg-black/30 backdrop-opacity-95"
+      >
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-sm mx-auto ">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">
+            Agregar Nueva Publicación
+          </h3>
+          <div className="space-y-4 text-gray-500 ">
+            <input
+              type="text"
+              name="title"
+              value={newArticle.title}
+              onChange={handleInputChange}
+              placeholder="Título"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <select
+              name="category"
+              value={newArticle.category}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg"
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <input
+              type="text"
+              name="tags"
+              value={newArticle.tags.join(', ')}
+              onChange={(e) =>
+                setNewArticle((prev) => ({
+                  ...prev,
+                  tags: e.target.value.split(', '),
+                }))
+              }
+              placeholder="Tags (separados por comas)"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <input
+              type="text"
+              name="excerpt"
+              value={newArticle.excerpt}
+              onChange={handleInputChange}
+              placeholder="Extracto"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <textarea
+              name="content"
+              value={newArticle.content}
+              onChange={handleInputChange}
+              placeholder="Contenido"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <input
+              type="text"
+              name="author"
+              value={newArticle.author}
+              onChange={handleInputChange}
+              placeholder="Autor"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <input
+              type="text"
+              name="image"
+              value={newArticle.image}
+              onChange={handleInputChange}
+              placeholder="URL de la imagen"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setModalIsOpen(false)}
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleAddArticle}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Agregar Publicación
+              </button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
