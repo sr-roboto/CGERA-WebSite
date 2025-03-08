@@ -13,7 +13,7 @@ import MarceloOrtega from '../assets/marcelo-ortega.jpeg';
 const authorities = [
   {
     id: 1,
-    name: 'Marcelo Ortega',
+    name: 'Marcelo Fernandez',
     role: 'Presidente de CGERA',
     image: `${MarceloOrtega}`,
     description:
