@@ -109,8 +109,8 @@ const FeaturedVideoSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section ref={ref} className="py-16 md:py-24 ">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -150,18 +150,18 @@ const FeaturedVideoSection = () => {
                   alt="Video Destacado"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-2 text-sm lg:text-xl sm:text-lg text-wrapping">
                   <span className="bg-blue-600 text-white px-3 py-1 rounded-full mb-2 self-start">
                     Entrevista
                   </span>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="max-w-lg font-bold text-white mb-2">
                     Video Introductorio al canal de Streaming de CGERA TV
                   </h3>
-                  <p className="text-white/90 mb-4 max-w-2xl">
+                  <p className="text-white/90 mb-1 xs:text-xs">
                     Descubre CGERA TV, con contenido exclusivo, entrevistas,
                     análisis y capacitaciones para el crecimiento de las PYMEs.
                   </p>
-                  <div className="flex items-center gap-4 text-white/80 text-sm mb-4">
+                  <div className="flex items-center gap-4 text-white/80 text-sm">
                     <span className="flex items-center gap-1">
                       <Calendar size={14} /> 15 Mar 2023
                     </span>
@@ -169,7 +169,7 @@ const FeaturedVideoSection = () => {
                       <Clock size={14} /> 45:32
                     </span>
                   </div>
-                  <div className="flex gap-3">
+                  {/* <div className="flex gap-3 xs:w-full justify-center">
                     <button
                       onClick={handlePlayVideo}
                       className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2"
@@ -182,14 +182,14 @@ const FeaturedVideoSection = () => {
                     <button className="text-white border border-white hover:bg-white/10 px-4 py-2 rounded-lg flex items-center gap-2">
                       <Share2 size={16} />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center ">
                   <div
                     onClick={handlePlayVideo}
-                    className="bg-white/90 rounded-full p-5 shadow-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300 cursor-pointer"
+                    className="bg-white/90 rounded-full p-5 shadow-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300 cursor-pointer "
                   >
-                    <Play className="h-10 w-10 text-primary group-hover:text-white" />
+                    <Play className="max-h-max max-w-max  text-primary group-hover:text-white" />
                   </div>
                 </div>
               </>
@@ -400,12 +400,12 @@ const VideoArchiveSection = () => {
           </motion.div>
         </div>
 
-        <div className="mb-8 flex overflow-x-auto bg-gray-100 p-1 rounded-lg max-w-max">
+        <div className="mb-8 flex overflow-x-auto bg-gray-100 p-1 rounded-lg max-w-max ">
           {categories.map((category, index) => (
             <button
               key={index}
               onClick={() => setSelectedCategory(category)}
-              className={`text-black border-none px-4 py-2 rounded-lg duration-150  ${
+              className={`text-black border-none px-4 py-2 rounded-lg duration-150 max-w-max ${
                 selectedCategory === category
                   ? 'bg-white border-none'
                   : 'text-gray-500'
