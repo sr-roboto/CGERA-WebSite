@@ -140,7 +140,7 @@ const AboutPage = () => {
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="bg-white p-6 rounded-lg shadow-lg">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    Mission
+                    Misión
                   </h3>
                   <p className="text-gray-600">
                     Participar en todos los espacios donde se debatan políticas
