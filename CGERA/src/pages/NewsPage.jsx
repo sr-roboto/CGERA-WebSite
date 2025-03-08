@@ -9,7 +9,15 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-import { Tag, Calendar, MessageCircle, Share2 } from 'lucide-react';
+import {
+  Tag,
+  Calendar,
+  MessageCircle,
+  Share2,
+  SquarePlus,
+  Edit,
+  Trash,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const categories = [
@@ -86,6 +94,8 @@ const NewsPage = () => {
     image: '',
   });
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentArticleId, setCurrentArticleId] = useState(null);
 
   const filteredArticles = articles.filter((article) => {
     const categoryMatch =
@@ -108,14 +118,24 @@ const NewsPage = () => {
   };
 
   const handleAddArticle = () => {
-    setArticles((prev) => [
-      ...prev,
-      {
-        ...newArticle,
-        id: prev.length + 1,
-        date: new Date().toISOString().split('T')[0],
-      },
-    ]);
+    if (isEditing) {
+      setArticles((prev) =>
+        prev.map((article) =>
+          article.id === currentArticleId
+            ? { ...newArticle, id: currentArticleId }
+            : article
+        )
+      );
+    } else {
+      setArticles((prev) => [
+        ...prev,
+        {
+          ...newArticle,
+          id: prev.length + 1,
+          date: new Date().toISOString().split('T')[0],
+        },
+      ]);
+    }
     setNewArticle({
       title: '',
       category: 'Industry News',
@@ -127,6 +147,35 @@ const NewsPage = () => {
       image: '',
     });
     setModalIsOpen(false);
+    setIsEditing(false);
+    setCurrentArticleId(null);
+  };
+
+  const handleEditArticle = (article) => {
+    setNewArticle(article);
+    setIsEditing(true);
+    setCurrentArticleId(article.id);
+    setModalIsOpen(true);
+  };
+
+  const handleDeleteArticle = (id) => {
+    setArticles((prev) => prev.filter((article) => article.id !== id));
+  };
+
+  const openAddModal = () => {
+    setNewArticle({
+      title: '',
+      category: 'Industry News',
+      tags: [],
+      excerpt: '',
+      content: '',
+      author: '',
+      date: '',
+      image: '',
+    });
+    setIsEditing(false);
+    setCurrentArticleId(null);
+    setModalIsOpen(true);
   };
 
   return (
@@ -216,10 +265,11 @@ const NewsPage = () => {
       <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <button
-            onClick={() => setModalIsOpen(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            onClick={openAddModal}
+            className="btn btn-soft btn-active border-none px-4 flex align-middle bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium"
           >
-            Agregar Nueva Publicación
+            <SquarePlus className="w-5 h-5 mr-2" />
+            Nueva Publicación
           </button>
         </div>
       </section>
@@ -261,22 +311,39 @@ const NewsPage = () => {
                       </span>
                     ))}
                   </div>
-
-                  {/* Social Share */}
-                  <div className="flex items-center justify-between mt-4 pt-4 border-t">
-                    <div className="flex items-center space-x-2">
-                      <MessageCircle className="w-5 h-5 text-gray-500" />
+                  <div className="flex  justify-between p-4 rounded-lg">
+                    {/* Social Share */}
+                    <div className="flex items-center justify-end mt-4 pt-4 ">
+                      {/* <div className="flex items-center space-x-2">
+                        <MessageCircle className="w-5 h-5 text-gray-500" />
+                      </div> */}
+                      <div className="flex space-x-2">
+                        <FacebookShareButton url={window.location.href}>
+                          <FacebookIcon size={32} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={window.location.href}>
+                          <TwitterIcon size={32} round />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={window.location.href}>
+                          <LinkedinIcon size={32} round />
+                        </LinkedinShareButton>
+                      </div>
                     </div>
-                    <div className="flex space-x-2">
-                      <FacebookShareButton url={window.location.href}>
-                        <FacebookIcon size={32} round />
-                      </FacebookShareButton>
-                      <TwitterShareButton url={window.location.href}>
-                        <TwitterIcon size={32} round />
-                      </TwitterShareButton>
-                      <LinkedinShareButton url={window.location.href}>
-                        <LinkedinIcon size={32} round />
-                      </LinkedinShareButton>
+
+                    {/* Edit and Delete Buttons */}
+                    <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
+                      <button
+                        onClick={() => handleEditArticle(article)}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <Edit className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteArticle(article.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <Trash className="w-5 h-5" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -286,19 +353,19 @@ const NewsPage = () => {
         </div>
       </section>
 
-      {/* Modal for Adding Article */}
+      {/* Modal for Adding/Editing Article */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         contentLabel="Agregar Nueva Publicación"
-        className="fixed inset-0 flex items-center justify-center z-50 "
+        className="fixed inset-0 flex items-center justify-center z-50"
         overlayClassName="fixed inset-0 bg-black/30 backdrop-opacity-95"
       >
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-sm mx-auto ">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            Agregar Nueva Publicación
+            {isEditing ? 'Editar Publicación' : 'Agregar Nueva Publicación'}
           </h3>
-          <div className="space-y-4 text-gray-500 ">
+          <div className="space-y-4 text-gray-500">
             <input
               type="text"
               name="title"
@@ -374,7 +441,7 @@ const NewsPage = () => {
                 onClick={handleAddArticle}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
-                Agregar Publicación
+                {isEditing ? 'Guardar Cambios' : 'Agregar Publicación'}
               </button>
             </div>
           </div>
