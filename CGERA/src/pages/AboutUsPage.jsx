@@ -396,7 +396,7 @@ const AboutUsPage = () => {
                 color="#418CBD"
               />
               <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl text-center">
-                Nuestros Representantes
+                Asociados
               </h2>
               <p className="mt-4  text-xl text-gray-500 text-center">
                 Entidades, Cámaras, Empresas y Federaciones representados por

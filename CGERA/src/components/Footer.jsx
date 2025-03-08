@@ -5,6 +5,7 @@ import {
   Instagram,
   Linkedin as LinkedIn,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -69,9 +70,11 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-700">
-          <p className="text-gray-400 text-sm text-center">
-            ©2025 Formosa Software Factory. Todos los derechos reservados.
-          </p>
+          <Link to="https://formosasoftwarefactory.com/">
+            <p className="text-gray-400 text-sm text-center hover:text-blue-600">
+              ©2025 Formosa Software Factory. Todos los derechos reservados.
+            </p>
+          </Link>
         </div>
       </div>
     </footer>
