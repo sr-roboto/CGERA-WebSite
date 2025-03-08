@@ -7,8 +7,8 @@ const NavBar = () => {
 
   const navItems = [
     { name: 'Inicio', href: '/' },
+    { name: 'Quienes Somos', href: '/about' },
     { name: 'Novedades', href: '/news' },
-    { name: 'Sobre Nosotros', href: '/about' },
     { name: 'Networking', href: 'https://networking-cgera.netlify.app/' },
     { name: 'CGERA TV', href: '/streaming' },
   ];

@@ -70,7 +70,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm text-center">
-            © {new Date().getFullYear()} CGERA. Todos los derechos reservados.
+            ©2025 Formosa Software Factory. Todos los derechos reservados.
           </p>
         </div>
       </div>
