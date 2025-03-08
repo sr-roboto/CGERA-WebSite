@@ -5,24 +5,236 @@ import { motion, useInView } from 'framer-motion';
 const authorities = [
   {
     id: 1,
-    name: 'Dr. Maria Rodriguez',
-    role: 'Presidente',
-    description:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'CICA',
+    description: 'Cámara Curtidora.',
   },
   {
     id: 2,
-    name: 'John Martinez',
-    role: 'Vice Presidente',
+    name: 'CAHFESA',
     description:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Cámara de Fabricantes de Herramientas, Ferretería, Electricidad, Sanitarios y Afines.',
   },
   {
     id: 3,
-    name: 'Sarah Chen',
-    role: 'Secretaria General',
+    name: 'AGIRA SA',
+    description: 'Empresa de Oil y Gas.',
+  },
+  {
+    id: 4,
+    name: 'ERNESTO MAYER SA',
+    description: 'Empresa de Circuitos Impresos.',
+  },
+  {
+    id: 5,
+    name: 'GRANJA TRES ARROYOS SA',
+    description: 'Empresa de Alimentos.',
+  },
+  {
+    id: 6,
+    name: 'RANIERI ARG SA',
+    description: 'Empresa de Producción y Comercialización de Anteojos.',
+  },
+  {
+    id: 7,
+    name: 'EXINTRADER SA',
+    description: 'Empresa de Importación y Distribución de Autopartes.',
+  },
+  {
+    id: 8,
+    name: 'EAYA CONSULTING SA',
+    description: 'Empresa Consultora.',
+  },
+  {
+    id: 9,
+    name: 'AIERA',
+    description: 'Asociación de Importadores y Exportadores de Argentina.',
+  },
+  {
+    id: 10,
+    name: 'ADEL',
+    description: 'Asociación de Empresas de Limpieza.',
+  },
+  {
+    id: 11,
+    name: 'CERAMICA ALBERDI SA',
+    description: 'Empresa de Pisos y Revestimientos.',
+  },
+  {
+    id: 12,
+    name: 'CADIOA',
+    description: 'Cámara de Industrias Ópticas y Afines.',
+  },
+  {
+    id: 13,
+    name: 'CADIME',
+    description: 'Cámara de Instituciones de Diagnóstico Médico.',
+  },
+  {
+    id: 14,
+    name: 'CAF',
+    description: 'Cámara Argentina de Feedlot.',
+  },
+  {
+    id: 15,
+    name: 'CAIPIC',
+    description: 'Cámara de Proveedores de la Industria del Calzado.',
+  },
+  {
+    id: 16,
+    name: 'CATGRA',
+    description: 'Cámara de Fabricantes de Tintas Gráficas.',
+  },
+  {
+    id: 17,
+    name: 'CASEL',
+    description: 'Cámara de Seguridad Electrónica.',
+  },
+  {
+    id: 18,
+    name: 'CEPA',
+    description: 'Centro de Empresas Procesadoras Avícolas.',
+  },
+  {
+    id: 19,
+    name: 'CIC',
+    description: 'Cámara de la Industria del Calzado.',
+  },
+  {
+    id: 20,
+    name: 'CIMA',
+    description: 'Cámara de la Industria Manufacturera del Cuero y Afines.',
+  },
+  {
+    id: 21,
+    name: 'FACAF',
+    description: 'Federación Argentina de Cámaras de Farmacias.',
+  },
+  {
+    id: 22,
+    name: 'CAEFA',
+    description: 'Cámara de Empresas de Fuegos Artificiales.',
+  },
+  {
+    id: 23,
+    name: 'CASWEATER',
+    description: 'Cámara del Sweater.',
+  },
+  {
+    id: 24,
+    name: 'ACARA',
     description:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Asociación de Concesionarios de Oficiales Automotores de Argentina.',
+  },
+  {
+    id: 25,
+    name: 'CGCYS',
+    description: 'Confederación General de Comercio y Servicios de Argentina.',
+  },
+  {
+    id: 26,
+    name: 'CAFAICYM',
+    description:
+      'Cámara Argentina de Fabricantes de Avíos e Insumos para Confección y Marroquinería.',
+  },
+  {
+    id: 27,
+    name: 'MAROLIO SA',
+    description: 'Empresa de Producción de Bienes de Consumo Masivo.',
+  },
+  {
+    id: 28,
+    name: 'FECIBA',
+    description: 'Federación Económica de la Ciudad de Buenos Aires.',
+  },
+  {
+    id: 29,
+    name: 'ROSSO ASESOR Y PROD',
+    description: 'Empresa de Seguros.',
+  },
+  {
+    id: 30,
+    name: 'ALGOSELAN FLANDRIA SA',
+    description: 'Empresa Mayorista Textil.',
+  },
+  {
+    id: 31,
+    name: 'CAEDE',
+    description: 'Cámara Argentina de Empresas Demoladoras y Excavadoras.',
+  },
+  {
+    id: 32,
+    name: 'CECAF',
+    description: 'Cámara de Empresas de Conservación de Ascensores y Afines.',
+  },
+  {
+    id: 33,
+    name: 'PUERTO RAWSON PATAG SA',
+    description: 'Empresa de Captura y Procesamiento de Pesca.',
+  },
+  {
+    id: 34,
+    name: 'CADMIPYA',
+    description:
+      'Cámara Argentina de Distribuidores Mayoristas de Informática, Productos y Afines.',
+  },
+  {
+    id: 35,
+    name: 'CCAER',
+    description: 'Cámara de Comercio Automotor de Entre Ríos.',
+  },
+  {
+    id: 36,
+    name: 'CCARPA',
+    description: 'Cámara de Comercio Argentino-Paraguaya.',
+  },
+  {
+    id: 37,
+    name: 'BENNY PEN ARG SA',
+    description: 'Empresa de Artículos de Escritura.',
+  },
+  {
+    id: 38,
+    name: 'CAPYMA',
+    description:
+      'Cámara Argentina de Pequeñas y Medianas Empresas de la Industria Alimenticia y Bebidas.',
+  },
+  {
+    id: 39,
+    name: 'CASRECH',
+    description: 'Cámara de Autoservicios y Supermercados Residentes Chinos.',
+  },
+  {
+    id: 40,
+    name: 'GELVEZ SRL',
+    description:
+      'Empresa de Servicios Industriales, Ingeniería y Construcción.',
+  },
+  {
+    id: 41,
+    name: 'LOMAS DEL SOL SRL',
+    description: 'Empresa de Ingeniería en Nutrición Animal.',
+  },
+  {
+    id: 42,
+    name: 'FLEXATEC SRL',
+    description:
+      'Empresa de Fabricación y Distribución de Componentes para Transporte de Movimiento.',
+  },
+  {
+    id: 43,
+    name: 'CAIFA',
+    description: 'Cámara Argentina de la Industria de Fricción.',
+  },
+  {
+    id: 44,
+    name: 'CAPIPE',
+    description:
+      'Cámara Argentina de Proveedores de la Industria Petroenergética.',
+  },
+  {
+    id: 45,
+    name: 'COOPERALA',
+    description: 'Cámara de Empresas Laboratorios Farmacéuticos.',
   },
 ];
 
@@ -192,30 +404,39 @@ const AboutUsPage = () => {
               </p>
             </div>
             <div className="mt-10">
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 ">
+              <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-3 ">
                 {authorities.map((authority) => (
                   <div
                     key={authority.id}
-                    className="bg-white overflow-hidden shadow-lg rounded-lg"
+                    className=" overflow-hidden shadow-lg rounded-lg hover:bg-gray-100"
                   >
-                    {/* <div className="aspect-w-3 aspect-h-2">
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {/* <div className="aspect-w-3 aspect-h-2">
                       <img
                         className="w-full h-64 object-cover"
                         src={authority.image}
                         alt={authority.name}
                       />
                     </div> */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {authority.name}
-                      </h3>
-                      {/* <p className="text-blue-600 font-medium">
+                      <div className="p-4 text-md">
+                        <h3 className=" font-semibold text-gray-800">
+                          {authority.name}:
+                        </h3>
+
+                        {/* <p className="text-blue-600 font-medium">
                         {authority.role}
                       </p> */}
-                      <p className="mt-3 text-gray-500">
-                        {authority.description}
-                      </p>
-                    </div>
+                        <p className=" text-gray-500">
+                          {authority.description}
+                        </p>
+                      </div>
+                    </motion.div>
                   </div>
                 ))}
               </div>
