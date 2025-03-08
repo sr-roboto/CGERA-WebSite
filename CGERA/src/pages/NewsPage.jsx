@@ -9,6 +9,7 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import { Tag, Calendar, MessageCircle, Share2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const categories = [
   'All',
@@ -96,19 +97,29 @@ const NewsPage = () => {
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
-            src="https://media.istockphoto.com/id/2032406889/photo/male-leader-talking-to-his-team-about-plans-on-a-meeting-in-the-office.webp?s=2048x2048&w=is&k=20&c=PcgPvBDzKpxtr_GojaHM1D-N9g1kxZ-dpd1fyqijRrA="
+            src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="News Header"
           />
           <div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-75" />
         </div>
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl font-bold mb-6"
+          >
             Noticias & Novedades
-          </h1>
-          <p className="mt-6 text-xl text-white max-w-3xl">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl opacity-90 mb-8"
+          >
             Manténgase actualizado con las últimas noticias, eventos e historias
             de la comunidad CGERA.
-          </p>
+          </motion.p>
         </div>
       </div>
 

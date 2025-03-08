@@ -1,5 +1,6 @@
 import React from 'react';
 import FadeIn from './animations/FadeIn';
+import { motion, useAnimation } from 'framer-motion';
 
 const newsItems = [
   {
@@ -36,67 +37,81 @@ const NewsSection = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Últimas Novedades
-          </h2>
-          <p className="mt-4 text-lg text-gray-500">
-            Manténgase actualizado con las últimas noticias, eventos y anuncios
-            de CGERA
-          </p>
-        </div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.8, ease: 'easeOut' },
+            },
+          }}
+          className="space-y-6"
+        >
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Últimas Novedades
+            </h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Manténgase actualizado con las últimas noticias, eventos y
+              anuncios de CGERA
+            </p>
+          </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {newsItems.map((item) => (
-            <article
-              key={item.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="h-48 w-full relative">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-blue-600 mb-2">{item.date}</p>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500">{item.excerpt}</p>
-                <a
-                  href="#"
-                  className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-500"
-                >
-                  Ver mas
-                  <svg
-                    className="ml-2 h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {newsItems.map((item) => (
+              <article
+                key={item.id}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="h-48 w-full relative">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-sm text-blue-600 mb-2">{item.date}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500">{item.excerpt}</p>
+                  <a
+                    href="#"
+                    className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-500"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+                    Ver mas
+                    <svg
+                      className="ml-2 h-5 w-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
 
-        <div className="mt-12 text-center">
-          <a
-            href="/news"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-          >
-            Ver todas las noticias
-          </a>
-        </div>
+          <div className="mt-12 text-center">
+            <a
+              href="/news"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            >
+              Ver todas las noticias
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
