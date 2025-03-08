@@ -1,8 +1,45 @@
 import React from 'react';
-import { History, Users, Target, Award, PlayCircle } from 'lucide-react';
+import {
+  History,
+  Users,
+  Target,
+  Award,
+  PlayCircle,
+  Factory,
+} from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import MarceloOrtega from '../assets/marcelo-ortega.jpeg';
 
 const authorities = [
+  {
+    id: 1,
+    name: 'Marcelo Ortega',
+    role: 'Presidente de CGERA',
+    image: `${MarceloOrtega}`,
+    description:
+      'Empresario. Presidente de Cierres Lynsa. Presidente de CGERA y CAFAICYM. Diputado Nacional por la Provincia de Buenos Aires (2005-2009).',
+  },
+  {
+    id: 2,
+    name: 'John Martinez',
+    role: 'Vice Presidente de CGERA',
+    image:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+    description:
+      'Experto en estrategias de innovación y transformación digital para empresas modernas.',
+  },
+  {
+    id: 3,
+    name: 'Sarah Chen',
+    role: 'Secretaria General',
+    image:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+    description:
+      'Especializada en relaciones internacionales y alianzas estratégicas.',
+  },
+];
+
+const associates = [
   {
     id: 1,
     name: 'CICA',
@@ -382,7 +419,55 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Autoridades*/}
+      {/* Authorities Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center">
+            <Users
+              className="mx-auto h-12 w-12 text-blue-600"
+              color="#418CBD"
+            />
+            <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Autoridades
+            </h2>
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              Español Conozca a los profesionales experimentados que lideran a
+              CGERA hacia un futuro de innovación y crecimiento.
+            </p>
+          </div>
+          <div className="mt-10">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {authorities.map((authority) => (
+                <div
+                  key={authority.id}
+                  className="bg-white overflow-hidden shadow-lg rounded-lg"
+                >
+                  <div className="aspect-w-3 aspect-h-2">
+                    <img
+                      className="w-full h-64 object-cover"
+                      src={authority.image}
+                      alt={authority.name}
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {authority.name}
+                    </h3>
+                    <p className="text-blue-600 font-medium">
+                      {authority.role}
+                    </p>
+                    <p className="mt-3 text-gray-500">
+                      {authority.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Asociaciones*/}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -391,7 +476,7 @@ const AboutUsPage = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <div className="lg:text-center">
-              <Users
+              <Factory
                 className="mx-auto h-12 w-12 text-blue-600 "
                 color="#418CBD"
               />
@@ -405,9 +490,9 @@ const AboutUsPage = () => {
             </div>
             <div className="mt-10">
               <div className="grid grid-cols-2 gap-0.5 lg:grid-cols-3 ">
-                {authorities.map((authority) => (
+                {associates.map((associates) => (
                   <div
-                    key={authority.id}
+                    key={associates.id}
                     className=" overflow-hidden shadow-lg rounded-lg hover:bg-gray-100"
                   >
                     <motion.div
@@ -426,13 +511,13 @@ const AboutUsPage = () => {
                     </div> */}
                       <div className="p-4 text-md sm:text-xl">
                         <h3 className=" font-semibold max-w-lg text-md text-gray-800">
-                          {authority.name}:
+                          {associates.name}:
                         </h3>
                         {/* <p className="text-blue-600 font-medium">
                         {authority.role}
                       </p> */}
                         <p className=" text-gray-500 capitalize font-medium text-wrap max-w-md">
-                          {authority.description}
+                          {associates.description}
                         </p>
                       </div>
                     </motion.div>
