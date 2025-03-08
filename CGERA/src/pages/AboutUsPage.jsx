@@ -422,48 +422,54 @@ const AboutUsPage = () => {
       {/* Authorities Section */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center">
-            <Users
-              className="mx-auto h-12 w-12 text-blue-600"
-              color="#418CBD"
-            />
-            <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Autoridades
-            </h2>
-            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-              Español Conozca a los profesionales experimentados que lideran a
-              CGERA hacia un futuro de innovación y crecimiento.
-            </p>
-          </div>
-          <div className="mt-10">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {authorities.map((authority) => (
-                <div
-                  key={authority.id}
-                  className="bg-white overflow-hidden shadow-lg rounded-lg"
-                >
-                  <div className="aspect-w-3 aspect-h-2">
-                    <img
-                      className="w-full h-64 object-cover"
-                      src={authority.image}
-                      alt={authority.name}
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {authority.name}
-                    </h3>
-                    <p className="text-blue-600 font-medium">
-                      {authority.role}
-                    </p>
-                    <p className="mt-3 text-gray-500">
-                      {authority.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="lg:text-center">
+              <Users
+                className="mx-auto h-12 w-12 text-blue-600"
+                color="#418CBD"
+              />
+              <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                Autoridades
+              </h2>
+              <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Español Conozca a los profesionales experimentados que lideran a
+                CGERA hacia un futuro de innovación y crecimiento.
+              </p>
             </div>
-          </div>
+            <div className="mt-10">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {authorities.map((authority) => (
+                  <div
+                    key={authority.id}
+                    className="bg-white overflow-hidden shadow-lg rounded-lg"
+                  >
+                    <div className="aspect-w-3 aspect-h-2">
+                      <img
+                        className="w-full h-64 object-cover"
+                        src={authority.image}
+                        alt={authority.name}
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900">
+                        {authority.name}
+                      </h3>
+                      <p className="text-blue-600 font-medium">
+                        {authority.role}
+                      </p>
+                      <p className="mt-3 text-gray-500">
+                        {authority.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
