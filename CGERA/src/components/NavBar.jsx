@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo2.png';
+import Login from '../pages/LoginPage';
+import useAuth from '../context/UseAuth';
 
 const NavBar = () => {
+  const { isAuthenticated, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const navItems = [
     { name: 'Inicio', href: '/' },
@@ -36,6 +40,21 @@ const NavBar = () => {
                 {item.name}
               </a>
             ))}
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Cerrar Sesión
+              </button>
+            ) : (
+              <button
+                onClick={() => setModalIsOpen(true)}
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Iniciar Sesión
+              </button>
+            )}
           </div>
 
           <div className="md:hidden flex items-center">
@@ -63,9 +82,32 @@ const NavBar = () => {
                 {item.name}
               </a>
             ))}
+            {isAuthenticated ? (
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  logout();
+                }}
+                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Cerrar Sesión
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setModalIsOpen(true);
+                }}
+                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Iniciar Sesión
+              </button>
+            )}
           </div>
         </div>
       )}
+
+      <Login modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
     </nav>
   );
 };

@@ -19,6 +19,7 @@ import {
   Trash,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import useAuth from '../context/UseAuth';
 
 const categories = [
   'All',
@@ -80,6 +81,7 @@ const initialArticles = [
 ];
 
 const NewsPage = () => {
+  const { isAuthenticated } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedTags, setSelectedTags] = useState([]);
   const [articles, setArticles] = useState(initialArticles);
@@ -262,24 +264,26 @@ const NewsPage = () => {
       </section>
 
       {/* Add Article Button */}
-      <section className="py-2 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex"
-          >
-            <button
-              onClick={openAddModal}
-              className="btn btn-soft btn-active border-none px-4 flex align-middle bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium"
+      {isAuthenticated && (
+        <section className="py-5 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex"
             >
-              <SquarePlus className="w-5 h-5 mr-2" />
-              Nueva Publicación
-            </button>
-          </motion.div>
-        </div>
-      </section>
+              <button
+                onClick={openAddModal}
+                className="btn btn-soft btn-active border-none  flex align-middle bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium"
+              >
+                <SquarePlus className="w-5 h-5 mr-2" />
+                Nueva Publicación
+              </button>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Articles Grid */}
       <section className="py-16">
@@ -343,20 +347,22 @@ const NewsPage = () => {
                       </div>
 
                       {/* Edit and Delete Buttons */}
-                      <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
-                        <button
-                          onClick={() => handleEditArticle(article)}
-                          className="text-blue-600 hover:text-blue-800"
-                        >
-                          <Edit className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteArticle(article.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash className="w-5 h-5" />
-                        </button>
-                      </div>
+                      {isAuthenticated && (
+                        <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
+                          <button
+                            onClick={() => handleEditArticle(article)}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            <Edit className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteArticle(article.id)}
+                            className="text-red-600 hover:text-red-800"
+                          >
+                            <Trash className="w-5 h-5" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>
