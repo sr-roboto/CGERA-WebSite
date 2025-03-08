@@ -436,8 +436,8 @@ const AboutUsPage = () => {
                 Autoridades
               </h2>
               <p className="mt-4 max-w-2xl md:max-w-max text-xl text-gray-500 lg:mx-auto">
-                Español Conozca a los profesionales experimentados que lideran a
-                CGERA hacia un futuro de innovación y crecimiento.
+                Conozca a los profesionales experimentados que lideran a CGERA
+                hacia un futuro de innovación y crecimiento.
               </p>
             </div>
             <div className="mt-10">
