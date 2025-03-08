@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo2.png';
 
@@ -19,7 +20,9 @@ const NavBar = () => {
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <img className="block h-12 w-auto" src={logo} alt="Workflow" />
+              <Link to="/">
+                <img className="block h-12 w-auto" src={logo} alt="Workflow" />
+              </Link>
             </div>
           </div>
 
