@@ -399,7 +399,7 @@ const AboutUsPage = () => {
                 Asociados
               </h2>
               <p className="mt-4  text-xl text-gray-500 text-center">
-                Entidades, Cámaras, Empresas y Federaciones representados por
+                Entidades, Cámaras, Empresas y Federaciones representadas por
                 CGERA
               </p>
             </div>
