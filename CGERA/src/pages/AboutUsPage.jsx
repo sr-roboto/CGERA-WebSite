@@ -427,7 +427,7 @@ const AboutUsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="lg:text-center">
+            <div className="text-center">
               <Users
                 className="mx-auto h-12 w-12 text-blue-600"
                 color="#418CBD"
@@ -435,7 +435,7 @@ const AboutUsPage = () => {
               <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
                 Autoridades
               </h2>
-              <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              <p className="mt-4 max-w-2xl md:max-w-max text-xl text-gray-500 lg:mx-auto">
                 Español Conozca a los profesionales experimentados que lideran a
                 CGERA hacia un futuro de innovación y crecimiento.
               </p>
