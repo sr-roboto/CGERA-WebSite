@@ -398,13 +398,13 @@ const AboutUsPage = () => {
               <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl text-center">
                 Nuestros Representantes
               </h2>
-              <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              <p className="mt-4  text-xl text-gray-500 text-center">
                 Entidades, Cámaras, Empresas y Federaciones representados por
                 CGERA
               </p>
             </div>
             <div className="mt-10">
-              <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-3 ">
+              <div className="grid grid-cols-2 gap-0.5 lg:grid-cols-3 ">
                 {authorities.map((authority) => (
                   <div
                     key={authority.id}
@@ -424,15 +424,14 @@ const AboutUsPage = () => {
                         alt={authority.name}
                       />
                     </div> */}
-                      <div className="p-4 text-md">
-                        <h3 className=" font-semibold text-gray-800">
+                      <div className="p-4 text-md sm:text-xl">
+                        <h3 className=" font-semibold max-w-lg text-md text-gray-800">
                           {authority.name}:
                         </h3>
-
                         {/* <p className="text-blue-600 font-medium">
                         {authority.role}
                       </p> */}
-                        <p className=" text-gray-500">
+                        <p className=" text-gray-500 capitalize font-medium text-wrap max-w-md">
                           {authority.description}
                         </p>
                       </div>
