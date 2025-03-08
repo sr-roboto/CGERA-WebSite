@@ -67,7 +67,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-2xl font-medium mb-4"
           >
-            El Canal para PYMEs
+            El Canal de las PYMEs
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -103,7 +103,9 @@ const FeaturedVideoSection = () => {
   const [videoUrl, setVideoUrl] = useState('');
 
   const handlePlayVideo = () => {
-    setVideoUrl('https://www.youtube.com/embed/_wNmXdPKL8Q?autoplay=1');
+    setVideoUrl(
+      'https://www.youtube-nocookie.com/embed/liAj2FwYUuo?si=aWrIDK8t9BO1SZdK'
+    );
   };
 
   return (

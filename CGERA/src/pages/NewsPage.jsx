@@ -264,92 +264,105 @@ const NewsPage = () => {
       {/* Add Article Button */}
       <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <button
-            onClick={openAddModal}
-            className="btn btn-soft btn-active border-none px-4 flex align-middle bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-end"
           >
-            <SquarePlus className="w-5 h-5 mr-2" />
-            Nueva Publicación
-          </button>
+            <button
+              onClick={openAddModal}
+              className="btn btn-soft btn-active border-none px-4 flex align-middle bg-blue-600 text-white rounded-full hover:bg-blue-700 text-sm font-medium"
+            >
+              <SquarePlus className="w-5 h-5 mr-2" />
+              Nueva Publicación
+            </button>
+          </motion.div>
         </div>
       </section>
 
       {/* Articles Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredArticles.map((article) => (
-              <article
-                key={article.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="h-48 w-full relative">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-2">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {format(new Date(article.date), 'MMM d, yyyy')}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredArticles.map((article) => (
+                <article
+                  key={article.id}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="h-48 w-full relative">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                    {article.title}
-                  </h2>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
+                  <div className="p-6">
+                    <div className="flex items-center text-sm text-gray-500 mb-2">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {format(new Date(article.date), 'MMM d, yyyy')}
+                    </div>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                      {article.title}
+                    </h2>
+                    <p className="text-gray-600 mb-4">{article.excerpt}</p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex  justify-between p-4 rounded-lg">
-                    {/* Social Share */}
-                    <div className="flex items-center justify-end mt-4 pt-4 ">
-                      {/* <div className="flex items-center space-x-2">
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {article.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex  justify-between p-4 rounded-lg">
+                      {/* Social Share */}
+                      <div className="flex items-center justify-end mt-4 pt-4 ">
+                        {/* <div className="flex items-center space-x-2">
                         <MessageCircle className="w-5 h-5 text-gray-500" />
                       </div> */}
-                      <div className="flex space-x-2">
-                        <FacebookShareButton url={window.location.href}>
-                          <FacebookIcon size={32} round />
-                        </FacebookShareButton>
-                        <TwitterShareButton url={window.location.href}>
-                          <TwitterIcon size={32} round />
-                        </TwitterShareButton>
-                        <LinkedinShareButton url={window.location.href}>
-                          <LinkedinIcon size={32} round />
-                        </LinkedinShareButton>
+                        <div className="flex space-x-2">
+                          <FacebookShareButton url={window.location.href}>
+                            <FacebookIcon size={32} round />
+                          </FacebookShareButton>
+                          <TwitterShareButton url={window.location.href}>
+                            <TwitterIcon size={32} round />
+                          </TwitterShareButton>
+                          <LinkedinShareButton url={window.location.href}>
+                            <LinkedinIcon size={32} round />
+                          </LinkedinShareButton>
+                        </div>
+                      </div>
+
+                      {/* Edit and Delete Buttons */}
+                      <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
+                        <button
+                          onClick={() => handleEditArticle(article)}
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          <Edit className="w-5 h-5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(article.id)}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          <Trash className="w-5 h-5" />
+                        </button>
                       </div>
                     </div>
-
-                    {/* Edit and Delete Buttons */}
-                    <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
-                      <button
-                        onClick={() => handleEditArticle(article)}
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        <Edit className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteArticle(article.id)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        <Trash className="w-5 h-5" />
-                      </button>
-                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
