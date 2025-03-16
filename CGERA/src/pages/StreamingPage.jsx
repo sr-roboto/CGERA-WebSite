@@ -234,48 +234,49 @@ const HighlightsSection = () => {
   const highlights = [
     {
       id: 1,
-      title: 'Corto Cgera TV 1P 1T MF Cerrar una Fábrica con Banner',
+      title: 'Qué hacemos con la Industria?',
       duration: '2:45',
       timestamp: '05:23',
       videoUrl:
         'https://www.youtube-nocookie.com/embed/WyhqZLOYVHM?si=73MmEz0G1lOq2ncS',
-      description: 'Agregar descripcion',
+      description: 'Marcelo Fernandez',
     },
     {
       id: 2,
-      title: 'Corto CGERA TV 1P 1T Ruben Adaptabilidad con Banner',
+      title: 'Alcanza la adaptabilidad de las PYMES para sortear la Crisis?',
       duration: '3:12',
       timestamp: '18:47',
       videoUrl:
         'https://www.youtube-nocookie.com/embed/u25EtzE_xaI?si=aQUtqJaqZ_tNZJh4',
-      description: 'Agregar descripcion',
+      description: 'Rubén Pallone',
     },
     {
       id: 3,
-      title: 'Corto Cgera TV 1P 1T Horacio Aduana con Banner',
+      title: 'El modelo impulsa el contrabando, que hacer?',
       duration: '4:30',
       timestamp: '32:15',
       videoUrl:
         'https://www.youtube-nocookie.com/embed/OCgesmzqp40?si=kpbMpaP_N1IWpwQ_',
-      description: 'Agregar descripcion',
+      description: 'Horacio Moschetto',
     },
     {
       id: 4,
-      title: 'Corto Cgera TV 1P 1T Rubén Cuero China Banner',
+      title: 'Exportar Materias Primas sin procesar, industricidio?',
       duration: '2:52',
       timestamp: '45:10',
       videoUrl:
         'https://www.youtube-nocookie.com/embed/WsqMc1OXuFU?si=gTkd7Tvlaagmmitx',
-      description: 'Agregar descripcion',
+      description: 'Rubén Pallone',
     },
     {
       id: 5,
-      title: 'corto Cgera TV 1P 1T MF con 4 Logos',
+      title:
+        'El canal de Streaming de  CGERA, un abrazo asociativo, en medio de la incertidumbre!!!',
       duration: '3:20',
       timestamp: '55:05',
       videoUrl:
         'https://www.youtube-nocookie.com/embed/3YOXDANh7As?si=trQDB-D0ZyfCrUac',
-      description: 'Agregar descripcion',
+      description: 'Marcelo Fernandez',
     },
   ];
 
