@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import {
   Play,
@@ -13,24 +14,34 @@ import {
 } from 'lucide-react';
 
 export default function CgeraTvPage() {
+  // Crear una referencia que se pasará a VideoArchiveSection
+  const videoArchiveRef = useRef(null);
+
+  // Función para hacer scroll a la sección
+  const scrollToVideoArchive = () => {
+    videoArchiveRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection scrollToVideoArchive={scrollToVideoArchive} />
 
       {/* Featured Video */}
       <FeaturedVideoSection />
+
+      {/* Highlights */}
+      <HighlightsSection />
 
       {/* Video Categories */}
       <VideoCategoriesSection />
 
       {/* Video Archive */}
-      <VideoArchiveSection />
+      <VideoArchiveSection ref={videoArchiveRef} />
     </div>
   );
 }
 
-const HeroSection = () => {
+const HeroSection = ({ scrollToVideoArchive }) => {
   return (
     <section className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
       {/* Video de fondo */}
@@ -85,9 +96,14 @@ const HeroSection = () => {
             className="flex flex-wrap gap-4 justify-center"
           >
             <button className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium">
-              Ver Transmisión en Vivo
+              <Link to="https://www.youtube.com/watch?v=VVbHG__h-So">
+                Ver Transmisión en Vivo
+              </Link>
             </button>
-            <button className="text-white border border-white hover:bg-white/10 px-6 py-3 rounded-lg text-lg font-medium">
+            <button
+              onClick={scrollToVideoArchive}
+              className="cursor-pointer  text-white border border-white hover:bg-white/10 px-6 py-3 rounded-lg text-lg font-medium"
+            >
               Explorar Videos
             </button>
           </motion.div>
@@ -201,6 +217,170 @@ const FeaturedVideoSection = () => {
   );
 };
 
+const HighlightsSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para extraer el ID del video de YouTube de la URL de embed
+  const getYouTubeID = (url) => {
+    const regExp = /embed\/([^?]+)/;
+    const match = url.match(regExp);
+    return match && match[1];
+  };
+
+  // Datos de momentos destacados
+  const highlights = [
+    {
+      id: 1,
+      title: 'Corto Cgera TV 1P 1T MF Cerrar una Fábrica con Banner',
+      duration: '2:45',
+      timestamp: '05:23',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/WyhqZLOYVHM?si=73MmEz0G1lOq2ncS',
+      description: 'Agregar descripcion',
+    },
+    {
+      id: 2,
+      title: 'Corto CGERA TV 1P 1T Ruben Adaptabilidad con Banner',
+      duration: '3:12',
+      timestamp: '18:47',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/u25EtzE_xaI?si=aQUtqJaqZ_tNZJh4',
+      description: 'Agregar descripcion',
+    },
+    {
+      id: 3,
+      title: 'Corto Cgera TV 1P 1T Horacio Aduana con Banner',
+      duration: '4:30',
+      timestamp: '32:15',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/OCgesmzqp40?si=kpbMpaP_N1IWpwQ_',
+      description: 'Agregar descripcion',
+    },
+    {
+      id: 4,
+      title: 'Corto Cgera TV 1P 1T Rubén Cuero China Banner',
+      duration: '2:52',
+      timestamp: '45:10',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/WsqMc1OXuFU?si=gTkd7Tvlaagmmitx',
+      description: 'Agregar descripcion',
+    },
+    {
+      id: 5,
+      title: 'corto Cgera TV 1P 1T MF con 4 Logos',
+      duration: '3:20',
+      timestamp: '55:05',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/3YOXDANh7As?si=trQDB-D0ZyfCrUac',
+      description: 'Agregar descripcion',
+    },
+  ];
+
+  const openVideoModal = (videoUrl) => {
+    setCurrentVideoUrl(videoUrl);
+    setIsModalOpen(true);
+  };
+
+  return (
+    <section ref={ref} className="py-12 md:py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl font-bold mb-4 text-black">
+            Momentos Destacados
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Los fragmentos más importantes y reveladores de nuestros videos
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {highlights.map((highlight, index) => (
+            <motion.div
+              key={highlight.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all"
+            >
+              <div className="relative aspect-video">
+                <img
+                  src={`https://img.youtube.com/vi/${getYouTubeID(
+                    highlight.videoUrl
+                  )}/hqdefault.jpg`}
+                  alt={highlight.title}
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer group"
+                  onClick={() => openVideoModal(highlight.videoUrl)}
+                >
+                  <div className="bg-white/90 rounded-full p-3 shadow-lg group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
+                    <Play className="h-5 w-5 text-blue-600 group-hover:text-white" />
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                    {highlight.duration}
+                  </div>
+                  <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded">
+                    {highlight.timestamp}
+                  </div>
+                </div>
+              </div>
+              <div className="p-4">
+                <h3 className="font-medium text-gray-800 hover:text-blue-600 transition-colors mb-1">
+                  {highlight.title}
+                </h3>
+                <p className="text-sm text-gray-500 line-clamp-2">
+                  {highlight.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-8"
+        >
+          <button className="inline-flex items-center gap-2 text-blue-600 font-medium hover:underline">
+            Ver todos los momentos destacados <ChevronRight size={16} />
+          </button>
+        </motion.div>
+
+        {/* Modal para reproducir video */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
+            <div className="relative w-full max-w-4xl mx-4 aspect-video">
+              <button
+                className="absolute -top-10 right-0 text-white hover:text-gray-300"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cerrar
+              </button>
+              <iframe
+                src={currentVideoUrl}
+                title="Momento destacado"
+                className="w-full h-full"
+                allowFullScreen
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 const VideoCategoriesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
@@ -285,9 +465,11 @@ const VideoCategoriesSection = () => {
   );
 };
 
-const VideoArchiveSection = () => {
-  const ref = useRef(null);
+const VideoArchiveSection = React.forwardRef((props, ref) => {
+  const sectionRef = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
@@ -298,6 +480,21 @@ const VideoArchiveSection = () => {
     'Análisis',
     'Evento',
   ];
+
+  // Función para extraer el ID del video de YouTube de la URL de embed
+  const getYouTubeID = (url) => {
+    if (!url) return null;
+
+    const regExp = /embed\/([^?]+)/;
+    const match = url.match(regExp);
+    return match && match[1];
+  };
+
+  // Función para abrir el modal de video
+  const openVideoModal = (videoUrl) => {
+    setCurrentVideoUrl(videoUrl);
+    setIsModalOpen(true);
+  };
 
   const videos = [
     {
@@ -354,6 +551,15 @@ const VideoArchiveSection = () => {
       image:
         'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
+    {
+      title: 'Cgera TV',
+      category: 'Entrevista',
+      duration: '24:38',
+      date: '16 Mar 2025',
+      views: '1.1K',
+      videoUrl:
+        'https://www.youtube-nocookie.com/embed/VVbHG__h-So?si=Q-_jro9UUvGNdG69',
+    },
   ];
 
   const filteredVideos =
@@ -362,7 +568,18 @@ const VideoArchiveSection = () => {
       : videos.filter((video) => video.category === selectedCategory);
 
   return (
-    <section ref={ref} className="py-16 md:py-24">
+    <section
+      ref={(node) => {
+        // Esta función asigna la ref tanto a la ref local como a la ref enviada desde el padre
+        sectionRef.current = node;
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      }}
+      className="py-16 md:py-24"
+    >
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <motion.div
@@ -438,16 +655,25 @@ const VideoArchiveSection = () => {
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <div className="group cursor-pointer rounded-lg overflow-hidden  p-4  ">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
+              <div className="group cursor-pointer rounded-lg overflow-hidden p-4">
+                <div
+                  className="relative aspect-video rounded-lg overflow-hidden mb-3"
+                  onClick={() => openVideoModal(video.videoUrl)}
+                >
                   <img
-                    src={video.image || '/placeholder.svg'}
+                    src={
+                      video.videoUrl
+                        ? `https://img.youtube.com/vi/${getYouTubeID(
+                            video.videoUrl
+                          )}/hqdefault.jpg`
+                        : video.image || '/placeholder.svg'
+                    }
                     alt={video.title}
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div className="bg-white/90 rounded-full p-3 shadow-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                      <Play className="h-6 w-6 text-primary group-hover:text-white" />
+                    <div className="bg-white/90 rounded-full p-3 shadow-lg group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
+                      <Play className="h-6 w-6 text-blue-600 group-hover:text-white" />
                     </div>
                   </div>
                   <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
@@ -457,7 +683,7 @@ const VideoArchiveSection = () => {
                     {video.category}
                   </span>
                 </div>
-                <h3 className="font-medium text-gray-700 text-lg group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="font-medium text-gray-700 text-lg group-hover:text-blue-600 transition-colors line-clamp-2">
                   {video.title}
                 </h3>
                 <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
@@ -484,11 +710,33 @@ const VideoArchiveSection = () => {
         </motion.div>
 
         <div className="text-center mt-12">
-          <button className="text-blue-600 border border-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium flex items-center gap-2">
+          <button className="text-blue-600 border border-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium flex items-center gap-2 mx-auto justify-center">
             Cargar Más Videos <ChevronRight size={16} />
           </button>
         </div>
+
+        {/* Modal para reproducir video */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
+            <div className="relative w-full max-w-4xl mx-4 aspect-video">
+              <button
+                className="absolute -top-10 right-0 text-white hover:text-gray-300"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cerrar
+              </button>
+              <iframe
+                src={currentVideoUrl}
+                title="Video de la biblioteca"
+                className="w-full h-full"
+                allowFullScreen
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
-};
+});
