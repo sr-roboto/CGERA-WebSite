@@ -12,19 +12,43 @@ import {
   Share2,
   ThumbsUp,
 } from 'lucide-react';
+import capacitarLogo from '../assets/capacitar-logo.png';
 
 export default function CgeraTvPage() {
   // Crear una referencia que se pasará a VideoArchiveSection
   const videoArchiveRef = useRef(null);
 
+  // Estado para compartir la categoría seleccionada
+  const [globalSelectedCategory, setGlobalSelectedCategory] = useState('Todos');
+
+  // Función para hacer scroll a la sección y cambiar la categoría
+  const navigateToVideoArchive = (category) => {
+    // Mapea las categorías en plural a singular para coincidir con los filtros
+    const categoryMap = {
+      Entrevistas: 'Entrevista',
+      Capacitaciones: 'Capacitación',
+      Análisis: 'Análisis',
+      Eventos: 'Evento',
+    };
+
+    // Establece la categoría seleccionada
+    setGlobalSelectedCategory(categoryMap[category] || category);
+
+    // Hace scroll a la sección de archivos
+    videoArchiveRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Función para hacer scroll a la sección
   const scrollToVideoArchive = () => {
     videoArchiveRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <HeroSection scrollToVideoArchive={scrollToVideoArchive} />
+      <HeroSection
+        scrollToVideoArchive={() => navigateToVideoArchive('Todos')}
+      />
 
       {/* Featured Video */}
       <FeaturedVideoSection />
@@ -33,10 +57,14 @@ export default function CgeraTvPage() {
       <HighlightsSection />
 
       {/* Video Categories */}
-      <VideoCategoriesSection />
+      <VideoCategoriesSection navigateToVideoArchive={navigateToVideoArchive} />
 
       {/* Video Archive */}
-      <VideoArchiveSection ref={videoArchiveRef} />
+      <VideoArchiveSection
+        ref={videoArchiveRef}
+        selectedCategory={globalSelectedCategory}
+        setSelectedCategory={setGlobalSelectedCategory}
+      />
     </div>
   );
 }
@@ -382,35 +410,35 @@ const HighlightsSection = () => {
     </section>
   );
 };
-const VideoCategoriesSection = () => {
+
+const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-
   const categories = [
     {
       title: 'Entrevistas',
       description:
         'Conversaciones con líderes empresariales y expertos del sector',
       icon: 'https://plus.unsplash.com/premium_photo-1672997189907-220e1305bb56?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      count: 24,
+      count: 2,
     },
     {
       title: 'Capacitaciones',
       description: 'Tutoriales y cursos para mejorar la gestión de tu empresa',
       icon: 'https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      count: 36,
+      count: 3,
     },
     {
       title: 'Análisis',
       description: 'Informes y análisis sobre la economía y el mercado',
       icon: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      count: 18,
+      count: 1,
     },
     {
       title: 'Eventos',
       description: 'Cobertura de los principales eventos del sector PYME',
       icon: 'https://plus.unsplash.com/premium_photo-1681487469745-91d1d8a5836b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      count: 12,
+      count: 1,
     },
   ];
 
@@ -454,7 +482,10 @@ const VideoCategoriesSection = () => {
                 <p className="text-sm text-gray-500">
                   {category.count} videos disponibles
                 </p>
-                <button className="mt-4 text-blue-600 hover:underline flex items-center gap-1">
+                <button
+                  onClick={() => navigateToVideoArchive(category.title)}
+                  className="mt-4 text-blue-600 hover:underline flex items-center gap-1"
+                >
                   Ver Videos <ChevronRight size={16} />
                 </button>
               </div>
@@ -466,278 +497,297 @@ const VideoCategoriesSection = () => {
   );
 };
 
-const VideoArchiveSection = React.forwardRef((props, ref) => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const VideoArchiveSection = React.forwardRef(
+  ({ selectedCategory, setSelectedCategory }, ref) => {
+    const sectionRef = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.1 });
+    const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
+    const categories = [
+      'Todos',
+      'Entrevista',
+      'Capacitación',
+      'Análisis',
+      'Evento',
+    ];
 
-  const categories = [
-    'Todos',
-    'Entrevista',
-    'Capacitación',
-    'Análisis',
-    'Evento',
-  ];
+    // Función para extraer el ID del video de YouTube de la URL de embed
+    const getYouTubeID = (url) => {
+      if (!url) return null;
 
-  // Función para extraer el ID del video de YouTube de la URL de embed
-  const getYouTubeID = (url) => {
-    if (!url) return null;
+      const regExp = /embed\/([^?]+)/;
+      const match = url.match(regExp);
+      return match && match[1];
+    };
 
-    const regExp = /embed\/([^?]+)/;
-    const match = url.match(regExp);
-    return match && match[1];
-  };
+    // Función para abrir el modal de video
+    const openVideoModal = (videoUrl) => {
+      setCurrentVideoUrl(videoUrl);
+      setIsModalOpen(true);
+    };
 
-  // Función para abrir el modal de video
-  const openVideoModal = (videoUrl) => {
-    setCurrentVideoUrl(videoUrl);
-    setIsModalOpen(true);
-  };
+    const videos = [
+      {
+        title: 'Cómo implementar un CRM en tu PYME',
+        category: 'Capacitación',
+        duration: '28:45',
+        date: '10 Mar 2023',
+        views: '1.2K',
+        image:
+          'https://plus.unsplash.com/premium_photo-1661376745450-08db5346075b?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Entrevista: La experiencia de exportar por primera vez',
+        category: 'Entrevista',
+        duration: '42:18',
+        date: '05 Mar 2023',
+        views: '856',
+        image:
+          'https://images.unsplash.com/photo-1497015455546-1da71faf8d06?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Análisis del mercado laboral para PYMEs en 2023',
+        category: 'Análisis',
+        duration: '35:22',
+        date: '28 Feb 2023',
+        views: '1.5K',
+        image:
+          'https://plus.unsplash.com/premium_photo-1661310049066-57565d639aba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Estrategias de marketing digital con bajo presupuesto',
+        category: 'Capacitación',
+        duration: '31:07',
+        date: '20 Feb 2023',
+        views: '2.3K',
+        image:
+          'https://plus.unsplash.com/premium_photo-1676651178953-4e4400aafa2b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Mesa redonda: Desafíos del financiamiento PYME',
+        category: 'Evento',
+        duration: '58:33',
+        date: '15 Feb 2023',
+        views: '945',
+        image:
+          'https://plus.unsplash.com/premium_photo-1663089174939-5870e2e8d62e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Optimización fiscal para pequeñas empresas',
+        category: 'Capacitación',
+        duration: '26:14',
+        date: '08 Feb 2023',
+        views: '1.1K',
+        image:
+          'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        title: 'Cgera TV',
+        category: 'Entrevista',
+        duration: '24:38',
+        date: '16 Mar 2025',
+        views: '1.1K',
+        videoUrl:
+          'https://www.youtube-nocookie.com/embed/VVbHG__h-So?si=Q-_jro9UUvGNdG69',
+      },
+    ];
 
-  const videos = [
-    {
-      title: 'Cómo implementar un CRM en tu PYME',
-      category: 'Capacitación',
-      duration: '28:45',
-      date: '10 Mar 2023',
-      views: '1.2K',
-      image:
-        'https://plus.unsplash.com/premium_photo-1661376745450-08db5346075b?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Entrevista: La experiencia de exportar por primera vez',
-      category: 'Entrevista',
-      duration: '42:18',
-      date: '05 Mar 2023',
-      views: '856',
-      image:
-        'https://images.unsplash.com/photo-1497015455546-1da71faf8d06?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Análisis del mercado laboral para PYMEs en 2023',
-      category: 'Análisis',
-      duration: '35:22',
-      date: '28 Feb 2023',
-      views: '1.5K',
-      image:
-        'https://plus.unsplash.com/premium_photo-1661310049066-57565d639aba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Estrategias de marketing digital con bajo presupuesto',
-      category: 'Capacitación',
-      duration: '31:07',
-      date: '20 Feb 2023',
-      views: '2.3K',
-      image:
-        'https://plus.unsplash.com/premium_photo-1676651178953-4e4400aafa2b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Mesa redonda: Desafíos del financiamiento PYME',
-      category: 'Evento',
-      duration: '58:33',
-      date: '15 Feb 2023',
-      views: '945',
-      image:
-        'https://plus.unsplash.com/premium_photo-1663089174939-5870e2e8d62e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Optimización fiscal para pequeñas empresas',
-      category: 'Capacitación',
-      duration: '26:14',
-      date: '08 Feb 2023',
-      views: '1.1K',
-      image:
-        'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      title: 'Cgera TV',
-      category: 'Entrevista',
-      duration: '24:38',
-      date: '16 Mar 2025',
-      views: '1.1K',
-      videoUrl:
-        'https://www.youtube-nocookie.com/embed/VVbHG__h-So?si=Q-_jro9UUvGNdG69',
-    },
-  ];
+    const filteredVideos =
+      selectedCategory === 'Todos'
+        ? videos
+        : videos.filter((video) => video.category === selectedCategory);
 
-  const filteredVideos =
-    selectedCategory === 'Todos'
-      ? videos
-      : videos.filter((video) => video.category === selectedCategory);
-
-  return (
-    <section
-      ref={(node) => {
-        // Esta función asigna la ref tanto a la ref local como a la ref enviada desde el padre
-        sectionRef.current = node;
-        if (typeof ref === 'function') {
-          ref(node);
-        } else if (ref) {
-          ref.current = node;
-        }
-      }}
-      className="py-16 md:py-24"
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-black text-3xl font-bold">
-              Biblioteca de Videos
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Explora nuestro archivo completo de contenidos
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-4 md:mt-0 flex gap-4 w-full md:w-auto"
-          >
-            <div className="relative flex-1 md:w-64 rounded-lg flex items-center text-gray-400">
-              <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={18}
-              />
-              <input
-                placeholder="Buscar videos"
-                className="pl-10 border border-gray-400 text-black rounded-lg p-2 w-full placeholder-gray-400"
-              />
-            </div>
-            <button className="text-gray-600 border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2">
-              <Filter size={16} /> Filtrar
-            </button>
-          </motion.div>
-        </div>
-
-        <div className="mb-8 flex overflow-x-auto bg-gray-100 p-1 rounded-lg max-w-max ">
-          {categories.map((category, index) => (
-            <button
-              key={index}
-              onClick={() => setSelectedCategory(category)}
-              className={`text-black border-none px-4 py-2 rounded-lg duration-150 max-w-max ${
-                selectedCategory === category
-                  ? 'bg-white border-none'
-                  : 'text-gray-500'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.1,
-              },
-            },
-          }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredVideos.map((video, index) => (
+    return (
+      <section
+        ref={(node) => {
+          // Esta función asigna la ref tanto a la ref local como a la ref enviada desde el padre
+          sectionRef.current = node;
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref) {
+            ref.current = node;
+          }
+        }}
+        className="py-16 md:py-24"
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
             >
-              <div className="group cursor-pointer rounded-lg overflow-hidden p-4">
-                <div
-                  className="relative aspect-video rounded-lg overflow-hidden mb-3"
-                  onClick={() => openVideoModal(video.videoUrl)}
-                >
-                  <img
-                    src={
-                      video.videoUrl
-                        ? `https://img.youtube.com/vi/${getYouTubeID(
-                            video.videoUrl
-                          )}/hqdefault.jpg`
-                        : video.image || '/placeholder.svg'
-                    }
-                    alt={video.title}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div className="bg-white/90 rounded-full p-3 shadow-lg group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
-                      <Play className="h-6 w-6 text-blue-600 group-hover:text-white" />
+              <h2 className="text-black text-3xl font-bold">
+                Biblioteca de Videos
+              </h2>
+              <p className="text-gray-600 mt-2">
+                Explora nuestro archivo completo de contenidos
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="mt-4 md:mt-0 flex gap-4 w-full md:w-auto"
+            >
+              <div className="relative flex-1 md:w-64 rounded-lg flex items-center text-gray-400">
+                <Search
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={18}
+                />
+                <input
+                  placeholder="Buscar videos"
+                  className="pl-10 border border-gray-400 text-black rounded-lg p-2 w-full placeholder-gray-400"
+                />
+              </div>
+              <button className="text-gray-600 border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2">
+                <Filter size={16} /> Filtrar
+              </button>
+            </motion.div>
+          </div>
+
+          <div className="mb-8 flex overflow-x-auto bg-gray-100 p-1 rounded-lg max-w-max ">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedCategory(category)}
+                className={`text-black border-none px-4 py-2 rounded-lg duration-150 max-w-max ${
+                  selectedCategory === category
+                    ? 'bg-white border-none'
+                    : 'text-gray-500'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <motion.div
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredVideos.map((video, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+              >
+                <div className="group cursor-pointer rounded-lg overflow-hidden p-4">
+                  <div
+                    className="relative aspect-video rounded-lg overflow-hidden mb-3"
+                    onClick={() => openVideoModal(video.videoUrl)}
+                  >
+                    <img
+                      src={
+                        video.videoUrl
+                          ? `https://img.youtube.com/vi/${getYouTubeID(
+                              video.videoUrl
+                            )}/hqdefault.jpg`
+                          : video.image || '/placeholder.svg'
+                      }
+                      alt={video.title}
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-white/90 rounded-full p-3 shadow-lg group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
+                        <Play className="h-6 w-6 text-blue-600 group-hover:text-white" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                      {video.duration}
+                    </div>
+                    <span className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded-2xl h-8 flex items-center gap-1">
+                      {video.category}
+                    </span>
+                  </div>
+                  <h3 className="font-medium text-gray-700 text-lg group-hover:text-blue-600 transition-colors line-clamp-2">
+                    {video.title}
+                  </h3>
+                  <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} /> {video.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <ThumbsUp size={14} /> {video.views} vistas
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="text-gray-600 hover:text-blue-600">
+                        <Bookmark size={16} />
+                      </button>
+                      <button className="text-gray-600 hover:text-blue-600">
+                        <Share2 size={16} />
+                      </button>
                     </div>
                   </div>
-                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                    {video.duration}
-                  </div>
-                  <span className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded-2xl h-8 flex items-center gap-1">
-                    {video.category}
-                  </span>
                 </div>
-                <h3 className="font-medium text-gray-700 text-lg group-hover:text-blue-600 transition-colors line-clamp-2">
-                  {video.title}
-                </h3>
-                <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={14} /> {video.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <ThumbsUp size={14} /> {video.views} vistas
-                    </span>
-                  </div>
-                  <div className="flex gap-2">
-                    <button className="text-gray-600 hover:text-blue-600">
-                      <Bookmark size={16} />
-                    </button>
-                    <button className="text-gray-600 hover:text-blue-600">
-                      <Share2 size={16} />
-                    </button>
-                  </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="text-center mt-12 mb-8">
+            <button className="text-blue-600 border border-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium flex items-center gap-2 mx-auto justify-center">
+              Cargar Más Videos <ChevronRight size={16} />
+            </button>
+          </div>
+
+          <div className="container bg-red-500 rounded-3xl py-8 ">
+            <Link to="https://www.argentina.gob.ar/economia/pymes-emprendedores-y-economia-del-conocimiento/capacitar">
+              <div className="row">
+                <div className=" flex flex-col justify-center">
+                  <img
+                    src={capacitarLogo}
+                    alt="logo capacitar"
+                    className="min-w-2xl mx-auto"
+                  />
+                  <h2 className="sr-only">Capacitar</h2>
+                  <p className="text-center text-lg pt-5">
+                    Accedé a capacitaciones gratuitas para potenciar tus
+                    proyectos, carrera profesional o emprendimientos.
+                  </p>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="text-center mt-12">
-          <button className="text-blue-600 border border-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium flex items-center gap-2 mx-auto justify-center">
-            Cargar Más Videos <ChevronRight size={16} />
-          </button>
-        </div>
-
-        {/* Modal para reproducir video */}
-        {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
-            <div className="relative w-full max-w-4xl mx-4 aspect-video">
-              <button
-                className="absolute -top-10 right-0 text-white hover:text-gray-300"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Cerrar
-              </button>
-              <iframe
-                src={currentVideoUrl}
-                title="Video de la biblioteca"
-                className="w-full h-full"
-                allowFullScreen
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-            </div>
+            </Link>
           </div>
-        )}
-      </div>
-    </section>
-  );
-});
+
+          {/* Modal para reproducir video */}
+          {isModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
+              <div className="relative w-full max-w-4xl mx-4 aspect-video">
+                <button
+                  className="absolute -top-10 right-0 text-white hover:text-gray-300"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cerrar
+                </button>
+                <iframe
+                  src={currentVideoUrl}
+                  title="Video de la biblioteca"
+                  className="w-full h-full"
+                  allowFullScreen
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+);
