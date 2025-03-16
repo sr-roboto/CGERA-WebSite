@@ -753,7 +753,7 @@ const VideoArchiveSection = React.forwardRef(
                   <img
                     src={capacitarLogo}
                     alt="logo capacitar"
-                    className="min-w-2xl mx-auto"
+                    className="min-w-32 mx-auto"
                   />
                   <h2 className="sr-only">Capacitar</h2>
                   <p className="text-center text-lg pt-5">
