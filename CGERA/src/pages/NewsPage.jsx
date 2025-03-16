@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import Modal from 'react-modal';
 import {
@@ -20,6 +21,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useAuth from '../context/UseAuth';
+import CapacitarLogo from '../assets/capacitar-logo.png';
+import BrechaCero from '../assets/brecha-cero-banner.png';
 
 const categories = [
   'All',
@@ -77,6 +80,31 @@ const initialArticles = [
     date: '2024-03-05',
     image:
       'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+  },
+  {
+    id: 4,
+    title: 'Desafíos de la educación en 2025',
+    category: 'Press Releases',
+    tags: ['Networking'],
+    excerpt:
+      'La preguntas en torno cómo será la educación del futuro se han revitalizado con el auge de la Inteligencia Artificial.. ',
+    content: 'Full article content here...',
+    Author: 'John Smith',
+    date: '2025-03-17',
+    image:
+      'https://nomadesdigitales.com.ar/wp-content/uploads/2025/02/10-Entrevistados.png',
+  },
+  {
+    id: 5,
+    title: 'Brecha Cero ',
+    category: 'Press Releases',
+    tags: ['Networking'],
+    excerpt:
+      'Banco Formosa, presenta Sala de Escape Digital, desarrollada por Formosa Software Factory, para alcanzar la Brecha Cero en su política de Género ',
+    content: 'Full article content here...',
+    Author: 'John Smith',
+    date: '2025-03-17',
+    image: BrechaCero,
   },
 ];
 
@@ -297,7 +325,7 @@ const NewsPage = () => {
               {filteredArticles.map((article) => (
                 <article
                   key={article.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
                 >
                   <div className="h-48 w-full relative">
                     <img
@@ -306,7 +334,7 @@ const NewsPage = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex-grow flex flex-col">
                     <div className="flex items-center text-sm text-gray-500 mb-2">
                       <Calendar className="w-4 h-4 mr-1" />
                       {format(new Date(article.date), 'MMM d, yyyy')}
@@ -327,12 +355,9 @@ const NewsPage = () => {
                         </span>
                       ))}
                     </div>
-                    <div className="flex  justify-between p-4 rounded-lg">
+                    <div className="flex justify-between p-4 rounded-lg mt-auto">
                       {/* Social Share */}
-                      <div className="flex items-center justify-end mt-4 pt-4 ">
-                        {/* <div className="flex items-center space-x-2">
-                        <MessageCircle className="w-5 h-5 text-gray-500" />
-                      </div> */}
+                      <div className="flex items-center justify-end">
                         <div className="flex space-x-2">
                           <FacebookShareButton url={window.location.href}>
                             <FacebookIcon size={32} round />
@@ -348,7 +373,7 @@ const NewsPage = () => {
 
                       {/* Edit and Delete Buttons */}
                       {isAuthenticated && (
-                        <div className="flex justify-start items-center space-x-2 mt-4 pt-4">
+                        <div className="flex justify-start items-center space-x-2">
                           <button
                             onClick={() => handleEditArticle(article)}
                             className="text-blue-600 hover:text-blue-800"
@@ -365,6 +390,15 @@ const NewsPage = () => {
                       )}
                     </div>
                   </div>
+                  <Link to="https://www.argentina.gob.ar/economia/pymes-emprendedores-y-economia-del-conocimiento/capacitar">
+                    <div className="bg-red-500 flex justify-center items-center py-4 px-4 mt-auto">
+                      <img
+                        src={CapacitarLogo}
+                        alt="Capacitar Logo"
+                        className="h-5"
+                      />
+                    </div>
+                  </Link>
                 </article>
               ))}
             </div>
