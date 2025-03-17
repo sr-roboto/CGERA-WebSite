@@ -23,6 +23,7 @@ import { motion } from 'framer-motion';
 import useAuth from '../context/UseAuth';
 import CapacitarLogo from '../assets/capacitar-logo.png';
 import BrechaCero from '../assets/brecha-cero-banner.png';
+import CapacitarImage from '../assets/capacitar-image.png';
 
 const categories = [
   'All',
@@ -105,6 +106,18 @@ const initialArticles = [
     Author: 'John Smith',
     date: '2025-03-17',
     image: BrechaCero,
+  },
+  {
+    id: 6,
+    title: 'Capacitar plataforma educativa',
+    category: 'Press Releases',
+    tags: ['Networking'],
+    excerpt:
+      'El gobierno nacional ha lanzado junto a diversas entidades la plataforma de Formación para Empresarios y Emprendedores en habilidades específicas, como tambien en digitales y blandas. ',
+    content: 'Full article content here...',
+    Author: 'John Smith',
+    date: '2025-03-17',
+    image: CapacitarImage,
   },
 ];
 
@@ -390,15 +403,6 @@ const NewsPage = () => {
                       )}
                     </div>
                   </div>
-                  <Link to="https://www.argentina.gob.ar/economia/pymes-emprendedores-y-economia-del-conocimiento/capacitar">
-                    <div className="bg-red-500 flex justify-center items-center py-4 px-4 mt-auto">
-                      <img
-                        src={CapacitarLogo}
-                        alt="Capacitar Logo"
-                        className="h-5"
-                      />
-                    </div>
-                  </Link>
                 </article>
               ))}
             </div>
