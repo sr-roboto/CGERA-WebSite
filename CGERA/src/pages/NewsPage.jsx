@@ -55,6 +55,7 @@ const initialArticles = [
     date: '2024-03-15',
     image:
       'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+    url: 'https://cgera.org/noticias/conferencia-anual-2024',
   },
   {
     id: 2,
@@ -68,6 +69,7 @@ const initialArticles = [
     date: '2024-03-10',
     image:
       'https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+    url: 'https://cgera.org/noticias/innovacion-practicas-sostenibles',
   },
   {
     id: 3,
@@ -81,6 +83,7 @@ const initialArticles = [
     date: '2024-03-05',
     image:
       'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+    url: 'https://cgera.org/noticias/casos-exito-transformacion-digital',
   },
   {
     id: 4,
@@ -94,6 +97,7 @@ const initialArticles = [
     date: '2025-03-17',
     image:
       'https://nomadesdigitales.com.ar/wp-content/uploads/2025/02/10-Entrevistados.png',
+    url: 'https://nomadesdigitales.com.ar/2025/02/17/desafios-de-la-educacion-en-2025/',
   },
   {
     id: 5,
@@ -106,6 +110,7 @@ const initialArticles = [
     Author: 'John Smith',
     date: '2025-03-17',
     image: BrechaCero,
+    url: 'https://brecha-cero.netlify.app/',
   },
   {
     id: 6,
@@ -118,6 +123,7 @@ const initialArticles = [
     Author: 'John Smith',
     date: '2025-03-17',
     image: CapacitarImage,
+    url: 'https://www.argentina.gob.ar/economia/pymes-emprendedores-y-economia-del-conocimiento/capacitar',
   },
 ];
 
@@ -135,6 +141,7 @@ const NewsPage = () => {
     author: '',
     date: '',
     image: '',
+    url: '',
   });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -215,6 +222,7 @@ const NewsPage = () => {
       author: '',
       date: '',
       image: '',
+      url: '',
     });
     setIsEditing(false);
     setCurrentArticleId(null);
@@ -402,6 +410,28 @@ const NewsPage = () => {
                         </div>
                       )}
                     </div>
+                    <div className="mt-4 mb-2">
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex cursor-pointer items-center px-4 py-2 hover:text-blue-700 text-blue-600 text-sm font-medium rounded-md transition-colors"
+                      >
+                        Ir a la publicación
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="ml-2 h-4 w-4"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -485,6 +515,14 @@ const NewsPage = () => {
               value={newArticle.image}
               onChange={handleInputChange}
               placeholder="URL de la imagen"
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+            <input
+              type="text"
+              name="url"
+              value={newArticle.url}
+              onChange={handleInputChange}
+              placeholder="URL de la publicación"
               className="w-full px-4 py-2 border rounded-lg"
             />
             <div className="flex justify-end space-x-4">
