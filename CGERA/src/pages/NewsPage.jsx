@@ -147,14 +147,20 @@ const NewsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentArticleId, setCurrentArticleId] = useState(null);
 
-  const filteredArticles = articles.filter((article) => {
-    const categoryMatch =
-      selectedCategory === 'All' || article.category === selectedCategory;
-    const tagsMatch =
-      selectedTags.length === 0 ||
-      article.tags.some((tag) => selectedTags.includes(tag));
-    return categoryMatch && tagsMatch;
-  });
+  const filteredArticles = articles
+    .filter((article) => {
+      const categoryMatch =
+        selectedCategory === 'All' || article.category === selectedCategory;
+      const tagsMatch =
+        selectedTags.length === 0 ||
+        article.tags.some((tag) => selectedTags.includes(tag));
+      return categoryMatch && tagsMatch;
+    })
+
+    .sort((a, b) => {
+      // Ordenar por fecha descendente (más reciente primero)
+      return new Date(b.date) - new Date(a.date);
+    });
 
   const toggleTag = (tag) => {
     setSelectedTags((prev) =>
