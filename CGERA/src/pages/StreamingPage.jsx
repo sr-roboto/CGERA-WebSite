@@ -153,7 +153,7 @@ const FeaturedVideoSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-16 md:py-24 ">
+    <section ref={ref} className="py-8 md:py-16 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -314,7 +314,7 @@ const HighlightsSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-12 md:py-16 bg-gray-50">
+    <section ref={ref} className="py-4 md:py-8 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
