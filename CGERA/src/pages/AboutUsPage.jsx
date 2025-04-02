@@ -8,36 +8,509 @@ import {
   Factory,
 } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
-import MarceloOrtega from '../assets/marcelo-ortega.jpeg';
+import auth1 from '../assets/authorities/1.jpg';
+import auth2 from '../assets/authorities/2.jpg';
+import auth3 from '../assets/authorities/3.jpg';
+import auth4 from '../assets/authorities/4.jpg';
+import auth5 from '../assets/authorities/5.jpg';
+import auth6 from '../assets/authorities/6.jpg';
+import auth7 from '../assets/authorities/7.jpg';
+import auth8 from '../assets/authorities/8.jpg';
+import auth9 from '../assets/authorities/9.jpg';
+import auth10 from '../assets/authorities/10.jpg';
+import auth11 from '../assets/authorities/11.jpg';
+import auth12 from '../assets/authorities/12.jpg';
+import auth13 from '../assets/authorities/13.jpg';
+import auth14 from '../assets/authorities/14.jpg';
+import auth15 from '../assets/authorities/15.jpg';
+import auth16 from '../assets/authorities/16.jpg';
+import auth17 from '../assets/authorities/17.jpg';
+import auth18 from '../assets/authorities/18.jpg';
+import auth19 from '../assets/authorities/19.jpg';
+import auth20 from '../assets/authorities/20.jpg';
+import auth21 from '../assets/authorities/21.jpg';
+import auth22 from '../assets/authorities/22.jpg';
+import auth23 from '../assets/authorities/23.jpg';
+import auth24 from '../assets/authorities/24.jpg';
+import auth25 from '../assets/authorities/25.jpg';
+import auth26 from '../assets/authorities/26.jpg';
+import auth27 from '../assets/authorities/27.jpg';
 
 const authorities = [
   {
     id: 1,
-    name: 'Marcelo Fernandez',
-    role: 'Presidente de CGERA',
-    image: `${MarceloOrtega}`,
+    name: 'Marcelo Omar Fernandez',
+    role: 'Presidente',
+    image: auth1,
     description:
-      'Empresario. Presidente de Cierres Lynsa. Presidente de CGERA y CAFAICYM. Diputado Nacional por la Provincia de Buenos Aires (2005-2009).',
+      'CAFAICYM - CÁMARA ARGENTINA DE FABRICANTES DE AVIOS Y ACCESORIOS PARA LA CONFECCIÓN Y MARROQUINERIA',
+    email: 'marcelo.lyn@gmail.com',
   },
   {
     id: 2,
-    name: 'John Martinez',
-    role: 'Vice Presidente de CGERA',
-    image:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+    name: 'Pedro Guillermo Bergaglio',
+    role: 'Vicepresidente 1°',
+    image: auth2,
     description:
-      'Experto en estrategias de innovación y transformación digital para empresas modernas.',
+      'CASWEATER - CAMARA ARGENTINA DE EMPRESAS DE LA INDUSTRIA DEL SWEATER',
+    email: 'pedrobergaglio@hotmail.com',
   },
   {
     id: 3,
-    name: 'Sarah Chen',
-    role: 'Secretaria General',
-    image:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+    name: 'Raul Eduardo Zylbersztein',
+    role: 'Vicepresidente 2°',
+    image: auth3,
+    description: 'CGCYS - Conf Gral de Comercio y Serv',
+    email: 'raulzyl@gmail.com',
+  },
+  {
+    id: 4,
+    name: 'Mariel Cecilia Adela Paz',
+    role: 'Vicepresidente 3°',
+    image: auth4,
     description:
-      'Especializada en relaciones internacionales y alianzas estratégicas.',
+      'ACARA - Asociación de Concesionarios de Automotores de la República Argentina',
+    email: 'marielcpaz@icloud.com',
+  },
+  {
+    id: 5,
+    name: 'Juan Nicolas Fera',
+    role: 'Vicepresidente 4°',
+    image: auth5,
+    description:
+      'CGERA PROV BS AS - Confederación General Empresaria de la República Argentina',
+    email: 'juancito@marolio.com',
+  },
+  {
+    id: 6,
+    name: 'Ariel Fernando Aguilar',
+    role: 'Vicepresidente 5°',
+    image: auth6,
+    description:
+      'CGERA MORON - Confederación General Empresaria de la República Argentina',
+    email: 'arielaguilar@corium.com.ar',
+  },
+  {
+    id: 7,
+    name: 'Marcelo Abel Girard',
+    role: 'Secretario',
+    image: auth7,
+    description: 'CAM TINTAS GRAF - Cámara de Tintas Gráficas',
+    email: 'marcelogirard.cotigraf@gmail.com',
+  },
+  {
+    id: 8,
+    name: 'Alfredo Luis Vila',
+    role: 'Pro Secretario 1°',
+    image: auth8,
+    description: 'FAGODA - FEDERACION DE GANADO',
+    email: 'vilaalfredo.s@gmail.com',
+  },
+  {
+    id: 9,
+    name: 'Veronica Wejchenberg',
+    role: 'Pro Secretario 2°',
+    image: auth9,
+    description:
+      'CGERA MORON - Confederación General Empresaria de la República Argentina',
+    email: 'cgeramoron@gmail.com',
+  },
+  {
+    id: 10,
+    name: 'Facundo Marcelo Girard',
+    role: 'Tesorero',
+    image: auth10,
+    description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
+    email: 'FACUNDOGIRARD@GMAIL.COM',
+  },
+  {
+    id: 11,
+    name: 'Sandra Estela Nicolas',
+    role: 'Pro Tesorero 1°',
+    image: auth11,
+    description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
+    email: 'loulou1424@gmail.com',
+  },
+  {
+    id: 12,
+    name: 'Norma Rios',
+    role: 'Pro Tesorero 2°',
+    image: auth12,
+    description:
+      'CAMEFOR - Cámara de Mujeres Empresarias y Profesionales de Formosa',
+    email: 'normariosmar@gmail.com',
+  },
+  {
+    id: 13,
+    name: 'Horacio Antonio Moschetto',
+    role: 'Vocal Titular 1°',
+    image: auth13,
+    description: 'CIC - Cámara de la Industria del Calzado',
+    email: 'cic@camara-calzado.org.ar',
+  },
+  {
+    id: 14,
+    name: 'Sandra Elizabeth Rey',
+    role: 'Vocal Titular 2°',
+    image: auth14,
+    description:
+      'CGERA ITUZAINGO - Confederación General Empresaria de la República Argentina',
+    email: 'sandraerey@gmail.com',
+  },
+  {
+    id: 15,
+    name: 'Mauro Javier Gonzalez',
+    role: 'Vocal Titular 3°',
+    image: auth15,
+    description:
+      'CGERA PROV BS AS - Confederación General Empresaria de la República Argentina',
+    email: 'maurogonzalez@zadig.com.ar',
+  },
+  {
+    id: 16,
+    name: 'Guillermo Eduardo Gomez Galizia',
+    role: 'Vocal Titular 4°',
+    image: auth16,
+    description:
+      'CADIME - Cámara Argentina de Distribuidores de Materiales eléctricos',
+    email: 'cadime@cadime.com.ar',
+  },
+  {
+    id: 17,
+    name: 'Juan Alejandro Bosch',
+    role: 'Vocal Titular 5°',
+    image: auth17,
+    description:
+      'CAIFA - Cámara de la Industria Argentina de Fertilizantes y Agroquímicos',
+    email: 'jabosch@fri-ma.com.ar',
+  },
+  {
+    id: 18,
+    name: 'Norberto Fermani',
+    role: 'Vocal Titular 6°',
+    image: auth18,
+    description: 'CADIOA - Cámara Argentina de industrias ópticas y afines',
+    email: 'nfermani@gmail.com',
+  },
+  {
+    id: 19,
+    name: 'Julian Moreno',
+    role: 'Vocal Titular 7°',
+    image: auth19,
+    description: 'APYME - Asamblea de Pequeños y Medianos Empresarios',
+    email: 'jm@kioshi.com.ar',
+  },
+  {
+    id: 20,
+    name: 'Pedro Vicente Uribarrena',
+    role: 'Vocal Titular 8°',
+    image: auth20,
+    description: 'FAGODA - FEDERACION DE GANADO',
+    email: 'pedro@uridesarrollos.com.ar',
+  },
+  {
+    id: 21,
+    name: 'Maria Antonieta Lovece',
+    role: 'Vocal Titular 9°',
+    image: auth21,
+    description:
+      'CAFAICYM - CÁMARA ARGENTINA DE FABRICANTES DE AVIOS Y ACCESORIOS PARA LA CONFECCIÓN Y MARROQUINERIA',
+    email: 'malovece150@gmail.com',
+  },
+  {
+    id: 22,
+    name: 'Ornella Calvete',
+    role: 'Vocal Titular 10°',
+    image: auth22,
+    description:
+      'CAPYMA - Cámara Arg de la Pequeña y Mediana Industria de la Alimentación',
+    email: 'calveteornella@gmail.com',
+  },
+  {
+    id: 23,
+    name: 'Ruben Fernando Quintero',
+    role: 'Vocal Titular 11°',
+    image: auth23,
+    description:
+      'CASRECH - Cámara de Autoservicios y Supermercados de Residentes Chinos',
+    email: 'fernandoquintero@fibertel.com.ar',
+  },
+  {
+    id: 24,
+    name: 'Roberto Alfredo Yacuzzi',
+    role: 'Vocal Titular 12°',
+    image: auth24,
+    description:
+      'UCI SAN LORENZO - UNIÓN DE COMERCIANTES E INDUSTRIALES DEL DPTO. SAN LORENZO',
+    email: 'ucisanlorenzo@yahoo.com.ar',
+  },
+  {
+    id: 25,
+    name: 'María Ester Bower Pelozo',
+    role: 'Vocal Titular 13°',
+    image: auth25,
+    description: 'CAMEM - Cámara de Mujeres Empresarias de Misiones',
+    email: 'mbowerpelozo@gmail.com',
+  },
+  {
+    id: 26,
+    name: 'Juan Carlos Pereyra',
+    role: 'Vocal Titular 14°',
+    image: auth26,
+    description:
+      'AIERA - Asociación de Importadores y Exportadores de la República Argentina',
+    email: 'jcpereyra@jcpcargo.com',
+  },
+  {
+    id: 27,
+    name: 'Jorge Osvaldo Metri',
+    role: 'Vocal Titular 15°',
+    image: auth27,
+    description:
+      'APYMEP - Asociación de Pequeñas y Medianas Empresas y Profesionales',
+    email: 'jmetri28@gmail.com',
+  },
+  {
+    id: 28,
+    name: 'Eduardo Emilio Wylder',
+    role: 'Vocal Titular 16°',
+    image: 'https://via.placeholder.com/500x500.png?text=Eduardo+Wylder',
+    description: 'CICA - Cámara de la Industria Curtidora Argentina',
+    email: 'ewydler@cica.org.ar',
+  },
+  {
+    id: 29,
+    name: 'Ruben Alberto Pallone',
+    role: 'Vocal Titular 17°',
+    image: 'https://via.placeholder.com/500x500.png?text=Ruben+Pallone',
+    description:
+      'CIMA - Cámara Industrial de la Manufactura del Cuero y Afines de la República Argentina',
+    email: 'presidencia@cuerocima.com.ar',
+  },
+  {
+    id: 30,
+    name: 'Justina Almiron Gayoso',
+    role: 'Vocal Titular 18°',
+    image: 'https://via.placeholder.com/500x500.png?text=Justina+Almiron',
+    description:
+      'CAMEFOR - Cámara de Mujeres Empresarias y Profesionales de Formosa',
+    email: 'puesto21.formosa@hotmail.com',
+  },
+  {
+    id: 31,
+    name: 'Daniel German Reffatti',
+    role: 'Vocal Titular 19°',
+    image: 'https://via.placeholder.com/500x500.png?text=Daniel+Reffatti',
+    description: 'CCAER - CAMARA ARGENTINA DE ENERGIAS RENOVABLES',
+    email: 'danielreffattiok@gmail.com',
+  },
+  {
+    id: 32,
+    name: 'Andres Gustavo Capriati',
+    role: 'Vocal Titular 20°',
+    image: 'https://via.placeholder.com/500x500.png?text=Andres+Capriati',
+    description:
+      'CADEFHA - CAMARA ARGENTINA DE FABRICANTES DE HERRAJES Y AFINES',
+    email: 'andrgc73@gmail.com',
+  },
+  {
+    id: 33,
+    name: 'Alejandro Diego Mayer',
+    role: 'Vocal Titular 21°',
+    image: 'https://via.placeholder.com/500x500.png?text=Alejandro+Mayer',
+    description:
+      'APYMIE - ASOCIACIÓN DE PEQUEÑAS Y MEDIANAS INDUSTRIAS ELECTRÓNICAS',
+    email: 'amayer@pcb.com.ar',
+  },
+  {
+    id: 34,
+    name: 'Norberto Peluso',
+    role: 'Vocal Titular 22°',
+    image: 'https://via.placeholder.com/500x500.png?text=Norberto+Peluso',
+    description: 'ADEL - Asociación de Empresas de Limpieza',
+    email: 'harasesece@yahoo.com.ar',
+  },
+  {
+    id: 35,
+    name: 'Mario Daniel Koch',
+    role: 'Vocal Titular 23°',
+    image: 'https://via.placeholder.com/500x500.png?text=Mario+Koch',
+    description: 'CASEL - Cámara Argentina de Seguridad Electrónica',
+    email: 'mariokoch@starx.com.ar',
+  },
+  {
+    id: 36,
+    name: 'Guillermo Mario Lopez',
+    role: 'Vocal Titular 24°',
+    image: 'https://via.placeholder.com/500x500.png?text=Guillermo+Lopez',
+    description:
+      'CECAF - Cámara Empresaria de Conservadores de Ascensores y Afines',
+    email: 'plata1555@gmail.com',
+  },
+  {
+    id: 37,
+    name: 'Ezequiel Asquinasi',
+    role: 'Vocal Titular 25°',
+    image: 'https://via.placeholder.com/500x500.png?text=Ezequiel+Asquinasi',
+    description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
+    email: 'ezequiel@caefa.org.ar',
+  },
+  {
+    id: 38,
+    name: 'Daniel Jose Campora',
+    role: 'Vocal Titular 26°',
+    image: 'https://via.placeholder.com/500x500.png?text=Daniel+Campora',
+    description: 'APYME - Asamblea de Pequeños y Medianos Empresarios',
+    email: 'danielcampora.arq@gmail.com',
+  },
+  {
+    id: 39,
+    name: 'Julio Alberto Bozzeli',
+    role: 'Vocal Titular 27°',
+    image: 'https://via.placeholder.com/500x500.png?text=Julio+Bozzeli',
+    description: 'CICA - Cámara de la Industria Curtidora Argentina',
+    email: 'secretaria@cica.org.ar',
+  },
+  {
+    id: 40,
+    name: 'Fernando Maria Storni',
+    role: 'Vocal Suplente 1°',
+    image: 'https://via.placeholder.com/500x500.png?text=Fernando+Storni',
+    description: 'CAEHV - Cámara Argentina de Engordadores de Hacienda Vacuna',
+    email: 'fernando.storni@feedlot.com.ar',
+  },
+  {
+    id: 41,
+    name: 'Francisco Alberto Guglielmo',
+    role: 'Vocal Suplente 2°',
+    image: 'https://via.placeholder.com/500x500.png?text=Francisco+Guglielmo',
+    description:
+      'CAIFA - Cámara de la Industria Argentina de Fertilizantes y Agroquímicos',
+    email: 'guglielmo@foundryresins.com.ar',
+  },
+  {
+    id: 42,
+    name: 'Ramiro Zilvestein',
+    role: 'Vocal Suplente 3°',
+    image: 'https://via.placeholder.com/500x500.png?text=Ramiro+Zilvestein',
+    description: 'CADIOA - Cámara Argentina de industrias ópticas y afines',
+    email: 'gerencia@cadioa.com.ar',
+  },
+  {
+    id: 43,
+    name: 'Gabriela Laura Artinian',
+    role: 'Vocal Suplente 4°',
+    image: 'https://via.placeholder.com/500x500.png?text=Gabriela+Artinian',
+    description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
+    email: 'gabriela@caefa.org.ar',
+  },
+  {
+    id: 44,
+    name: 'Alejandro Silvio Vazquez',
+    role: 'Vocal Suplente 5°',
+    image: 'https://via.placeholder.com/500x500.png?text=Alejandro+Vazquez',
+    description:
+      'CECAF - Cámara Empresaria de Conservadores de Ascensores y Afines',
+    email: 'alsivaz@yahoo.com',
+  },
+  {
+    id: 45,
+    name: 'Carlos Adalberto Estebarena',
+    role: 'Vocal Suplente 6°',
+    image: 'https://via.placeholder.com/500x500.png?text=Carlos+Estebarena',
+    description:
+      'CAIPIC - Cámara Argentina de Industriales Proveedores de la Industria del Calzado',
+    email: 'estebarena@gmail.com',
+  },
+  {
+    id: 46,
+    name: 'Pablo Daniel Lires',
+    role: 'Vocal Suplente 7°',
+    image: 'https://via.placeholder.com/500x500.png?text=Pablo+Lires',
+    description:
+      'APYMEP - Asociación de Pequeñas y Medianas Empresas y Profesionales',
+    email: 'plablolires@yahoo.com.ar',
+  },
+  {
+    id: 47,
+    name: 'Pablo Andres Roust',
+    role: 'Vocal Suplente 8°',
+    image: 'https://via.placeholder.com/500x500.png?text=Pablo+Roust',
+    description:
+      'CADMI - CAMARA ARGENTINA DE DISTRIBUIDORES MAYORISTAS DE INFORMATICA',
+    email: 'pablo_roust@solutionbox.com.ar',
+  },
+  {
+    id: 48,
+    name: 'Leonardo Anibal Marcilio',
+    role: 'Vocal Suplente 9°',
+    image: 'https://via.placeholder.com/500x500.png?text=Leonardo+Marcilio',
+    description: 'CCARPA - Cámara de Comercio Argentino Paraguaya',
+    email: 'leomarcil@gmail.com',
+  },
+  {
+    id: 49,
+    name: 'Miguel Angel Hale',
+    role: 'Vocal Suplente 10°',
+    image: 'https://via.placeholder.com/500x500.png?text=Miguel+Hale',
+    description:
+      'CAEDE - CÁMARA ARGENTINA DE EMPRESAS DEMOLEDORAS Y EXCAVADORAS',
+    email: 'miguel_hale@hotmail.com',
+  },
+  {
+    id: 50,
+    name: 'Patricia Nora Ballester',
+    role: 'Vocal Suplente 11°',
+    image: 'https://via.placeholder.com/500x500.png?text=Patricia+Ballester',
+    description:
+      'AIERA - Asociación de Importadores y Exportadores de la República Argentina',
+    email: 'pnballester@yahoo.com.ar',
+  },
+  {
+    id: 51,
+    name: 'Damian Andres Gravagna',
+    role: 'Vocal Suplente 12°',
+    image: 'https://via.placeholder.com/500x500.png?text=Damian+Gravagna',
+    description: 'CIC - Cámara de la Industria del Calzado',
+    email: 'DGRAVAGNA@GMAIL.COM',
+  },
+  {
+    id: 52,
+    name: 'Guillermo Daniel Camioli',
+    role: 'Vocal Suplente 13°',
+    image: 'https://via.placeholder.com/500x500.png?text=Guillermo+Camioli',
+    description:
+      'UCI SAN LORENZO - UNIÓN DE COMERCIANTES E INDUSTRIALES DEL DPTO. SAN LORENZO',
+    email: 'guillermocamioli@gelvezsrl.com.ar',
+  },
+  {
+    id: 53,
+    name: 'Norberto Luis Luciani',
+    role: 'Revisor de Cuenta Titular 1°',
+    image: 'https://via.placeholder.com/500x500.png?text=Norberto+Luciani',
+    description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
+    email: 'norbertolluciani@gmail.com',
+  },
+  {
+    id: 54,
+    name: 'Alejandro Agustin Carrano',
+    role: 'Revisor de Cuenta Titular 2°',
+    image: 'https://via.placeholder.com/500x500.png?text=Alejandro+Carrano',
+    description:
+      'CGERA ITUZAINGO - Confederación General Empresaria de la República Argentina',
+    email: '',
+  },
+  {
+    id: 55,
+    name: 'Abel Andres Girard',
+    role: 'Revisor de Cuenta Suplente',
+    image: 'https://via.placeholder.com/500x500.png?text=Abel+Girard',
+    description: 'CAM TINTAS GRAF - Cámara de Tintas Gráficas',
+    email: '',
   },
 ];
+
+// ...existing code...
 
 const associates = [
   {
@@ -433,7 +906,7 @@ const AboutUsPage = () => {
                 color="#418CBD"
               />
               <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Autoridades
+                Autoridades y Asociados
               </h2>
               <p className="mt-4 max-w-2xl md:max-w-max text-xl text-gray-500 lg:mx-auto">
                 Conozca a los profesionales experimentados que lideran a CGERA
@@ -464,6 +937,16 @@ const AboutUsPage = () => {
                       <p className="mt-3 text-gray-500">
                         {authority.description}
                       </p>
+                      {authority.email && (
+                        <p className="mt-2 text-sm text-gray-600">
+                          <a
+                            href={`mailto:${authority.email}`}
+                            className="text-blue-500 hover:underline"
+                          >
+                            {authority.email}
+                          </a>
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -474,7 +957,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Asociaciones*/}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -508,20 +991,11 @@ const AboutUsPage = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5 }}
                     >
-                      {/* <div className="aspect-w-3 aspect-h-2">
-                      <img
-                        className="w-full h-64 object-cover"
-                        src={authority.image}
-                        alt={authority.name}
-                      />
-                    </div> */}
                       <div className="p-4 text-md sm:text-xl">
                         <h3 className=" font-semibold max-w-lg text-md text-gray-800">
                           {associates.name}:
                         </h3>
-                        {/* <p className="text-blue-600 font-medium">
-                        {authority.role}
-                      </p> */}
+
                         <p className=" text-gray-500 capitalize font-medium text-wrap max-w-md">
                           {associates.description}
                         </p>
@@ -533,7 +1007,7 @@ const AboutUsPage = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
