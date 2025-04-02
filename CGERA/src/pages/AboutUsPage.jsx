@@ -940,39 +940,50 @@ const AboutUsPage = () => {
             </div>
             <div className="mt-10">
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {authorities.map((authority) => (
+                {authorities.map((authority, index) => (
                   <div
                     key={authority.id}
-                    className="bg-white overflow-hidden shadow-lg rounded-lg"
+                    className="overflow-hidden shadow-lg rounded-lg hover:bg-gray-100"
                   >
-                    <div className="aspect-w-3 aspect-h-2">
-                      <img
-                        className="w-full h-64 object-cover"
-                        src={authority.image}
-                        alt={authority.name}
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {authority.name}
-                      </h3>
-                      <p className="text-blue-600 font-medium">
-                        {authority.role}
-                      </p>
-                      <p className="mt-3 text-gray-500">
-                        {authority.description}
-                      </p>
-                      {authority.email && (
-                        <p className="mt-2 text-sm text-gray-600">
-                          <a
-                            href={`mailto:${authority.email}`}
-                            className="text-blue-500 hover:underline"
-                          >
-                            {authority.email}
-                          </a>
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.1 * index,
+                      }}
+                    >
+                      <div className="aspect-w-3 aspect-h-2">
+                        <img
+                          className="w-full h-64 object-cover"
+                          src={authority.image}
+                          alt={authority.name}
+                        />
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900">
+                          {authority.name}
+                        </h3>
+                        <p className="text-blue-600 font-medium">
+                          {authority.role}
                         </p>
-                      )}
-                    </div>
+                        <p className="mt-3 text-gray-500">
+                          {authority.description}
+                        </p>
+                        {authority.email && (
+                          <p className="mt-2 text-sm text-gray-600">
+                            <a
+                              href={`mailto:${authority.email}`}
+                              className="text-blue-500 hover:underline"
+                            >
+                              {authority.email}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
                   </div>
                 ))}
               </div>
@@ -982,7 +993,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Asociaciones*/}
-      {/* <section className="py-16">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -1032,7 +1043,7 @@ const AboutUsPage = () => {
             </div>
           </motion.div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 };
