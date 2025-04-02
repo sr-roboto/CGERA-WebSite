@@ -35,6 +35,31 @@ import auth24 from '../assets/authorities/24.jpg';
 import auth25 from '../assets/authorities/25.jpg';
 import auth26 from '../assets/authorities/26.jpg';
 import auth27 from '../assets/authorities/27.jpg';
+import auth29 from '../assets/authorities/29.jpg';
+import auth30 from '../assets/authorities/30.jpg';
+import auth31 from '../assets/authorities/31.jpg';
+import auth32 from '../assets/authorities/32.jpg';
+import auth33 from '../assets/authorities/33.jpg';
+import auth34 from '../assets/authorities/34.jpg';
+import auth35 from '../assets/authorities/35.jpg';
+import auth36 from '../assets/authorities/36.jpg';
+import auth37 from '../assets/authorities/37.jpg';
+import auth38 from '../assets/authorities/38.jpg';
+import auth39 from '../assets/authorities/39.jpg';
+import auth40 from '../assets/authorities/40.jpg';
+import auth41 from '../assets/authorities/41.jpg';
+import auth42 from '../assets/authorities/42.jpg';
+import auth43 from '../assets/authorities/43.jpg';
+import auth45 from '../assets/authorities/45.jpg';
+import auth46 from '../assets/authorities/46.jpg';
+import auth47 from '../assets/authorities/47.jpg';
+import auth48 from '../assets/authorities/48.jpg';
+import auth49 from '../assets/authorities/49.jpg';
+import auth50 from '../assets/authorities/50.jpg';
+import auth51 from '../assets/authorities/51.jpg';
+import auth52 from '../assets/authorities/52.jpg';
+import auth53 from '../assets/authorities/53.jpg';
+import auth55 from '../assets/authorities/55.jpg';
 
 const authorities = [
   {
@@ -282,7 +307,7 @@ const authorities = [
     id: 29,
     name: 'Ruben Alberto Pallone',
     role: 'Vocal Titular 17°',
-    image: 'https://via.placeholder.com/500x500.png?text=Ruben+Pallone',
+    image: auth29,
     description:
       'CIMA - Cámara Industrial de la Manufactura del Cuero y Afines de la República Argentina',
     email: 'presidencia@cuerocima.com.ar',
@@ -291,7 +316,7 @@ const authorities = [
     id: 30,
     name: 'Justina Almiron Gayoso',
     role: 'Vocal Titular 18°',
-    image: 'https://via.placeholder.com/500x500.png?text=Justina+Almiron',
+    image: auth30,
     description:
       'CAMEFOR - Cámara de Mujeres Empresarias y Profesionales de Formosa',
     email: 'puesto21.formosa@hotmail.com',
@@ -300,7 +325,7 @@ const authorities = [
     id: 31,
     name: 'Daniel German Reffatti',
     role: 'Vocal Titular 19°',
-    image: 'https://via.placeholder.com/500x500.png?text=Daniel+Reffatti',
+    image: auth31,
     description: 'CCAER - CAMARA ARGENTINA DE ENERGIAS RENOVABLES',
     email: 'danielreffattiok@gmail.com',
   },
@@ -308,7 +333,7 @@ const authorities = [
     id: 32,
     name: 'Andres Gustavo Capriati',
     role: 'Vocal Titular 20°',
-    image: 'https://via.placeholder.com/500x500.png?text=Andres+Capriati',
+    image: auth32,
     description:
       'CADEFHA - CAMARA ARGENTINA DE FABRICANTES DE HERRAJES Y AFINES',
     email: 'andrgc73@gmail.com',
@@ -317,7 +342,7 @@ const authorities = [
     id: 33,
     name: 'Alejandro Diego Mayer',
     role: 'Vocal Titular 21°',
-    image: 'https://via.placeholder.com/500x500.png?text=Alejandro+Mayer',
+    image: auth33,
     description:
       'APYMIE - ASOCIACIÓN DE PEQUEÑAS Y MEDIANAS INDUSTRIAS ELECTRÓNICAS',
     email: 'amayer@pcb.com.ar',
@@ -326,7 +351,7 @@ const authorities = [
     id: 34,
     name: 'Norberto Peluso',
     role: 'Vocal Titular 22°',
-    image: 'https://via.placeholder.com/500x500.png?text=Norberto+Peluso',
+    image: auth34,
     description: 'ADEL - Asociación de Empresas de Limpieza',
     email: 'harasesece@yahoo.com.ar',
   },
@@ -334,7 +359,7 @@ const authorities = [
     id: 35,
     name: 'Mario Daniel Koch',
     role: 'Vocal Titular 23°',
-    image: 'https://via.placeholder.com/500x500.png?text=Mario+Koch',
+    image: auth35,
     description: 'CASEL - Cámara Argentina de Seguridad Electrónica',
     email: 'mariokoch@starx.com.ar',
   },
@@ -342,7 +367,7 @@ const authorities = [
     id: 36,
     name: 'Guillermo Mario Lopez',
     role: 'Vocal Titular 24°',
-    image: 'https://via.placeholder.com/500x500.png?text=Guillermo+Lopez',
+    image: auth36,
     description:
       'CECAF - Cámara Empresaria de Conservadores de Ascensores y Afines',
     email: 'plata1555@gmail.com',
@@ -351,7 +376,7 @@ const authorities = [
     id: 37,
     name: 'Ezequiel Asquinasi',
     role: 'Vocal Titular 25°',
-    image: 'https://via.placeholder.com/500x500.png?text=Ezequiel+Asquinasi',
+    image: auth37,
     description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
     email: 'ezequiel@caefa.org.ar',
   },
@@ -359,7 +384,7 @@ const authorities = [
     id: 38,
     name: 'Daniel Jose Campora',
     role: 'Vocal Titular 26°',
-    image: 'https://via.placeholder.com/500x500.png?text=Daniel+Campora',
+    image: auth38,
     description: 'APYME - Asamblea de Pequeños y Medianos Empresarios',
     email: 'danielcampora.arq@gmail.com',
   },
@@ -367,7 +392,7 @@ const authorities = [
     id: 39,
     name: 'Julio Alberto Bozzeli',
     role: 'Vocal Titular 27°',
-    image: 'https://via.placeholder.com/500x500.png?text=Julio+Bozzeli',
+    image: auth39,
     description: 'CICA - Cámara de la Industria Curtidora Argentina',
     email: 'secretaria@cica.org.ar',
   },
@@ -375,7 +400,7 @@ const authorities = [
     id: 40,
     name: 'Fernando Maria Storni',
     role: 'Vocal Suplente 1°',
-    image: 'https://via.placeholder.com/500x500.png?text=Fernando+Storni',
+    image: auth40,
     description: 'CAEHV - Cámara Argentina de Engordadores de Hacienda Vacuna',
     email: 'fernando.storni@feedlot.com.ar',
   },
@@ -383,7 +408,7 @@ const authorities = [
     id: 41,
     name: 'Francisco Alberto Guglielmo',
     role: 'Vocal Suplente 2°',
-    image: 'https://via.placeholder.com/500x500.png?text=Francisco+Guglielmo',
+    image: auth41,
     description:
       'CAIFA - Cámara de la Industria Argentina de Fertilizantes y Agroquímicos',
     email: 'guglielmo@foundryresins.com.ar',
@@ -392,7 +417,7 @@ const authorities = [
     id: 42,
     name: 'Ramiro Zilvestein',
     role: 'Vocal Suplente 3°',
-    image: 'https://via.placeholder.com/500x500.png?text=Ramiro+Zilvestein',
+    image: auth42,
     description: 'CADIOA - Cámara Argentina de industrias ópticas y afines',
     email: 'gerencia@cadioa.com.ar',
   },
@@ -400,7 +425,7 @@ const authorities = [
     id: 43,
     name: 'Gabriela Laura Artinian',
     role: 'Vocal Suplente 4°',
-    image: 'https://via.placeholder.com/500x500.png?text=Gabriela+Artinian',
+    image: auth43,
     description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
     email: 'gabriela@caefa.org.ar',
   },
@@ -417,7 +442,7 @@ const authorities = [
     id: 45,
     name: 'Carlos Adalberto Estebarena',
     role: 'Vocal Suplente 6°',
-    image: 'https://via.placeholder.com/500x500.png?text=Carlos+Estebarena',
+    image: auth45,
     description:
       'CAIPIC - Cámara Argentina de Industriales Proveedores de la Industria del Calzado',
     email: 'estebarena@gmail.com',
@@ -426,7 +451,7 @@ const authorities = [
     id: 46,
     name: 'Pablo Daniel Lires',
     role: 'Vocal Suplente 7°',
-    image: 'https://via.placeholder.com/500x500.png?text=Pablo+Lires',
+    image: auth46,
     description:
       'APYMEP - Asociación de Pequeñas y Medianas Empresas y Profesionales',
     email: 'plablolires@yahoo.com.ar',
@@ -435,7 +460,7 @@ const authorities = [
     id: 47,
     name: 'Pablo Andres Roust',
     role: 'Vocal Suplente 8°',
-    image: 'https://via.placeholder.com/500x500.png?text=Pablo+Roust',
+    image: auth47,
     description:
       'CADMI - CAMARA ARGENTINA DE DISTRIBUIDORES MAYORISTAS DE INFORMATICA',
     email: 'pablo_roust@solutionbox.com.ar',
@@ -444,7 +469,7 @@ const authorities = [
     id: 48,
     name: 'Leonardo Anibal Marcilio',
     role: 'Vocal Suplente 9°',
-    image: 'https://via.placeholder.com/500x500.png?text=Leonardo+Marcilio',
+    image: auth48,
     description: 'CCARPA - Cámara de Comercio Argentino Paraguaya',
     email: 'leomarcil@gmail.com',
   },
@@ -452,7 +477,7 @@ const authorities = [
     id: 49,
     name: 'Miguel Angel Hale',
     role: 'Vocal Suplente 10°',
-    image: 'https://via.placeholder.com/500x500.png?text=Miguel+Hale',
+    image: auth49,
     description:
       'CAEDE - CÁMARA ARGENTINA DE EMPRESAS DEMOLEDORAS Y EXCAVADORAS',
     email: 'miguel_hale@hotmail.com',
@@ -461,7 +486,7 @@ const authorities = [
     id: 50,
     name: 'Patricia Nora Ballester',
     role: 'Vocal Suplente 11°',
-    image: 'https://via.placeholder.com/500x500.png?text=Patricia+Ballester',
+    image: auth50,
     description:
       'AIERA - Asociación de Importadores y Exportadores de la República Argentina',
     email: 'pnballester@yahoo.com.ar',
@@ -470,7 +495,7 @@ const authorities = [
     id: 51,
     name: 'Damian Andres Gravagna',
     role: 'Vocal Suplente 12°',
-    image: 'https://via.placeholder.com/500x500.png?text=Damian+Gravagna',
+    image: auth51,
     description: 'CIC - Cámara de la Industria del Calzado',
     email: 'DGRAVAGNA@GMAIL.COM',
   },
@@ -478,7 +503,7 @@ const authorities = [
     id: 52,
     name: 'Guillermo Daniel Camioli',
     role: 'Vocal Suplente 13°',
-    image: 'https://via.placeholder.com/500x500.png?text=Guillermo+Camioli',
+    image: auth52,
     description:
       'UCI SAN LORENZO - UNIÓN DE COMERCIANTES E INDUSTRIALES DEL DPTO. SAN LORENZO',
     email: 'guillermocamioli@gelvezsrl.com.ar',
@@ -487,7 +512,7 @@ const authorities = [
     id: 53,
     name: 'Norberto Luis Luciani',
     role: 'Revisor de Cuenta Titular 1°',
-    image: 'https://via.placeholder.com/500x500.png?text=Norberto+Luciani',
+    image: auth53,
     description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
     email: 'norbertolluciani@gmail.com',
   },
@@ -504,7 +529,7 @@ const authorities = [
     id: 55,
     name: 'Abel Andres Girard',
     role: 'Revisor de Cuenta Suplente',
-    image: 'https://via.placeholder.com/500x500.png?text=Abel+Girard',
+    image: auth55,
     description: 'CAM TINTAS GRAF - Cámara de Tintas Gráficas',
     email: '',
   },
