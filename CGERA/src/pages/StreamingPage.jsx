@@ -151,7 +151,7 @@ const HeroSection = ({ scrollToVideoArchive }) => {
           >
             <button
               onClick={handlePlayLive}
-              className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium"
+              className="cursor-pointer bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium"
             >
               Ver Transmisión en Vivo
             </button>
