@@ -70,6 +70,32 @@ export default function CgeraTvPage() {
 }
 
 const HeroSection = ({ scrollToVideoArchive }) => {
+  // Agregamos estados para controlar la reproducción de videos
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
+
+  // Función para reproducir la transmisión en vivo
+  const handlePlayLive = () => {
+    setVideoUrl(
+      'https://www.youtube-nocookie.com/embed/VVbHG__h-So?autoplay=1'
+    );
+    setShowVideo(true);
+  };
+
+  // Función para reproducir el último programa
+  const handlePlayLastProgram = () => {
+    setVideoUrl(
+      'https://www.youtube-nocookie.com/embed/liAj2FwYUuo?autoplay=1'
+    );
+    setShowVideo(true);
+  };
+
+  // Función para cerrar el video
+  const handleCloseVideo = () => {
+    setShowVideo(false);
+    setVideoUrl('');
+  };
+
   return (
     <section className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
       {/* Video de fondo */}
@@ -123,20 +149,49 @@ const HeroSection = ({ scrollToVideoArchive }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            <button className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium">
-              <Link to="https://www.youtube.com/watch?v=VVbHG__h-So">
-                Ver Transmisión en Vivo
-              </Link>
+            <button
+              onClick={handlePlayLive}
+              className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg text-lg font-medium"
+            >
+              Ver Transmisión en Vivo
+            </button>
+            <button
+              onClick={handlePlayLastProgram}
+              className="cursor-pointer text-white border border-white hover:bg-white/10 px-6 py-3 rounded-lg text-lg font-medium"
+            >
+              Último Programa
             </button>
             <button
               onClick={scrollToVideoArchive}
-              className="cursor-pointer  text-white border border-white hover:bg-white/10 px-6 py-3 rounded-lg text-lg font-medium"
+              className="cursor-pointer text-white border border-white hover:bg-white/10 px-6 py-3 rounded-lg text-lg font-medium"
             >
               Explorar Videos
             </button>
           </motion.div>
         </div>
       </div>
+
+      {/* Reproductor de video embebido */}
+      {showVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          <div className="relative w-full max-w-5xl mx-4 aspect-video">
+            <button
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 text-lg font-medium"
+              onClick={handleCloseVideo}
+            >
+              Cerrar ×
+            </button>
+            <iframe
+              src={videoUrl}
+              title="Video de CGERA TV"
+              className="w-full h-full rounded-lg shadow-xl"
+              allowFullScreen
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

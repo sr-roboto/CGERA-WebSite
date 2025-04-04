@@ -960,7 +960,7 @@ const AuthorityCard = ({ authority, handleChamberClick }) => {
         {authority.name}
       </h3>
 
-      <p className="text-gray-700  font-extralight">{authority.role}</p>
+      <p className="text-gray-700 font-light">{authority.role}</p>
       <div
         className={`description-container p-4 w-full overflow-hidden transition-all duration-300 ${
           showDescription
