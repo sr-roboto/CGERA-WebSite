@@ -108,7 +108,7 @@ const HeroSection = ({ scrollToVideoArchive }) => {
           className="object-cover w-full h-full opacity-20"
         >
           <source
-            src="https://media.istockphoto.com/id/2156675608/video/hispanic-latin-american-couple-software-engineer-developer-use-computer-work-on-program.mp4?s=mp4-640x640-is&k=20&c=CHzdhPE9Y2wEdr0zqltlfhgLpGB9AU1mGnuo0AU91jk="
+            src="https://res.cloudinary.com/dmdverrub/video/upload/v1743763132/pflhcykw9grpkve25oaq.mp4"
             type="video/mp4"
           />
           Tu navegador no soporta videos.
