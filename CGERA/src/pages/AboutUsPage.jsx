@@ -1277,7 +1277,7 @@ const AboutUsPage = () => {
       </section> */}
 
       {/* Sección de Autoridades con Tabs */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 container">
         <div className="text-center">
           <Users className="mx-auto h-12 w-12 text-blue-600" color="#418CBD" />
           <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -1289,8 +1289,8 @@ const AboutUsPage = () => {
           </p>
 
           {/* Tabs de navegación */}
-          <div className="border-b border-gray-200 mb-8">
-            <nav className="flex justify-center -mb-px space-x-8">
+          <div className="border-b border-gray-200 mb-8 max-w-ful">
+            <nav className="flex justify-normal sm:justify-center space-x-8 overflow-x-auto">
               <button
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'president'
