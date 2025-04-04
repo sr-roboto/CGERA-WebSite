@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+import Modal from 'react-modal';
 import {
   History,
   Users,
@@ -6,6 +8,9 @@ import {
   Award,
   PlayCircle,
   Factory,
+  AlertCircle,
+  ExternalLink,
+  Frown,
 } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import auth1 from '../assets/authorities/1.jpg';
@@ -61,6 +66,31 @@ import auth52 from '../assets/authorities/52.jpg';
 import auth53 from '../assets/authorities/53.jpg';
 import auth55 from '../assets/authorities/55.jpg';
 
+Modal.setAppElement('#root');
+
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    zIndex: 1000,
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#7ca9c5', // Rojo
+    color: 'white',
+    border: 'none',
+    borderRadius: '0.5rem',
+    padding: '2rem',
+    maxWidth: '400px',
+    width: '90%',
+    textAlign: 'center',
+  },
+};
+
 const authorities = [
   {
     id: 1,
@@ -70,6 +100,8 @@ const authorities = [
     description:
       'CAFAICYM - CÁMARA ARGENTINA DE FABRICANTES DE AVIOS Y ACCESORIOS PARA LA CONFECCIÓN Y MARROQUINERIA',
     email: 'marcelo.lyn@gmail.com',
+    chamberUrl: '',
+    category: 'president',
   },
   {
     id: 2,
@@ -79,6 +111,8 @@ const authorities = [
     description:
       'CASWEATER - CAMARA ARGENTINA DE EMPRESAS DE LA INDUSTRIA DEL SWEATER',
     email: 'pedrobergaglio@hotmail.com',
+    chamberUrl: '',
+    category: 'vicepresident',
   },
   {
     id: 3,
@@ -87,6 +121,9 @@ const authorities = [
     image: auth3,
     description: 'CGCYS - Conf Gral de Comercio y Serv',
     email: 'raulzyl@gmail.com',
+    url: 'https://camefor.org.ar/',
+    chamberUrl: '',
+    category: 'vicepresident',
   },
   {
     id: 4,
@@ -96,6 +133,8 @@ const authorities = [
     description:
       'ACARA - Asociación de Concesionarios de Automotores de la República Argentina',
     email: 'marielcpaz@icloud.com',
+    chamberUrl: 'https://www.acara.org.ar/',
+    category: 'vicepresident',
   },
   {
     id: 5,
@@ -105,6 +144,8 @@ const authorities = [
     description:
       'CGERA PROV BS AS - Confederación General Empresaria de la República Argentina',
     email: 'juancito@marolio.com',
+    chamberUrl: '',
+    category: 'vicepresident',
   },
   {
     id: 6,
@@ -114,6 +155,8 @@ const authorities = [
     description:
       'CGERA MORON - Confederación General Empresaria de la República Argentina',
     email: 'arielaguilar@corium.com.ar',
+    chamberUrl: '',
+    category: 'vicepresident',
   },
   {
     id: 7,
@@ -122,6 +165,8 @@ const authorities = [
     image: auth7,
     description: 'CAM TINTAS GRAF - Cámara de Tintas Gráficas',
     email: 'marcelogirard.cotigraf@gmail.com',
+    chamberUrl: '',
+    category: 'secretary',
   },
   {
     id: 8,
@@ -130,6 +175,8 @@ const authorities = [
     image: auth8,
     description: 'FAGODA - FEDERACION DE GANADO',
     email: 'vilaalfredo.s@gmail.com',
+    chamberUrl: '',
+    category: 'secretary',
   },
   {
     id: 9,
@@ -139,6 +186,8 @@ const authorities = [
     description:
       'CGERA MORON - Confederación General Empresaria de la República Argentina',
     email: 'cgeramoron@gmail.com',
+    chamberUrl: '',
+    category: 'secretary',
   },
   {
     id: 10,
@@ -147,6 +196,8 @@ const authorities = [
     image: auth10,
     description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
     email: 'FACUNDOGIRARD@GMAIL.COM',
+    chamberUrl: '',
+    category: 'treasurer',
   },
   {
     id: 11,
@@ -155,6 +206,8 @@ const authorities = [
     image: auth11,
     description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
     email: 'loulou1424@gmail.com',
+    chamberUrl: '',
+    category: 'treasurer',
   },
   {
     id: 12,
@@ -164,6 +217,8 @@ const authorities = [
     description:
       'CAMEFOR - Cámara de Mujeres Empresarias y Profesionales de Formosa',
     email: 'normariosmar@gmail.com',
+    chamberUrl: 'https://camefor.org.ar/',
+    category: 'treasurer',
   },
   {
     id: 13,
@@ -172,6 +227,8 @@ const authorities = [
     image: auth13,
     description: 'CIC - Cámara de la Industria del Calzado',
     email: 'cic@camara-calzado.org.ar',
+    chamberUrl: 'https://www.calzadoargentino.org.ar/',
+    category: 'vocal',
   },
   {
     id: 14,
@@ -181,6 +238,8 @@ const authorities = [
     description:
       'CGERA ITUZAINGO - Confederación General Empresaria de la República Argentina',
     email: 'sandraerey@gmail.com',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 15,
@@ -190,6 +249,8 @@ const authorities = [
     description:
       'CGERA PROV BS AS - Confederación General Empresaria de la República Argentina',
     email: 'maurogonzalez@zadig.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 16,
@@ -199,6 +260,8 @@ const authorities = [
     description:
       'CADIME - Cámara Argentina de Distribuidores de Materiales eléctricos',
     email: 'cadime@cadime.com.ar',
+    chamberUrl: 'https://www.cadime.org.ar/',
+    category: 'vocal',
   },
   {
     id: 17,
@@ -208,6 +271,8 @@ const authorities = [
     description:
       'CAIFA - Cámara de la Industria Argentina de Fertilizantes y Agroquímicos',
     email: 'jabosch@fri-ma.com.ar',
+    chamberUrl: 'https://www.ciafa.org.ar/',
+    category: 'vocal',
   },
   {
     id: 18,
@@ -216,6 +281,8 @@ const authorities = [
     image: auth18,
     description: 'CADIOA - Cámara Argentina de industrias ópticas y afines',
     email: 'nfermani@gmail.com',
+    chamberUrl: 'http://cadioa.com.ar/ ',
+    category: 'vocal',
   },
   {
     id: 19,
@@ -224,6 +291,8 @@ const authorities = [
     image: auth19,
     description: 'APYME - Asamblea de Pequeños y Medianos Empresarios',
     email: 'jm@kioshi.com.ar',
+    chamberUrl: 'https://www.apyme.org.ar/ ',
+    category: 'vocal',
   },
   {
     id: 20,
@@ -232,6 +301,8 @@ const authorities = [
     image: auth20,
     description: 'FAGODA - FEDERACION DE GANADO',
     email: 'pedro@uridesarrollos.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 21,
@@ -241,6 +312,8 @@ const authorities = [
     description:
       'CAFAICYM - CÁMARA ARGENTINA DE FABRICANTES DE AVIOS Y ACCESORIOS PARA LA CONFECCIÓN Y MARROQUINERIA',
     email: 'malovece150@gmail.com',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 22,
@@ -250,6 +323,8 @@ const authorities = [
     description:
       'CAPYMA - Cámara Arg de la Pequeña y Mediana Industria de la Alimentación',
     email: 'calveteornella@gmail.com',
+    chamberUrl: 'https://capyma.com.ar/ ',
+    category: 'vocal',
   },
   {
     id: 23,
@@ -259,6 +334,8 @@ const authorities = [
     description:
       'CASRECH - Cámara de Autoservicios y Supermercados de Residentes Chinos',
     email: 'fernandoquintero@fibertel.com.ar',
+    chamberUrl: 'https://casrech.com.ar/ ',
+    category: 'vocal',
   },
   {
     id: 24,
@@ -268,6 +345,8 @@ const authorities = [
     description:
       'UCI SAN LORENZO - UNIÓN DE COMERCIANTES E INDUSTRIALES DEL DPTO. SAN LORENZO',
     email: 'ucisanlorenzo@yahoo.com.ar',
+    chamberUrl: 'https://ucisanlorenzo.com/',
+    category: 'vocal',
   },
   {
     id: 25,
@@ -276,6 +355,8 @@ const authorities = [
     image: auth25,
     description: 'CAMEM - Cámara de Mujeres Empresarias de Misiones',
     email: 'mbowerpelozo@gmail.com',
+    chamberUrl: 'https://camem.org.ar/',
+    category: 'vocal',
   },
   {
     id: 26,
@@ -285,6 +366,8 @@ const authorities = [
     description:
       'AIERA - Asociación de Importadores y Exportadores de la República Argentina',
     email: 'jcpereyra@jcpcargo.com',
+    chamberUrl: 'https://aiera.org/',
+    category: 'vocal',
   },
   {
     id: 27,
@@ -294,6 +377,8 @@ const authorities = [
     description:
       'APYMEP - Asociación de Pequeñas y Medianas Empresas y Profesionales',
     email: 'jmetri28@gmail.com',
+    chamberUrl: 'https://www.apymep.org.ar/ ',
+    category: 'vocal',
   },
   {
     id: 28,
@@ -302,6 +387,8 @@ const authorities = [
     image: 'https://via.placeholder.com/500x500.png?text=Eduardo+Wylder',
     description: 'CICA - Cámara de la Industria Curtidora Argentina',
     email: 'ewydler@cica.org.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 29,
@@ -311,6 +398,8 @@ const authorities = [
     description:
       'CIMA - Cámara Industrial de la Manufactura del Cuero y Afines de la República Argentina',
     email: 'presidencia@cuerocima.com.ar',
+    chamberUrl: 'https://www.cuerocima.com.ar/ ',
+    category: 'vocal',
   },
   {
     id: 30,
@@ -320,6 +409,8 @@ const authorities = [
     description:
       'CAMEFOR - Cámara de Mujeres Empresarias y Profesionales de Formosa',
     email: 'puesto21.formosa@hotmail.com',
+    chamberUrl: 'https://camefor.org.ar/ ',
+    category: 'vocal',
   },
   {
     id: 31,
@@ -328,6 +419,8 @@ const authorities = [
     image: auth31,
     description: 'CCAER - CAMARA ARGENTINA DE ENERGIAS RENOVABLES',
     email: 'danielreffattiok@gmail.com',
+    chamberUrl: 'https://www.cader.org.ar/',
+    category: 'vocal',
   },
   {
     id: 32,
@@ -337,6 +430,8 @@ const authorities = [
     description:
       'CADEFHA - CAMARA ARGENTINA DE FABRICANTES DE HERRAJES Y AFINES',
     email: 'andrgc73@gmail.com',
+    chamberUrl: 'https://www.cahfesa.com.ar/',
+    category: 'vocal',
   },
   {
     id: 33,
@@ -346,6 +441,8 @@ const authorities = [
     description:
       'APYMIE - ASOCIACIÓN DE PEQUEÑAS Y MEDIANAS INDUSTRIAS ELECTRÓNICAS',
     email: 'amayer@pcb.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 34,
@@ -354,6 +451,8 @@ const authorities = [
     image: auth34,
     description: 'ADEL - Asociación de Empresas de Limpieza',
     email: 'harasesece@yahoo.com.ar',
+    chamberUrl: 'https://adel.com.ar/',
+    category: 'vocal',
   },
   {
     id: 35,
@@ -362,6 +461,8 @@ const authorities = [
     image: auth35,
     description: 'CASEL - Cámara Argentina de Seguridad Electrónica',
     email: 'mariokoch@starx.com.ar',
+    chamberUrl: 'https://casel.org.ar/',
+    category: 'vocal',
   },
   {
     id: 36,
@@ -371,6 +472,8 @@ const authorities = [
     description:
       'CECAF - Cámara Empresaria de Conservadores de Ascensores y Afines',
     email: 'plata1555@gmail.com',
+    chamberUrl: 'https://cecaf.com.ar/',
+    category: 'vocal',
   },
   {
     id: 37,
@@ -379,6 +482,8 @@ const authorities = [
     image: auth37,
     description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
     email: 'ezequiel@caefa.org.ar',
+    chamberUrl: 'http://www.caefa.org.ar/',
+    category: 'vocal',
   },
   {
     id: 38,
@@ -387,6 +492,8 @@ const authorities = [
     image: auth38,
     description: 'APYME - Asamblea de Pequeños y Medianos Empresarios',
     email: 'danielcampora.arq@gmail.com',
+    chamberUrl: 'https://www.apyme.org.ar/',
+    category: 'vocal',
   },
   {
     id: 39,
@@ -395,6 +502,8 @@ const authorities = [
     image: auth39,
     description: 'CICA - Cámara de la Industria Curtidora Argentina',
     email: 'secretaria@cica.org.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 40,
@@ -403,6 +512,8 @@ const authorities = [
     image: auth40,
     description: 'CAEHV - Cámara Argentina de Engordadores de Hacienda Vacuna',
     email: 'fernando.storni@feedlot.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 41,
@@ -412,6 +523,8 @@ const authorities = [
     description:
       'CAIFA - Cámara de la Industria Argentina de Fertilizantes y Agroquímicos',
     email: 'guglielmo@foundryresins.com.ar',
+    chamberUrl: 'https://www.ciafa.org.ar/',
+    category: 'vocal',
   },
   {
     id: 42,
@@ -420,6 +533,8 @@ const authorities = [
     image: auth42,
     description: 'CADIOA - Cámara Argentina de industrias ópticas y afines',
     email: 'gerencia@cadioa.com.ar',
+    chamberUrl: 'https://cadioa.blogspot.com/',
+    category: 'vocal',
   },
   {
     id: 43,
@@ -428,6 +543,8 @@ const authorities = [
     image: auth43,
     description: 'CAEFA - Cámara Argentina de Empresas de Fuegos Artificiales',
     email: 'gabriela@caefa.org.ar',
+    chamberUrl: 'https://www.caefa.org.ar/',
+    category: 'vocal',
   },
   {
     id: 44,
@@ -437,6 +554,8 @@ const authorities = [
     description:
       'CECAF - Cámara Empresaria de Conservadores de Ascensores y Afines',
     email: 'alsivaz@yahoo.com',
+    chamberUrl: 'https://cecaf.com.ar/',
+    category: 'vocal',
   },
   {
     id: 45,
@@ -446,6 +565,8 @@ const authorities = [
     description:
       'CAIPIC - Cámara Argentina de Industriales Proveedores de la Industria del Calzado',
     email: 'estebarena@gmail.com',
+    chamberUrl: 'https://www.caipic.org.ar/',
+    category: 'vocal',
   },
   {
     id: 46,
@@ -455,6 +576,8 @@ const authorities = [
     description:
       'APYMEP - Asociación de Pequeñas y Medianas Empresas y Profesionales',
     email: 'plablolires@yahoo.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 47,
@@ -464,6 +587,8 @@ const authorities = [
     description:
       'CADMI - CAMARA ARGENTINA DE DISTRIBUIDORES MAYORISTAS DE INFORMATICA',
     email: 'pablo_roust@solutionbox.com.ar',
+    chamberUrl: '',
+    category: 'vocal',
   },
   {
     id: 48,
@@ -472,6 +597,8 @@ const authorities = [
     image: auth48,
     description: 'CCARPA - Cámara de Comercio Argentino Paraguaya',
     email: 'leomarcil@gmail.com',
+    chamberUrl: 'https://ccarpa.com.ar/',
+    category: 'vocal',
   },
   {
     id: 49,
@@ -481,6 +608,8 @@ const authorities = [
     description:
       'CAEDE - CÁMARA ARGENTINA DE EMPRESAS DEMOLEDORAS Y EXCAVADORAS',
     email: 'miguel_hale@hotmail.com',
+    chamberUrl: 'https://caedearg.com.ar/',
+    category: 'vocal',
   },
   {
     id: 50,
@@ -490,6 +619,8 @@ const authorities = [
     description:
       'AIERA - Asociación de Importadores y Exportadores de la República Argentina',
     email: 'pnballester@yahoo.com.ar',
+    chamberUrl: 'https://aiera.org/',
+    category: 'vocal',
   },
   {
     id: 51,
@@ -498,6 +629,8 @@ const authorities = [
     image: auth51,
     description: 'CIC - Cámara de la Industria del Calzado',
     email: 'DGRAVAGNA@GMAIL.COM',
+    chamberUrl: 'https://www.calzadoargentino.org.ar/',
+    category: 'vocal',
   },
   {
     id: 52,
@@ -507,6 +640,8 @@ const authorities = [
     description:
       'UCI SAN LORENZO - UNIÓN DE COMERCIANTES E INDUSTRIALES DEL DPTO. SAN LORENZO',
     email: 'guillermocamioli@gelvezsrl.com.ar',
+    chamberUrl: 'https://ucisanlorenzo.com/',
+    category: 'vocal',
   },
   {
     id: 53,
@@ -515,6 +650,8 @@ const authorities = [
     image: auth53,
     description: 'FECIBA - FEDERACIÓN ECONÓMICA DE LA CIUDAD DE BUENOS AIRES',
     email: 'norbertolluciani@gmail.com',
+    chamberUrl: '',
+    category: 'revisor',
   },
   {
     id: 54,
@@ -524,6 +661,8 @@ const authorities = [
     description:
       'CGERA ITUZAINGO - Confederación General Empresaria de la República Argentina',
     email: '',
+    chamberUrl: 'https://www.facebook.com/CGERAItuzaingo/?locale=es_LA',
+    category: 'revisor',
   },
   {
     id: 55,
@@ -532,248 +671,393 @@ const authorities = [
     image: auth55,
     description: 'CAM TINTAS GRAF - Cámara de Tintas Gráficas',
     email: '',
+    chamberUrl: '',
+    category: 'revisor',
   },
 ];
 
-// ...existing code...
+// const associates = [
+//   {
+//     id: 1,
+//     name: 'CICA',
+//     description: 'Cámara Curtidora.',
+//   },
+//   {
+//     id: 2,
+//     name: 'CAHFESA',
+//     description:
+//       'Cámara de Fabricantes de Herramientas, Ferretería, Electricidad, Sanitarios y Afines.',
+//   },
+//   {
+//     id: 3,
+//     name: 'AGIRA SA',
+//     description: 'Empresa de Oil y Gas.',
+//   },
+//   {
+//     id: 4,
+//     name: 'ERNESTO MAYER SA',
+//     description: 'Empresa de Circuitos Impresos.',
+//   },
+//   {
+//     id: 5,
+//     name: 'GRANJA TRES ARROYOS SA',
+//     description: 'Empresa de Alimentos.',
+//   },
+//   {
+//     id: 6,
+//     name: 'RANIERI ARG SA',
+//     description: 'Empresa de Producción y Comercialización de Anteojos.',
+//   },
+//   {
+//     id: 7,
+//     name: 'EXINTRADER SA',
+//     description: 'Empresa de Importación y Distribución de Autopartes.',
+//   },
+//   {
+//     id: 8,
+//     name: 'EAYA CONSULTING SA',
+//     description: 'Empresa Consultora.',
+//   },
+//   {
+//     id: 9,
+//     name: 'AIERA',
+//     description: 'Asociación de Importadores y Exportadores de Argentina.',
+//   },
+//   {
+//     id: 10,
+//     name: 'ADEL',
+//     description: 'Asociación de Empresas de Limpieza.',
+//   },
+//   {
+//     id: 11,
+//     name: 'CERAMICA ALBERDI SA',
+//     description: 'Empresa de Pisos y Revestimientos.',
+//   },
+//   {
+//     id: 12,
+//     name: 'CADIOA',
+//     description: 'Cámara de Industrias Ópticas y Afines.',
+//   },
+//   {
+//     id: 13,
+//     name: 'CADIME',
+//     description: 'Cámara de Instituciones de Diagnóstico Médico.',
+//   },
+//   {
+//     id: 14,
+//     name: 'CAF',
+//     description: 'Cámara Argentina de Feedlot.',
+//   },
+//   {
+//     id: 15,
+//     name: 'CAIPIC',
+//     description: 'Cámara de Proveedores de la Industria del Calzado.',
+//   },
+//   {
+//     id: 16,
+//     name: 'CATGRA',
+//     description: 'Cámara de Fabricantes de Tintas Gráficas.',
+//   },
+//   {
+//     id: 17,
+//     name: 'CASEL',
+//     description: 'Cámara de Seguridad Electrónica.',
+//   },
+//   {
+//     id: 18,
+//     name: 'CEPA',
+//     description: 'Centro de Empresas Procesadoras Avícolas.',
+//   },
+//   {
+//     id: 19,
+//     name: 'CIC',
+//     description: 'Cámara de la Industria del Calzado.',
+//   },
+//   {
+//     id: 20,
+//     name: 'CIMA',
+//     description: 'Cámara de la Industria Manufacturera del Cuero y Afines.',
+//   },
+//   {
+//     id: 21,
+//     name: 'FACAF',
+//     description: 'Federación Argentina de Cámaras de Farmacias.',
+//   },
+//   {
+//     id: 22,
+//     name: 'CAEFA',
+//     description: 'Cámara de Empresas de Fuegos Artificiales.',
+//   },
+//   {
+//     id: 23,
+//     name: 'CASWEATER',
+//     description: 'Cámara del Sweater.',
+//   },
+//   {
+//     id: 24,
+//     name: 'ACARA',
+//     description:
+//       'Asociación de Concesionarios de Oficiales Automotores de Argentina.',
+//   },
+//   {
+//     id: 25,
+//     name: 'CGCYS',
+//     description: 'Confederación General de Comercio y Servicios de Argentina.',
+//   },
+//   {
+//     id: 26,
+//     name: 'CAFAICYM',
+//     description:
+//       'Cámara Argentina de Fabricantes de Avíos e Insumos para Confección y Marroquinería.',
+//   },
+//   {
+//     id: 27,
+//     name: 'MAROLIO SA',
+//     description: 'Empresa de Producción de Bienes de Consumo Masivo.',
+//   },
+//   {
+//     id: 28,
+//     name: 'FECIBA',
+//     description: 'Federación Económica de la Ciudad de Buenos Aires.',
+//   },
+//   {
+//     id: 29,
+//     name: 'ROSSO ASESOR Y PROD',
+//     description: 'Empresa de Seguros.',
+//   },
+//   {
+//     id: 30,
+//     name: 'ALGOSELAN FLANDRIA SA',
+//     description: 'Empresa Mayorista Textil.',
+//   },
+//   {
+//     id: 31,
+//     name: 'CAEDE',
+//     description: 'Cámara Argentina de Empresas Demoladoras y Excavadoras.',
+//   },
+//   {
+//     id: 32,
+//     name: 'CECAF',
+//     description: 'Cámara de Empresas de Conservación de Ascensores y Afines.',
+//   },
+//   {
+//     id: 33,
+//     name: 'PUERTO RAWSON PATAG SA',
+//     description: 'Empresa de Captura y Procesamiento de Pesca.',
+//   },
+//   {
+//     id: 34,
+//     name: 'CADMIPYA',
+//     description:
+//       'Cámara Argentina de Distribuidores Mayoristas de Informática, Productos y Afines.',
+//   },
+//   {
+//     id: 35,
+//     name: 'CCAER',
+//     description: 'Cámara de Comercio Automotor de Entre Ríos.',
+//   },
+//   {
+//     id: 36,
+//     name: 'CCARPA',
+//     description: 'Cámara de Comercio Argentino-Paraguaya.',
+//   },
+//   {
+//     id: 37,
+//     name: 'BENNY PEN ARG SA',
+//     description: 'Empresa de Artículos de Escritura.',
+//   },
+//   {
+//     id: 38,
+//     name: 'CAPYMA',
+//     description:
+//       'Cámara Argentina de Pequeñas y Medianas Empresas de la Industria Alimenticia y Bebidas.',
+//   },
+//   {
+//     id: 39,
+//     name: 'CASRECH',
+//     description: 'Cámara de Autoservicios y Supermercados Residentes Chinos.',
+//   },
+//   {
+//     id: 40,
+//     name: 'GELVEZ SRL',
+//     description:
+//       'Empresa de Servicios Industriales, Ingeniería y Construcción.',
+//   },
+//   {
+//     id: 41,
+//     name: 'LOMAS DEL SOL SRL',
+//     description: 'Empresa de Ingeniería en Nutrición Animal.',
+//   },
+//   {
+//     id: 42,
+//     name: 'FLEXATEC SRL',
+//     description:
+//       'Empresa de Fabricación y Distribución de Componentes para Transporte de Movimiento.',
+//   },
+//   {
+//     id: 43,
+//     name: 'CAIFA',
+//     description: 'Cámara Argentina de la Industria de Fricción.',
+//   },
+//   {
+//     id: 44,
+//     name: 'CAPIPE',
+//     description:
+//       'Cámara Argentina de Proveedores de la Industria Petroenergética.',
+//   },
+//   {
+//     id: 45,
+//     name: 'COOPERALA',
+//     description: 'Cámara de Empresas Laboratorios Farmacéuticos.',
+//   },
+// ];
 
-const associates = [
-  {
-    id: 1,
-    name: 'CICA',
-    description: 'Cámara Curtidora.',
-  },
-  {
-    id: 2,
-    name: 'CAHFESA',
-    description:
-      'Cámara de Fabricantes de Herramientas, Ferretería, Electricidad, Sanitarios y Afines.',
-  },
-  {
-    id: 3,
-    name: 'AGIRA SA',
-    description: 'Empresa de Oil y Gas.',
-  },
-  {
-    id: 4,
-    name: 'ERNESTO MAYER SA',
-    description: 'Empresa de Circuitos Impresos.',
-  },
-  {
-    id: 5,
-    name: 'GRANJA TRES ARROYOS SA',
-    description: 'Empresa de Alimentos.',
-  },
-  {
-    id: 6,
-    name: 'RANIERI ARG SA',
-    description: 'Empresa de Producción y Comercialización de Anteojos.',
-  },
-  {
-    id: 7,
-    name: 'EXINTRADER SA',
-    description: 'Empresa de Importación y Distribución de Autopartes.',
-  },
-  {
-    id: 8,
-    name: 'EAYA CONSULTING SA',
-    description: 'Empresa Consultora.',
-  },
-  {
-    id: 9,
-    name: 'AIERA',
-    description: 'Asociación de Importadores y Exportadores de Argentina.',
-  },
-  {
-    id: 10,
-    name: 'ADEL',
-    description: 'Asociación de Empresas de Limpieza.',
-  },
-  {
-    id: 11,
-    name: 'CERAMICA ALBERDI SA',
-    description: 'Empresa de Pisos y Revestimientos.',
-  },
-  {
-    id: 12,
-    name: 'CADIOA',
-    description: 'Cámara de Industrias Ópticas y Afines.',
-  },
-  {
-    id: 13,
-    name: 'CADIME',
-    description: 'Cámara de Instituciones de Diagnóstico Médico.',
-  },
-  {
-    id: 14,
-    name: 'CAF',
-    description: 'Cámara Argentina de Feedlot.',
-  },
-  {
-    id: 15,
-    name: 'CAIPIC',
-    description: 'Cámara de Proveedores de la Industria del Calzado.',
-  },
-  {
-    id: 16,
-    name: 'CATGRA',
-    description: 'Cámara de Fabricantes de Tintas Gráficas.',
-  },
-  {
-    id: 17,
-    name: 'CASEL',
-    description: 'Cámara de Seguridad Electrónica.',
-  },
-  {
-    id: 18,
-    name: 'CEPA',
-    description: 'Centro de Empresas Procesadoras Avícolas.',
-  },
-  {
-    id: 19,
-    name: 'CIC',
-    description: 'Cámara de la Industria del Calzado.',
-  },
-  {
-    id: 20,
-    name: 'CIMA',
-    description: 'Cámara de la Industria Manufacturera del Cuero y Afines.',
-  },
-  {
-    id: 21,
-    name: 'FACAF',
-    description: 'Federación Argentina de Cámaras de Farmacias.',
-  },
-  {
-    id: 22,
-    name: 'CAEFA',
-    description: 'Cámara de Empresas de Fuegos Artificiales.',
-  },
-  {
-    id: 23,
-    name: 'CASWEATER',
-    description: 'Cámara del Sweater.',
-  },
-  {
-    id: 24,
-    name: 'ACARA',
-    description:
-      'Asociación de Concesionarios de Oficiales Automotores de Argentina.',
-  },
-  {
-    id: 25,
-    name: 'CGCYS',
-    description: 'Confederación General de Comercio y Servicios de Argentina.',
-  },
-  {
-    id: 26,
-    name: 'CAFAICYM',
-    description:
-      'Cámara Argentina de Fabricantes de Avíos e Insumos para Confección y Marroquinería.',
-  },
-  {
-    id: 27,
-    name: 'MAROLIO SA',
-    description: 'Empresa de Producción de Bienes de Consumo Masivo.',
-  },
-  {
-    id: 28,
-    name: 'FECIBA',
-    description: 'Federación Económica de la Ciudad de Buenos Aires.',
-  },
-  {
-    id: 29,
-    name: 'ROSSO ASESOR Y PROD',
-    description: 'Empresa de Seguros.',
-  },
-  {
-    id: 30,
-    name: 'ALGOSELAN FLANDRIA SA',
-    description: 'Empresa Mayorista Textil.',
-  },
-  {
-    id: 31,
-    name: 'CAEDE',
-    description: 'Cámara Argentina de Empresas Demoladoras y Excavadoras.',
-  },
-  {
-    id: 32,
-    name: 'CECAF',
-    description: 'Cámara de Empresas de Conservación de Ascensores y Afines.',
-  },
-  {
-    id: 33,
-    name: 'PUERTO RAWSON PATAG SA',
-    description: 'Empresa de Captura y Procesamiento de Pesca.',
-  },
-  {
-    id: 34,
-    name: 'CADMIPYA',
-    description:
-      'Cámara Argentina de Distribuidores Mayoristas de Informática, Productos y Afines.',
-  },
-  {
-    id: 35,
-    name: 'CCAER',
-    description: 'Cámara de Comercio Automotor de Entre Ríos.',
-  },
-  {
-    id: 36,
-    name: 'CCARPA',
-    description: 'Cámara de Comercio Argentino-Paraguaya.',
-  },
-  {
-    id: 37,
-    name: 'BENNY PEN ARG SA',
-    description: 'Empresa de Artículos de Escritura.',
-  },
-  {
-    id: 38,
-    name: 'CAPYMA',
-    description:
-      'Cámara Argentina de Pequeñas y Medianas Empresas de la Industria Alimenticia y Bebidas.',
-  },
-  {
-    id: 39,
-    name: 'CASRECH',
-    description: 'Cámara de Autoservicios y Supermercados Residentes Chinos.',
-  },
-  {
-    id: 40,
-    name: 'GELVEZ SRL',
-    description:
-      'Empresa de Servicios Industriales, Ingeniería y Construcción.',
-  },
-  {
-    id: 41,
-    name: 'LOMAS DEL SOL SRL',
-    description: 'Empresa de Ingeniería en Nutrición Animal.',
-  },
-  {
-    id: 42,
-    name: 'FLEXATEC SRL',
-    description:
-      'Empresa de Fabricación y Distribución de Componentes para Transporte de Movimiento.',
-  },
-  {
-    id: 43,
-    name: 'CAIFA',
-    description: 'Cámara Argentina de la Industria de Fricción.',
-  },
-  {
-    id: 44,
-    name: 'CAPIPE',
-    description:
-      'Cámara Argentina de Proveedores de la Industria Petroenergética.',
-  },
-  {
-    id: 45,
-    name: 'COOPERALA',
-    description: 'Cámara de Empresas Laboratorios Farmacéuticos.',
-  },
-];
+// Función actualizada para manejar clics en cámaras
+// const handleChamberClick = (url) => {
+//   if (!url) {
+//     setModalIsOpen(true);
+//     return;
+//   }
+//   window.open(url, '_blank');
+// };
+
+// Función para cerrar el modal
+// const closeModal = () => {
+//   setModalIsOpen(false);
+// };
+
+const AuthorityCard = ({ authority, handleChamberClick }) => {
+  const [showDescription, setShowDescription] = React.useState(false);
+
+  const handleTouchStart = () => {
+    setShowDescription(true);
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      setShowDescription(false);
+    }, 3000); // Desaparece después de 3 segundos
+  };
+
+  return (
+    <motion.div
+      className="bg-white rounded-lg pt-4 flex flex-col items-center text-center min-h-auto hover:bg-gray-50"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      onHoverStart={() => setShowDescription(true)}
+      onHoverEnd={() => setShowDescription(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <img
+        src={authority.image}
+        alt={authority.name}
+        className="w-32 h-32 rounded-full object-cover mb-4"
+      />
+      <h3 className="text-justify text-gray-800 font-bold break-all">
+        {authority.name}
+      </h3>
+
+      <p className="text-gray-700  font-extralight">{authority.role}</p>
+      <div
+        className={`description-container p-4 w-full overflow-hidden transition-all duration-300 ${
+          showDescription
+            ? 'max-h-40 opacity-100 bg-slate-100 rounded-t'
+            : 'max-h-0 opacity-0'
+        }`}
+      >
+        <p className="text-sm text-gray-600">
+          {authority.description.includes('-')
+            ? (() => {
+                const [before, after] = authority.description
+                  .split('-')
+                  .map((s) => s.trim());
+                return `${before.toUpperCase()} - ${after
+                  .toLowerCase()
+                  .split(' ')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' ')}`;
+              })()
+            : authority.description.charAt(0).toUpperCase() +
+              authority.description.slice(1)}
+        </p>
+        {authority.email && (
+          <p className="mt-2 text-sm text-gray-600">
+            <a
+              href={`mailto:${authority.email}`}
+              className="text-blue-500 hover:underline"
+            >
+              {authority.email}
+            </a>
+          </p>
+        )}
+      </div>
+
+      <button
+        onClick={() => handleChamberClick(authority.chamberUrl)}
+        className={`flex justify-center items-center text-sm cursor-pointer w-full bg-slate-200 hover:bg-slate-300 rounded-b ${
+          authority.chamberUrl ? 'text-blue-600  ' : 'text-gray-800  '
+        }`}
+      >
+        {authority.description ? authority.description.split(' - ')[0] : ''}
+        {authority.chamberUrl ? (
+          <ExternalLink size={14} className="ml-1" />
+        ) : (
+          <AlertCircle size={14} className="ml-1" />
+        )}
+      </button>
+    </motion.div>
+  );
+};
 
 const AboutUsPage = () => {
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState('president');
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 8; // Número de autoridades por página para los vocales
+
+  const presidents = authorities.filter(
+    (auth) => auth.category === 'president'
+  );
+  const vicepresidents = authorities.filter(
+    (auth) => auth.category === 'vicepresident'
+  );
+  const secretarys = authorities.filter(
+    (auth) => auth.category === 'secretary'
+  );
+  const treasurers = authorities.filter(
+    (auth) => auth.category === 'treasurer'
+  );
+  const vocals = authorities.filter((auth) => auth.category === 'vocal');
+
+  // Cálculos para la paginación de vocales
+  const totalVocals = vocals.length;
+  const totalPages = Math.ceil(totalVocals / itemsPerPage);
+
+  // Obtener las autoridades actuales según la página actual
+  const indexOfLastVocal = currentPage * itemsPerPage;
+  const indexOfFirstVocal = indexOfLastVocal - itemsPerPage;
+  const currentVocals = vocals.slice(indexOfFirstVocal, indexOfLastVocal);
+
+  // Función para cambiar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Función actualizada para manejar clics en cámaras
+  const handleChamberClick = (url) => {
+    if (!url) {
+      setModalIsOpen(true);
+      return;
+    }
+    window.open(url, '_blank');
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="pt-16 bg-white">
       {/* Hero Section */}
@@ -918,7 +1202,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Authorities Section */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -990,10 +1274,239 @@ const AboutUsPage = () => {
             </div>
           </motion.div>
         </div>
+      </section> */}
+
+      {/* Sección de Autoridades con Tabs */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center">
+          <Users className="mx-auto h-12 w-12 text-blue-600" color="#418CBD" />
+          <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Autoridades y Asociados
+          </h2>
+          <p className="mt-4 max-w-2xl md:max-w-max text-xl text-gray-500 lg:mx-auto mb-8">
+            Conozca a los profesionales experimentados que lideran a CGERA hacia
+            un futuro de innovación y crecimiento.
+          </p>
+
+          {/* Tabs de navegación */}
+          <div className="border-b border-gray-200 mb-8">
+            <nav className="flex justify-center -mb-px space-x-8">
+              <button
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'president'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+                onClick={() => setActiveTab('president')}
+              >
+                Presidencia
+              </button>
+              <button
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'vicepresident'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+                onClick={() => setActiveTab('vicepresident')}
+              >
+                Vicepresidencia
+              </button>
+              <button
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'secretary'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+                onClick={() => setActiveTab('secretary')}
+              >
+                Secretaría
+              </button>
+              <button
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'treasurer'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+                onClick={() => setActiveTab('treasurer')}
+              >
+                Tesorería
+              </button>
+              <button
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'vocal'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+                onClick={() => {
+                  setActiveTab('vocal');
+                  setCurrentPage(1);
+                }}
+              >
+                Vocales
+              </button>
+            </nav>
+          </div>
+
+          {/* Contenido según el tab activo */}
+          <div className="mt-8">
+            {/* Presidente */}
+            {activeTab === 'president' && (
+              <div>
+                <div className="flex justify-center">
+                  {presidents.map((auth) => (
+                    <div key={auth.id} className="max-w-sm">
+                      <AuthorityCard
+                        authority={auth}
+                        handleChamberClick={handleChamberClick}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Vicepresidentes */}
+            {activeTab === 'vicepresident' && (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {vicepresidents.map((auth) => (
+                    <AuthorityCard
+                      key={auth.id}
+                      authority={auth}
+                      handleChamberClick={handleChamberClick}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Secretarios */}
+            {activeTab === 'secretary' && (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {secretarys.map((auth) => (
+                    <AuthorityCard
+                      key={auth.id}
+                      authority={auth}
+                      handleChamberClick={handleChamberClick}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Tesoreros */}
+            {activeTab === 'treasurer' && (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {treasurers.map((auth) => (
+                    <AuthorityCard
+                      key={auth.id}
+                      authority={auth}
+                      handleChamberClick={handleChamberClick}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Vocales (con paginación) */}
+            {activeTab === 'vocal' && (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {currentVocals.map((auth) => (
+                    <AuthorityCard
+                      key={auth.id}
+                      authority={auth}
+                      handleChamberClick={handleChamberClick}
+                    />
+                  ))}
+                </div>
+
+                {/* Paginación */}
+                {totalPages > 1 && (
+                  <div className="mt-8 flex justify-center">
+                    <nav
+                      className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                      aria-label="Pagination"
+                    >
+                      <button
+                        onClick={() =>
+                          paginate(currentPage > 1 ? currentPage - 1 : 1)
+                        }
+                        disabled={currentPage === 1}
+                        className={`relative inline-flex items-center px-2 py-2 rounded-l-md border ${
+                          currentPage === 1
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="sr-only">Anterior</span>
+                        &laquo;
+                      </button>
+
+                      {/* Botones de página */}
+                      {[...Array(totalPages)].map((_, i) => (
+                        <button
+                          key={i + 1}
+                          onClick={() => paginate(i + 1)}
+                          className={`relative inline-flex items-center px-4 py-2 border ${
+                            currentPage === i + 1
+                              ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                              : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                          }`}
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+
+                      <button
+                        onClick={() =>
+                          paginate(
+                            currentPage < totalPages
+                              ? currentPage + 1
+                              : totalPages
+                          )
+                        }
+                        disabled={currentPage === totalPages}
+                        className={`relative inline-flex items-center px-2 py-2 rounded-r-md border ${
+                          currentPage === totalPages
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="sr-only">Siguiente</span>
+                        &raquo;
+                      </button>
+                    </nav>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Modal para cámaras sin sitio web */}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Error Modal"
+        >
+          <Frown className="mx-auto h-16 w-16 mb-4" color="white" />
+          <h2 className="text-xl font-bold mb-4">Lo sentimos</h2>
+          <p className="mb-6">Esta cámara aún no tiene sitio web disponible</p>
+          <button
+            onClick={closeModal}
+            className="px-4 py-2 bg-white text-red-600 rounded font-medium hover:bg-gray-100 transition-colors"
+          >
+            Cerrar
+          </button>
+        </Modal>
       </section>
 
       {/* Asociaciones*/}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -1043,7 +1556,7 @@ const AboutUsPage = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
