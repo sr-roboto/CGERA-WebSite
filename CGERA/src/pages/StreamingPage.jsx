@@ -802,7 +802,7 @@ const VideoArchiveSection = React.forwardRef(
           </div>
 
           <div className="container bg-red-500 rounded-3xl py-8 ">
-            <Link to="https://www.argentina.gob.ar/economia/pymes-emprendedores-y-economia-del-conocimiento/capacitar">
+            <Link to="/course">
               <div className="row">
                 <div className=" flex flex-col justify-center">
                   <img

@@ -11,6 +11,7 @@ import Streaming from './pages/StreamingPage';
 import LoginPage from './pages/LoginPage';
 import { ChatBotProvider } from './components/chatbot/ChatBotProvider';
 import { AuthProvider } from './context/AuthContext';
+import CoursePage from './pages/CoursePage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/about" element={<AboutUsPage />} />
                 <Route path="/streaming" element={<Streaming />} />
+                <Route path="/course" element={<CoursePage />} />
               </Routes>
             </main>
             <Footer />
