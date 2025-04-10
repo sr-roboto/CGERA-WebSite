@@ -1,10 +1,46 @@
 import { ChevronRight, Play } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 export default function CoursePage() {
   const [activeTab, setActiveTab] = useState('module-1'); // Estado para la pestaña activa
   const location = useLocation();
+
+  // Referencias para animaciones basadas en scroll
+  const courseOverviewRef = useRef(null);
+  const courseModulesRef = useRef(null);
+  const benefitsRef = useRef(null);
+
+  // Estado de visibilidad para las secciones
+  const isCourseOverviewVisible = useInView(courseOverviewRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const isCourseModulesVisible = useInView(courseModulesRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const isBenefitsVisible = useInView(benefitsRef, { once: true, amount: 0.2 });
+
+  // Controles de animación
+  const overviewControls = useAnimation();
+  const modulesControls = useAnimation();
+  const benefitsControls = useAnimation();
+
+  // Efecto para disparar animaciones cuando las secciones son visibles
+  useEffect(() => {
+    if (isCourseOverviewVisible) {
+      overviewControls.start('visible');
+    }
+    if (isCourseModulesVisible) {
+      modulesControls.start('visible');
+    }
+    if (isBenefitsVisible) {
+      benefitsControls.start('visible');
+    }
+  }, [isCourseOverviewVisible, isCourseModulesVisible, isBenefitsVisible]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -19,6 +55,37 @@ export default function CoursePage() {
     } else {
       return url.split('/').pop(); // Fallback al método anterior
     }
+  };
+
+  // Variantes de animación
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  const tabVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3 },
+    },
   };
 
   const courseModules = [
@@ -176,23 +243,38 @@ export default function CoursePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols gap-12 items-center mt-10 ">
             <div className="text-center md:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <motion.h1
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl md:text-5xl font-bold mb-6"
+              >
                 Desata el Poder de la IA: Marketing Digital para Aventureros
-              </h1>
-              <p className="text-lg">
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg"
+              >
                 Un curso completo que te brindará todas las herramientas
                 necesarias para dominar el marketing digital con inteligencia
                 artificial.
-              </p>
+              </motion.p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Course Overview */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      <section ref={courseOverviewRef} className="py-16 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="max-w-7xl mx-auto"
+          initial="hidden"
+          animate={overviewControls}
+          variants={sectionVariants}
+        >
+          <motion.div className="text-center mb-12" variants={cardVariants}>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Sobre el Curso
             </h2>
@@ -201,10 +283,17 @@ export default function CoursePage() {
               Inteligencia Artificial a través de 8 módulos completos,
               presentados por Zoe, tu guía virtual.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100">
+            <motion.div
+              className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100"
+              variants={cardVariants}
+              whileHover={{
+                y: -5,
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+              }}
+            >
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-3">
                   Técnica Innovadora
@@ -217,8 +306,15 @@ export default function CoursePage() {
                   una experiencia de aprendizaje única.
                 </p>
               </div>
-            </div>
-            <div className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100">
+            </motion.div>
+            <motion.div
+              className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100"
+              variants={cardVariants}
+              whileHover={{
+                y: -5,
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+              }}
+            >
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-3">
                   Asistencia con IA
@@ -230,8 +326,15 @@ export default function CoursePage() {
                   apoyo constante durante todo tu recorrido de aprendizaje.
                 </p>
               </div>
-            </div>
-            <div className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100">
+            </motion.div>
+            <motion.div
+              className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100"
+              variants={cardVariants}
+              whileHover={{
+                y: -5,
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+              }}
+            >
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-3">Enfoque Práctico</h3>
               </div>
@@ -242,15 +345,23 @@ export default function CoursePage() {
                   proyecto.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Course Modules */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      <section
+        ref={courseModulesRef}
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50"
+      >
+        <motion.div
+          className="max-w-7xl mx-auto"
+          initial="hidden"
+          animate={modulesControls}
+          variants={sectionVariants}
+        >
+          <motion.div className="text-center mb-12" variants={cardVariants}>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Estructura del Curso
             </h2>
@@ -258,14 +369,17 @@ export default function CoursePage() {
               El curso se divide en 8 partes, cada una con un enfoque temático
               específico, actividades prácticas y una llamada a la acción.
             </p>
-          </div>
+          </motion.div>
 
           {/* Custom Tabs Implementation */}
           <div className="w-full">
             {/* Tab Navigation */}
-            <div className="flex flex-wrap justify-center mb-8 gap-2">
+            <motion.div
+              className="flex flex-wrap justify-center mb-8 gap-2"
+              variants={cardVariants}
+            >
               {courseModules.map((module, index) => (
-                <button
+                <motion.button
                   key={module.id}
                   onClick={() => setActiveTab(module.id)}
                   className={`tab-button px-4 py-2 text-sm rounded-md transition-colors ${
@@ -273,11 +387,13 @@ export default function CoursePage() {
                       ? 'bg-purple-600 text-white'
                       : 'bg-white text-gray-700 hover:bg-gray-100'
                   }`}
+                  variants={tabVariants}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Parte {index + 1}
-                </button>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
 
             {/* Tab Content */}
             {courseModules.map((module, index) => {
@@ -285,9 +401,12 @@ export default function CoursePage() {
               if (activeTab !== module.id) return null;
 
               return (
-                <div
+                <motion.div
                   key={module.id}
-                  className="tab-content-active animate-fadeIn"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="tab-content-active"
                 >
                   <div className="bg-white text-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div className="p-6 border-b border-gray-100">
@@ -304,10 +423,16 @@ export default function CoursePage() {
                           </h4>
                           <ul className="space-y-2">
                             {module.topics.map((topic, i) => (
-                              <li key={i} className="flex items-start">
+                              <motion.li
+                                key={i}
+                                className="flex items-start"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.3, delay: i * 0.1 }}
+                              >
                                 <ChevronRight className="h-5 w-5 text-purple-600 mr-2 shrink-0 mt-0.5" />
                                 <span>{topic}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </ul>
                           <h4 className="font-medium text-lg mb-3 mt-6">
@@ -315,14 +440,28 @@ export default function CoursePage() {
                           </h4>
                           <ul className="space-y-2">
                             {module.editingProcess.map((step, i) => (
-                              <li key={i} className="flex items-start">
+                              <motion.li
+                                key={i}
+                                className="flex items-start"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                  duration: 0.3,
+                                  delay: (i + module.topics.length) * 0.1,
+                                }}
+                              >
                                 <ChevronRight className="h-5 w-5 text-purple-600 mr-2 shrink-0 mt-0.5" />
                                 <span>{step}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </ul>
                         </div>
-                        <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                        <motion.div
+                          className="aspect-video bg-gray-100 rounded-lg overflow-hidden"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5 }}
+                        >
                           <iframe
                             className="w-full h-full"
                             src={`https://www.youtube.com/embed/${getYouTubeID(
@@ -332,32 +471,39 @@ export default function CoursePage() {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                           ></iframe>
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
                     <div className="px-6 pb-6 pt-2 border-t border-gray-100 mt-4">
-                      <a
+                      <motion.a
                         href={module.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         Ver video completo{' '}
                         <ChevronRight className="ml-2 h-4 w-4" />
-                      </a>
+                      </motion.a>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Benefits */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      <section ref={benefitsRef} className="py-16 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="max-w-7xl mx-auto"
+          initial="hidden"
+          animate={benefitsControls}
+          variants={sectionVariants}
+        >
+          <motion.div className="text-center mb-12" variants={cardVariants}>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               ¿Por qué elegir este curso?
             </h2>
@@ -365,95 +511,60 @@ export default function CoursePage() {
               Este curso te ofrece una base teórica y conceptual amplia, con
               herramientas prácticas para dominar el marketing digital con IA.
             </p>
-          </div>
+          </motion.div>
 
           <div className="text-gray-900 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white  rounded-lg shadow-md overflow-hidden border border-gray-100">
-              <div className="p-6">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-purple-600">1</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">
-                  Conocimiento Completo
-                </h3>
-              </div>
-              <div className="px-6 pb-6">
-                <p>
-                  Desde la definición del cliente ideal hasta la optimización de
-                  estrategias, cubrimos todo el ciclo del marketing digital.
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-              <div className="p-6">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-purple-600">2</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">
-                  Asistencia con IA
-                </h3>
-              </div>
-              <div className="px-6 pb-6">
-                <p>
-                  Zoe, tu asistente de IA, estará disponible para resolver dudas
-                  y brindarte apoyo durante todo el curso.
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-              <div className="p-6">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-purple-600">3</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Enfoque Práctico</h3>
-              </div>
-              <div className="px-6 pb-6">
-                <p>
-                  Cada módulo incluye actividades prácticas para aplicar
-                  inmediatamente lo aprendido en tu propio proyecto.
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-              <div className="p-6">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-purple-600">4</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">
-                  Tendencias Actuales
-                </h3>
-              </div>
-              <div className="px-6 pb-6">
-                <p>
-                  Aprenderás sobre las últimas tendencias en marketing digital
-                  con IA, preparándote para el futuro de la industria.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            {[1, 2, 3, 4].map((num, idx) => {
+              const titles = [
+                'Conocimiento Completo',
+                'Asistencia con IA',
+                'Enfoque Práctico',
+                'Tendencias Actuales',
+              ];
+              const descriptions = [
+                'Desde la definición del cliente ideal hasta la optimización de estrategias, cubrimos todo el ciclo del marketing digital.',
+                'Zoe, tu asistente de IA, estará disponible para resolver dudas y brindarte apoyo durante todo el curso.',
+                'Cada módulo incluye actividades prácticas para aplicar inmediatamente lo aprendido en tu propio proyecto.',
+                'Aprenderás sobre las últimas tendencias en marketing digital con IA, preparándote para el futuro de la industria.',
+              ];
 
-      {/* CTA */}
-      {/* <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            ¿Listo para desatar el poder de la IA en tu marketing?
-          </h2>
-          <p className="max-w-3xl mx-auto text-lg mb-8">
-            Inscríbete ahora y comienza tu viaje hacia el dominio del marketing
-            digital con inteligencia artificial.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="px-6 py-3 text-lg font-medium bg-white text-purple-700 hover:bg-purple-100 rounded-md transition-colors">
-              Inscríbete Ahora
-            </button>
-            <button className="px-6 py-3 text-lg font-medium border border-white text-white hover:bg-white/10 rounded-md transition-colors">
-              Más Información
-            </button>
+              return (
+                <motion.div
+                  key={idx}
+                  className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100"
+                  variants={cardVariants}
+                  whileHover={{
+                    y: -5,
+                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+                  }}
+                >
+                  <div className="p-6">
+                    <motion.div
+                      className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4"
+                      whileHover={{ scale: 1.1, backgroundColor: '#d8b4fe' }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      <span className="text-2xl font-bold text-purple-600">
+                        {num}
+                      </span>
+                    </motion.div>
+                    <h3 className="text-xl font-semibold mb-3">
+                      {titles[idx]}
+                    </h3>
+                  </div>
+                  <div className="px-6 pb-6">
+                    <p>{descriptions[idx]}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-        </div>
-      </section> */}
+        </motion.div>
+      </section>
     </div>
   );
 }
