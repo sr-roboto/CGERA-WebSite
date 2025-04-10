@@ -1,10 +1,13 @@
 import { ChevronRight, Play } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function CoursePage() {
   const [activeTab, setActiveTab] = useState('module-1'); // Estado para la pestaña activa
-  console.log(activeTab); // Verifica el estado activo en la consola
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   // Función para extraer correctamente el ID de YouTube de diferentes formatos de URL
   const getYouTubeID = (url) => {
@@ -175,11 +178,8 @@ export default function CoursePage() {
             <div className="text-center md:text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Desata el Poder de la IA: Marketing Digital para Aventureros
-                <span className="block text-2xl md:text-3xl mt-2 text-purple-200">
-                  (y No Aventureros También)
-                </span>
               </h1>
-              <p className="text-lg mb-8">
+              <p className="text-lg">
                 Un curso completo que te brindará todas las herramientas
                 necesarias para dominar el marketing digital con inteligencia
                 artificial.

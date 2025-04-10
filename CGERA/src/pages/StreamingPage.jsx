@@ -808,10 +808,9 @@ const VideoArchiveSection = React.forwardRef(
                   <img
                     src={capacitarLogo}
                     alt="logo capacitar"
-                    className="min-h-2 mx-auto"
+                    className="min-h-2 px-4 mx-auto md:w-1/2 lg:w-1/3"
                   />
-                  <h2 className="sr-only">Capacitar</h2>
-                  <p className="text-center text-lg pt-5">
+                  <p className="text-center pt-5">
                     Accedé a capacitaciones gratuitas para potenciar tus
                     proyectos, carrera profesional o emprendimientos.
                   </p>
