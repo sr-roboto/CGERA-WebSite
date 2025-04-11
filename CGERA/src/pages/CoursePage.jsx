@@ -101,13 +101,6 @@ export default function CoursePage() {
         'Introducción al marketing digital con IA',
         'Definición del cliente ideal',
       ],
-      editingProcess: [
-        'Creación del guion inicial, adaptado para video pregrabado.',
-        'Generación del video introductorio con el avatar de Zoe.',
-        'Diseño de diapositivas de presentación con transiciones dinámicas.',
-        'Incorporación de música de fondo motivadora.',
-        'Creación de llamado a la acción para interactuar con el chatbot de Zoe, con actividad de esbozar el propio cliente ideal.',
-      ],
     },
     {
       id: 'module-2',
@@ -120,12 +113,6 @@ export default function CoursePage() {
         'Herramientas de investigación',
         'Uso de IA para refinar perfiles',
         'Adaptación del mensaje',
-      ],
-      editingProcess: [
-        'Elaboración del guion, ampliando la información teórica.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas explicativas y ejemplos visuales.',
-        'Creación de llamado a la acción para interactuar con el chatbot, actividad de investigación del cliente ideal usando una herramienta.',
       ],
     },
     {
@@ -140,12 +127,6 @@ export default function CoursePage() {
         'Herramientas disponibles',
         'Edición y personalización',
       ],
-      editingProcess: [
-        'Creación del guion, con enfoque en la claridad y el lenguaje visual.',
-        'Generación del video con el avatar de Zoe.',
-        'Incorporación de ejemplos visuales de prompts y banners generados.',
-        'Creación de llamado a la acción para interactuar con el chatbot, con actividad de crear un banner propio.',
-      ],
     },
     {
       id: 'module-4',
@@ -159,12 +140,6 @@ export default function CoursePage() {
         'HubSpot',
         'Importancia estratégica',
       ],
-      editingProcess: [
-        'Elaboración del guion, con énfasis en la teoría y los beneficios de HubSpot.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas explicativas con diagramas y capturas de pantalla conceptuales.',
-        'Creación de llamado a la acción para interactuar con el chatbot, con actividad de pensar en una oferta para una landing page.',
-      ],
     },
     {
       id: 'module-5',
@@ -173,12 +148,6 @@ export default function CoursePage() {
         'El puente entre el mensaje y la audiencia, estrategias de difusión y optimización mediante IA.',
       videoUrl: 'https://youtu.be/uEqeIXbFGyo',
       topics: ['Mensaje', 'Difusión', 'Audiencia', 'Estrategia', 'IA'],
-      editingProcess: [
-        'Creación del guion, con un enfoque en conceptos clave y metáforas visuales.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas con diagramas y mapas conceptuales.',
-        'Creación de llamado a la acción para interactuar con el chatbot, con actividad de reflexión sobre el canal ideal.',
-      ],
     },
     {
       id: 'module-6',
@@ -187,12 +156,6 @@ export default function CoursePage() {
         'Estrategias específicas para Instagram, YouTube, Google Ads y Email Marketing.',
       videoUrl: 'https://youtu.be/lTYKXQF3tfk',
       topics: ['Instagram', 'YouTube', 'Google Ads', 'Email Marketing'],
-      editingProcess: [
-        'Elaboración del guion, con un equilibrio entre teoría y ejemplos prácticos.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas con logos de las plataformas y ejemplos visuales.',
-        'Creación de llamado a la acción para interactuar con el chatbot, con actividad de investigación sobre un canal específico.',
-      ],
     },
     {
       id: 'module-7',
@@ -205,12 +168,6 @@ export default function CoursePage() {
         'Métricas clave',
         'Herramientas de medición',
         'Rol de la IA en análisis de datos',
-      ],
-      editingProcess: [
-        'Creación del guion, con énfasis en la importancia de la medición y la optimización.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas con diagramas del embudo, tablas comparativas de métricas y logos de herramientas.',
-        'Creación de llamado a la acción detallado para interactuar con el chatbot, con actividad de dibujar el propio embudo de marketing.',
       ],
     },
     {
@@ -225,13 +182,6 @@ export default function CoursePage() {
         'Implementación',
         'Medición',
         'Tendencias futuras',
-      ],
-      editingProcess: [
-        'Elaboración del guion, con un tono motivador y orientado al futuro.',
-        'Generación del video con el avatar de Zoe.',
-        'Diseño de diapositivas con imágenes futuristas y resúmenes visuales.',
-        'Incorporación de música inspiradora.',
-        'Creación de llamado a la acción final para interactuar con el chatbot.',
       ],
     },
   ];
@@ -432,26 +382,6 @@ export default function CoursePage() {
                               >
                                 <ChevronRight className="h-5 w-5 text-purple-600 mr-2 shrink-0 mt-0.5" />
                                 <span>{topic}</span>
-                              </motion.li>
-                            ))}
-                          </ul>
-                          <h4 className="font-medium text-lg mb-3 mt-6">
-                            Proceso de Edición:
-                          </h4>
-                          <ul className="space-y-2">
-                            {module.editingProcess.map((step, i) => (
-                              <motion.li
-                                key={i}
-                                className="flex items-start"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{
-                                  duration: 0.3,
-                                  delay: (i + module.topics.length) * 0.1,
-                                }}
-                              >
-                                <ChevronRight className="h-5 w-5 text-purple-600 mr-2 shrink-0 mt-0.5" />
-                                <span>{step}</span>
                               </motion.li>
                             ))}
                           </ul>
