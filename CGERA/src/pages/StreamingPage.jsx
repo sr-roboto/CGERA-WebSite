@@ -472,28 +472,47 @@ const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
   const categories = [
     {
       title: 'Entrevistas',
+      subtittle: [],
       description:
         'Conversaciones con líderes empresariales y expertos del sector',
       icon: 'https://plus.unsplash.com/premium_photo-1672997189907-220e1305bb56?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 2,
+      url: '',
     },
     {
       title: 'Capacitaciones',
+      subtittle: [
+        {
+          title: 'Curso de marketing digital',
+          description: 'Aprende a utilizar las redes sociales para tu negocio',
+          url: '/course',
+        },
+        {
+          title: 'Liderazgo, Gestión y Empresas Familiares',
+          description: 'Marcelo Leibovich Lilien',
+          url: 'http://www.cecicapacitaciones.com',
+        },
+      ],
       description: 'Tutoriales y cursos para mejorar la gestión de tu empresa',
       icon: 'https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 3,
+      url: '',
     },
     {
       title: 'Análisis',
+      subtittle: [],
       description: 'Informes y análisis sobre la economía y el mercado',
       icon: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 1,
+      url: '',
     },
     {
       title: 'Eventos',
+      subtittle: [],
       description: 'Cobertura de los principales eventos del sector PYME',
       icon: 'https://plus.unsplash.com/premium_photo-1681487469745-91d1d8a5836b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 1,
+      url: '',
     },
   ];
 
@@ -533,7 +552,20 @@ const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
                 <h3 className="text-xl font-semibold mb-2 text-gray-800">
                   {category.title}
                 </h3>
+
                 <p className="text-gray-600 mb-4">{category.description}</p>
+                <ul className="list-disc list-inside justify-items-start mb-4">
+                  {category.subtittle.map((subtittle, index) => (
+                    <li key={index} className="text-sm text-gray-500 mb-1">
+                      <Link
+                        to={subtittle.url}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {subtittle.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
                 <p className="text-sm text-gray-500">
                   {category.count} videos disponibles
                 </p>
@@ -645,6 +677,16 @@ const VideoArchiveSection = React.forwardRef(
         views: '1.1K',
         videoUrl:
           'https://www.youtube-nocookie.com/embed/VVbHG__h-So?si=Q-_jro9UUvGNdG69',
+      },
+      {
+        title:
+          'Liderazgo, Gestión y Empresas Familiares, bajo el método CECI - Marcelo Leibovich Lilien ',
+        category: 'Capacitación',
+        duration: '05:11',
+        date: '14 Abril 2025',
+        views: '1.1K',
+        videoUrl:
+          'https://www.youtube-nocookie.com/embed/sGxAHvQiDCU?si=5HNGOaHqQXIN2z-E',
       },
     ];
 
