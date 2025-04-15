@@ -469,55 +469,81 @@ const HighlightsSection = () => {
 const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+
+  // Estado para controlar el hover en cada tarjeta
+  const [hoveredCategory, setHoveredCategory] = useState(null);
+
+  // Categorías actualizadas con las nuevas opciones
   const categories = [
     {
       title: 'Entrevistas',
-      subtittle: [],
       description:
         'Conversaciones con líderes empresariales y expertos del sector',
       icon: 'https://plus.unsplash.com/premium_photo-1672997189907-220e1305bb56?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 2,
-      url: '',
+      url: '#videoArchive',
+      subtitulo: [], // Mantenemos el array vacío para esta categoría
     },
     {
       title: 'Capacitaciones',
-      subtittle: [
+      description: 'Tutoriales y cursos para mejorar la gestión de tu empresa',
+      icon: 'https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      count: 3,
+      url: '#videoArchive',
+      subtitulo: [
         {
-          title: 'Curso de marketing digital',
-          description: 'Aprende a utilizar las redes sociales para tu negocio',
+          title: 'Marketing Digital para Aventureros',
+          description: 'Aprende a utilizar la IA para tu estrategia digital',
           url: '/course',
+          imagen: 'https://img.youtube.com/vi/IzpwyqjSw80/hqdefault.jpg',
+        },
+        {
+          title: 'Coaching Empresarial',
+          description: 'Desarrollo del Potencial Individual y de Equipos',
+          url: 'http://www.cecicapacitaciones.com',
+          imagen:
+            'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop',
         },
         {
           title: 'Liderazgo, Gestión y Empresas Familiares',
           description: 'Marcelo Leibovich Lilien',
-          url: 'http://www.cecicapacitaciones.com',
+          url: '#',
+          videoUrl:
+            'https://www.youtube-nocookie.com/embed/sGxAHvQiDCU?si=5HNGOaHqQXIN2z-E',
+          imagen: 'https://img.youtube.com/vi/sGxAHvQiDCU/hqdefault.jpg',
         },
       ],
-      description: 'Tutoriales y cursos para mejorar la gestión de tu empresa',
-      icon: 'https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      count: 3,
-      url: '',
     },
     {
       title: 'Análisis',
-      subtittle: [],
       description: 'Informes y análisis sobre la economía y el mercado',
       icon: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 1,
-      url: '',
+      url: '#videoArchive',
+      subtitulo: [],
     },
     {
       title: 'Eventos',
-      subtittle: [],
       description: 'Cobertura de los principales eventos del sector PYME',
       icon: 'https://plus.unsplash.com/premium_photo-1681487469745-91d1d8a5836b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       count: 1,
-      url: '',
+      url: '#videoArchive',
+      subtitulo: [],
     },
   ];
 
+  // Estado para controlar el modal de video
+  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para abrir el modal de video
+  const openVideoModal = (videoUrl) => {
+    setCurrentVideoUrl(videoUrl);
+    setIsModalOpen(true);
+  };
+
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-gray-50">
+    <section ref={ref} className="py-16 md:py-8 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -540,38 +566,102 @@ const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              onMouseEnter={() => setHoveredCategory(index)}
+              onMouseLeave={() => setHoveredCategory(null)}
             >
-              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg  border border-gray-100 rounded-ful">
-                <div className="mx-auto relative mb-2l">
+              <div className="h-full hover:shadow-lg transition-shadow text-center p-6 bg-white rounded-lg border border-gray-100">
+                {/* Imagen clickeable que lleva al archivo de videos */}
+                <div
+                  className="mx-auto relative mb-4 cursor-pointer"
+                  onClick={() => navigateToVideoArchive(category.title)}
+                >
                   <img
                     src={category.icon || '/placeholder.svg'}
                     alt={category.title}
-                    className="object-contain w-full h-full rounded-2xl shadow-lg"
+                    className="object-cover w-full h-48 rounded-2xl shadow-lg hover:opacity-90 transition-opacity"
                   />
+                  <div className="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors rounded-2xl flex items-center justify-center opacity-0 hover:opacity-100">
+                    <div className="bg-white/90 rounded-full p-3 shadow-lg">
+                      <ChevronRight className="h-6 w-6 text-blue-600" />
+                    </div>
+                  </div>
                 </div>
+
                 <h3 className="text-xl font-semibold mb-2 text-gray-800">
                   {category.title}
                 </h3>
 
                 <p className="text-gray-600 mb-4">{category.description}</p>
-                <ul className="list-disc list-inside justify-items-start mb-4">
-                  {category.subtittle.map((subtittle, index) => (
-                    <li key={index} className="text-sm text-gray-500 mb-1">
-                      <Link
-                        to={subtittle.url}
-                        className="text-blue-600 hover:underline"
-                      >
-                        {subtittle.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm text-gray-500">
-                  {category.count} videos disponibles
-                </p>
+
+                {/* Lista de subtítulos con miniaturas cuando existen Y el usuario hace hover*/}
+                {hoveredCategory === index &&
+                  category.subtitulo &&
+                  category.subtitulo.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-3 mb-4"
+                    >
+                      {category.subtitulo.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-gray-50 rounded-lg p-3 text-left hover:bg-gray-100 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            {/* Miniatura del contenido */}
+                            <div
+                              className="w-20 h-12 relative rounded overflow-hidden flex-shrink-0"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (item.videoUrl) {
+                                  openVideoModal(item.videoUrl);
+                                } else if (item.url) {
+                                  window.location.href = item.url;
+                                }
+                              }}
+                            >
+                              <img
+                                src={
+                                  item.imagen ||
+                                  'https://via.placeholder.com/150'
+                                }
+                                alt={item.title}
+                                className="w-full h-full object-cover cursor-pointer"
+                              />
+                              {item.videoUrl && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                  <Play size={14} className="text-white" />
+                                </div>
+                              )}
+                            </div>
+
+                            <div>
+                              <Link
+                                to={item.url}
+                                className="text-sm font-medium text-blue-600 hover:underline block"
+                                onClick={(e) => {
+                                  if (item.videoUrl) {
+                                    e.preventDefault();
+                                    openVideoModal(item.videoUrl);
+                                  }
+                                }}
+                              >
+                                {item.title}
+                              </Link>
+                              <p className="text-xs text-gray-500">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+
                 <button
                   onClick={() => navigateToVideoArchive(category.title)}
-                  className="mt-4 text-blue-600 hover:underline flex items-center gap-1"
+                  className="mt-4 text-blue-600 hover:underline flex items-center gap-1 mx-auto justify-center"
                 >
                   Ver Videos <ChevronRight size={16} />
                 </button>
@@ -579,6 +669,28 @@ const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
             </motion.div>
           ))}
         </div>
+
+        {/* Modal para reproducir video */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
+            <div className="relative w-full max-w-4xl mx-4 aspect-video">
+              <button
+                className="absolute -top-10 right-0 text-white hover:text-gray-300"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cerrar
+              </button>
+              <iframe
+                src={currentVideoUrl}
+                title="Video"
+                className="w-full h-full"
+                allowFullScreen
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -677,16 +789,6 @@ const VideoArchiveSection = React.forwardRef(
         views: '1.1K',
         videoUrl:
           'https://www.youtube-nocookie.com/embed/VVbHG__h-So?si=Q-_jro9UUvGNdG69',
-      },
-      {
-        title:
-          'Liderazgo, Gestión y Empresas Familiares, bajo el método CECI - Marcelo Leibovich Lilien ',
-        category: 'Capacitación',
-        duration: '05:11',
-        date: '14 Abril 2025',
-        views: '1.1K',
-        videoUrl:
-          'https://www.youtube-nocookie.com/embed/sGxAHvQiDCU?si=5HNGOaHqQXIN2z-E',
       },
     ];
 
