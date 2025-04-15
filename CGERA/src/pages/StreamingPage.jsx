@@ -500,9 +500,10 @@ const VideoCategoriesSection = ({ navigateToVideoArchive }) => {
         {
           title: 'Coaching Empresarial',
           description: 'Desarrollo del Potencial Individual y de Equipos',
-          url: 'http://www.cecicapacitaciones.com',
-          imagen:
-            'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop',
+          url: '#',
+          videoUrl:
+            'https://www.youtube.com/embed/sEQ29P9-un8?si=CG_DOMwi3tkss35-',
+          imagen: 'https://img.youtube.com/vi/sEQ29P9-un8/hqdefault.jpg',
         },
         {
           title: 'Liderazgo, Gestión y Empresas Familiares',
