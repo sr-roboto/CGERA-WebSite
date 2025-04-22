@@ -19,13 +19,14 @@ const Hero = () => {
       >
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Bienvenido a CGERA
+            Bienvenido a CGERA - CGE
           </h1>
           <p className="mt-6 text-lg text-white max-w-3xl">
-            CGERA (Confederación General Empresaria de la República Argentina)
-            Fundada el 4 de octubre de 2007, CGERA nace como una expresión de un
-            numeroso grupo de cámaras pymes de todo el país que necesitaban una
-            entidad que las represente.
+            Desde 2019, estas dos grandes entidades gremiales han unido sus
+            fuerzas con un propósito común: impulsar el desarrollo de las PYMES
+            y MiPymes argentinas. Con una mirada federal y una visión
+            estratégica, trabajemos para acompañar a las empresas en su
+            crecimiento y desarrollo.
           </p>
         </div>
       </motion.div>

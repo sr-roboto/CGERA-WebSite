@@ -50,14 +50,41 @@ const NewsSection = () => {
           }}
           className="space-y-6"
         >
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-8">
               Últimas Novedades
             </h2>
-            <p className="mt-4 text-lg text-gray-500">
-              Manténgase actualizado con las últimas noticias, eventos y
-              anuncios de CGERA
-            </p>
+            <ul className="space-y-4 text-left bg-white rounded-lg shadow-md p-6 border border-gray-100">
+              <li className="flex items-start py-3 border-b border-gray-100">
+                <div className="text-gray-500">
+                  <span className="font-bold text-gray-900">
+                    Quienes somos:
+                  </span>{' '}
+                  conoce quienes integran la Comisión Directiva.
+                </div>
+              </li>
+              <li className="flex items-start py-3 border-b border-gray-100">
+                <div className="text-gray-500">
+                  <span className="font-bold text-gray-900">Novedades:</span> Te
+                  contamos el día a día del accionar de la entidad.
+                </div>
+              </li>
+              <li className="flex items-start py-3 border-b border-gray-100">
+                <div className="text-gray-500">
+                  <span className="font-bold text-gray-900">Networking:</span>{' '}
+                  Subí los datos de tu empresa, qué demandas y qué ofertas para
+                  crecer junto a la Red de Empresas de mayor impacto del país.
+                </div>
+              </li>
+              <li className="flex items-start py-3">
+                <div className="text-gray-500">
+                  <span className="font-bold text-gray-900">CGERA TV:</span>{' '}
+                  Entrevistas y Capacitaciones, somos la voz y el oído de las
+                  PYMES Argentinas, hacete escuchar y escucha a tus pares la
+                  salida es el trabajo conjunto, la fuerza es asociativa.
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
