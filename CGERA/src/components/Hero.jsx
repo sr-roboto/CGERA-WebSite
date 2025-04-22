@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
+import banner from '../assets/banner.jpeg';
 const Hero = () => {
   return (
     <div className="relative bg-blue-600 pt-16">
       <div className="absolute inset-0">
         <img
           className="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+          src={banner}
           alt="Business people collaborating"
         />
         <div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-90" />
