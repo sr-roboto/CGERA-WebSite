@@ -55,6 +55,9 @@ const NewsSection = () => {
               Últimas Novedades
             </h2>
             <ul className="space-y-4 text-left bg-white rounded-lg shadow-md p-6 border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 sm:text-2xl">
+                En nuestra web vas a encontrar:{' '}
+              </h3>
               <li className="flex items-start py-3 border-b border-gray-100">
                 <div className="text-gray-500">
                   <span className="font-bold text-gray-900">
