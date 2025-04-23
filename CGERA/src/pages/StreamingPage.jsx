@@ -56,6 +56,9 @@ export default function CgeraTvPage() {
       {/* Highlights */}
       <HighlightsSection />
 
+      {/* Grilla de Programación - NUEVA SECCIÓN */}
+      <TVScheduleSection />
+
       {/* Video Categories */}
       <VideoCategoriesSection navigateToVideoArchive={navigateToVideoArchive} />
 
@@ -990,3 +993,187 @@ const VideoArchiveSection = React.forwardRef(
     );
   }
 );
+
+// Nuevo componente de Grilla de Programación para StreamingPage.jsx
+
+const TVScheduleSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+
+  // Definición de programas
+  const programs = [
+    {
+      day: 'Lunes',
+      start: '18:00',
+      end: '19:00',
+      name: 'Desafío PYME',
+      host: 'Marcelo Fernandez',
+      description: 'CEO Cierres Lynsa',
+    },
+    {
+      day: 'Miércoles',
+      start: '18:00',
+      end: '19:00',
+      name: 'Desafío PYME',
+      host: 'Marcelo Fernandez',
+      description: 'CEO Cierres Lynsa',
+    },
+    {
+      day: 'Viernes',
+      start: '18:00',
+      end: '19:00',
+      name: 'Desafío PYME',
+      host: 'Marcelo Fernandez',
+      description: 'CEO Cierres Lynsa',
+    },
+    {
+      day: 'Martes',
+      start: '18:00',
+      end: '19:00',
+      name: 'PYMES DE ITALIANOS',
+      host: 'Marisa Costantino',
+      description: 'Vicecónsul Italiana',
+    },
+    {
+      day: 'Jueves',
+      start: '18:00',
+      end: '19:00',
+      name: 'PYMES Sostenibles',
+      host: 'Cyntia Giolito',
+      description: '',
+    },
+    {
+      day: 'Sábados',
+      start: '11:00',
+      end: '12:00',
+      name: 'PYMES SANTAFESINAS',
+      host: 'ADER SANTA FE CAMEES',
+      description: '',
+    },
+    {
+      day: 'Lunes',
+      start: '19:00',
+      end: '20:00',
+      name: 'Líderes y Negocios',
+      host: 'Claudia Acosta',
+      description: '',
+    },
+    {
+      day: 'Miércoles',
+      start: '19:00',
+      end: '20:00',
+      name: 'Jóvenes emprendedores',
+      host: 'Sofia Scholastra',
+      description: 'Pymes en Crecimiento',
+    },
+  ];
+
+  // Días de la semana
+  const days = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo',
+  ];
+
+  // Horas del día (0-24)
+  const hours = [
+    ...[...Array(10)].map((_, i) => i + 14), // 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+  ];
+
+  // Función para obtener el programa en un día y hora específicos
+  const getProgramForTime = (day, hour) => {
+    return programs.find(
+      (program) =>
+        program.day === day && parseInt(program.start.split(':')[0]) === hour
+    );
+  };
+
+  return (
+    <section ref={ref} className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">
+            Grilla de Programación
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Descubre cuándo sintonizar tus programas favoritos en CGERA TV.
+          </p>
+        </motion.div>
+
+        <div className="overflow-x-auto">
+          <div className="min-w-[900px]">
+            {/* Encabezados de días */}
+            <div className="grid grid-cols-8 gap-1 mb-2">
+              <div className="bg-blue-600 text-white p-3 font-bold rounded-tl-lg">
+                Hora
+              </div>
+              {days.map((day, index) => (
+                <div
+                  key={index}
+                  className="bg-blue-600 text-white p-3 font-bold text-center last:rounded-tr-lg"
+                >
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            {/* Filas de horas */}
+            {hours.map((hour) => (
+              <div key={hour} className="grid grid-cols-8 gap-1 mb-1">
+                <div className="bg-gray-100 p-2 font-semibold flex items-center justify-center rounded-sm text-gray-800">
+                  {hour}:00
+                </div>
+
+                {days.map((day, dayIndex) => {
+                  const program = getProgramForTime(day, hour);
+
+                  return (
+                    <div
+                      key={dayIndex}
+                      className={`p-2 rounded-sm flex flex-col justify-center ${
+                        program
+                          ? 'bg-blue-100 border-l-4 border-blue-500'
+                          : 'bg-gray-50'
+                      }`}
+                    >
+                      {program && (
+                        <>
+                          <div className="font-bold text-sm text-blue-800">
+                            {program.name}
+                          </div>
+                          <div className="text-xs text-gray-700">
+                            {program.host}
+                          </div>
+                          {program.description && (
+                            <div className="text-xs text-gray-500 italic">
+                              {program.description}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <p className="text-gray-500 text-sm">
+            * La programación está sujeta a cambios sin previo aviso.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
