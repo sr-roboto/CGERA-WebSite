@@ -11,6 +11,7 @@ import {
   AlertCircle,
   ExternalLink,
   Frown,
+  Atom,
 } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import auth1 from '../assets/authorities/1.jpg';
@@ -676,241 +677,241 @@ const authorities = [
   },
 ];
 
-// const associates = [
-//   {
-//     id: 1,
-//     name: 'CICA',
-//     description: 'Cámara Curtidora.',
-//   },
-//   {
-//     id: 2,
-//     name: 'CAHFESA',
-//     description:
-//       'Cámara de Fabricantes de Herramientas, Ferretería, Electricidad, Sanitarios y Afines.',
-//   },
-//   {
-//     id: 3,
-//     name: 'AGIRA SA',
-//     description: 'Empresa de Oil y Gas.',
-//   },
-//   {
-//     id: 4,
-//     name: 'ERNESTO MAYER SA',
-//     description: 'Empresa de Circuitos Impresos.',
-//   },
-//   {
-//     id: 5,
-//     name: 'GRANJA TRES ARROYOS SA',
-//     description: 'Empresa de Alimentos.',
-//   },
-//   {
-//     id: 6,
-//     name: 'RANIERI ARG SA',
-//     description: 'Empresa de Producción y Comercialización de Anteojos.',
-//   },
-//   {
-//     id: 7,
-//     name: 'EXINTRADER SA',
-//     description: 'Empresa de Importación y Distribución de Autopartes.',
-//   },
-//   {
-//     id: 8,
-//     name: 'EAYA CONSULTING SA',
-//     description: 'Empresa Consultora.',
-//   },
-//   {
-//     id: 9,
-//     name: 'AIERA',
-//     description: 'Asociación de Importadores y Exportadores de Argentina.',
-//   },
-//   {
-//     id: 10,
-//     name: 'ADEL',
-//     description: 'Asociación de Empresas de Limpieza.',
-//   },
-//   {
-//     id: 11,
-//     name: 'CERAMICA ALBERDI SA',
-//     description: 'Empresa de Pisos y Revestimientos.',
-//   },
-//   {
-//     id: 12,
-//     name: 'CADIOA',
-//     description: 'Cámara de Industrias Ópticas y Afines.',
-//   },
-//   {
-//     id: 13,
-//     name: 'CADIME',
-//     description: 'Cámara de Instituciones de Diagnóstico Médico.',
-//   },
-//   {
-//     id: 14,
-//     name: 'CAF',
-//     description: 'Cámara Argentina de Feedlot.',
-//   },
-//   {
-//     id: 15,
-//     name: 'CAIPIC',
-//     description: 'Cámara de Proveedores de la Industria del Calzado.',
-//   },
-//   {
-//     id: 16,
-//     name: 'CATGRA',
-//     description: 'Cámara de Fabricantes de Tintas Gráficas.',
-//   },
-//   {
-//     id: 17,
-//     name: 'CASEL',
-//     description: 'Cámara de Seguridad Electrónica.',
-//   },
-//   {
-//     id: 18,
-//     name: 'CEPA',
-//     description: 'Centro de Empresas Procesadoras Avícolas.',
-//   },
-//   {
-//     id: 19,
-//     name: 'CIC',
-//     description: 'Cámara de la Industria del Calzado.',
-//   },
-//   {
-//     id: 20,
-//     name: 'CIMA',
-//     description: 'Cámara de la Industria Manufacturera del Cuero y Afines.',
-//   },
-//   {
-//     id: 21,
-//     name: 'FACAF',
-//     description: 'Federación Argentina de Cámaras de Farmacias.',
-//   },
-//   {
-//     id: 22,
-//     name: 'CAEFA',
-//     description: 'Cámara de Empresas de Fuegos Artificiales.',
-//   },
-//   {
-//     id: 23,
-//     name: 'CASWEATER',
-//     description: 'Cámara del Sweater.',
-//   },
-//   {
-//     id: 24,
-//     name: 'ACARA',
-//     description:
-//       'Asociación de Concesionarios de Oficiales Automotores de Argentina.',
-//   },
-//   {
-//     id: 25,
-//     name: 'CGCYS',
-//     description: 'Confederación General de Comercio y Servicios de Argentina.',
-//   },
-//   {
-//     id: 26,
-//     name: 'CAFAICYM',
-//     description:
-//       'Cámara Argentina de Fabricantes de Avíos e Insumos para Confección y Marroquinería.',
-//   },
-//   {
-//     id: 27,
-//     name: 'MAROLIO SA',
-//     description: 'Empresa de Producción de Bienes de Consumo Masivo.',
-//   },
-//   {
-//     id: 28,
-//     name: 'FECIBA',
-//     description: 'Federación Económica de la Ciudad de Buenos Aires.',
-//   },
-//   {
-//     id: 29,
-//     name: 'ROSSO ASESOR Y PROD',
-//     description: 'Empresa de Seguros.',
-//   },
-//   {
-//     id: 30,
-//     name: 'ALGOSELAN FLANDRIA SA',
-//     description: 'Empresa Mayorista Textil.',
-//   },
-//   {
-//     id: 31,
-//     name: 'CAEDE',
-//     description: 'Cámara Argentina de Empresas Demoladoras y Excavadoras.',
-//   },
-//   {
-//     id: 32,
-//     name: 'CECAF',
-//     description: 'Cámara de Empresas de Conservación de Ascensores y Afines.',
-//   },
-//   {
-//     id: 33,
-//     name: 'PUERTO RAWSON PATAG SA',
-//     description: 'Empresa de Captura y Procesamiento de Pesca.',
-//   },
-//   {
-//     id: 34,
-//     name: 'CADMIPYA',
-//     description:
-//       'Cámara Argentina de Distribuidores Mayoristas de Informática, Productos y Afines.',
-//   },
-//   {
-//     id: 35,
-//     name: 'CCAER',
-//     description: 'Cámara de Comercio Automotor de Entre Ríos.',
-//   },
-//   {
-//     id: 36,
-//     name: 'CCARPA',
-//     description: 'Cámara de Comercio Argentino-Paraguaya.',
-//   },
-//   {
-//     id: 37,
-//     name: 'BENNY PEN ARG SA',
-//     description: 'Empresa de Artículos de Escritura.',
-//   },
-//   {
-//     id: 38,
-//     name: 'CAPYMA',
-//     description:
-//       'Cámara Argentina de Pequeñas y Medianas Empresas de la Industria Alimenticia y Bebidas.',
-//   },
-//   {
-//     id: 39,
-//     name: 'CASRECH',
-//     description: 'Cámara de Autoservicios y Supermercados Residentes Chinos.',
-//   },
-//   {
-//     id: 40,
-//     name: 'GELVEZ SRL',
-//     description:
-//       'Empresa de Servicios Industriales, Ingeniería y Construcción.',
-//   },
-//   {
-//     id: 41,
-//     name: 'LOMAS DEL SOL SRL',
-//     description: 'Empresa de Ingeniería en Nutrición Animal.',
-//   },
-//   {
-//     id: 42,
-//     name: 'FLEXATEC SRL',
-//     description:
-//       'Empresa de Fabricación y Distribución de Componentes para Transporte de Movimiento.',
-//   },
-//   {
-//     id: 43,
-//     name: 'CAIFA',
-//     description: 'Cámara Argentina de la Industria de Fricción.',
-//   },
-//   {
-//     id: 44,
-//     name: 'CAPIPE',
-//     description:
-//       'Cámara Argentina de Proveedores de la Industria Petroenergética.',
-//   },
-//   {
-//     id: 45,
-//     name: 'COOPERALA',
-//     description: 'Cámara de Empresas Laboratorios Farmacéuticos.',
-//   },
-// ];
+const associates = [
+  {
+    id: 1,
+    name: 'CICA',
+    description: 'Cámara Curtidora.',
+  },
+  {
+    id: 2,
+    name: 'CAHFESA',
+    description:
+      'Cámara de Fabricantes de Herramientas, Ferretería, Electricidad, Sanitarios y Afines.',
+  },
+  {
+    id: 3,
+    name: 'AGIRA SA',
+    description: 'Empresa de Oil y Gas.',
+  },
+  {
+    id: 4,
+    name: 'ERNESTO MAYER SA',
+    description: 'Empresa de Circuitos Impresos.',
+  },
+  {
+    id: 5,
+    name: 'GRANJA TRES ARROYOS SA',
+    description: 'Empresa de Alimentos.',
+  },
+  {
+    id: 6,
+    name: 'RANIERI ARG SA',
+    description: 'Empresa de Producción y Comercialización de Anteojos.',
+  },
+  {
+    id: 7,
+    name: 'EXINTRADER SA',
+    description: 'Empresa de Importación y Distribución de Autopartes.',
+  },
+  {
+    id: 8,
+    name: 'EAYA CONSULTING SA',
+    description: 'Empresa Consultora.',
+  },
+  {
+    id: 9,
+    name: 'AIERA',
+    description: 'Asociación de Importadores y Exportadores de Argentina.',
+  },
+  {
+    id: 10,
+    name: 'ADEL',
+    description: 'Asociación de Empresas de Limpieza.',
+  },
+  {
+    id: 11,
+    name: 'CERAMICA ALBERDI SA',
+    description: 'Empresa de Pisos y Revestimientos.',
+  },
+  {
+    id: 12,
+    name: 'CADIOA',
+    description: 'Cámara de Industrias Ópticas y Afines.',
+  },
+  {
+    id: 13,
+    name: 'CADIME',
+    description: 'Cámara de Instituciones de Diagnóstico Médico.',
+  },
+  {
+    id: 14,
+    name: 'CAF',
+    description: 'Cámara Argentina de Feedlot.',
+  },
+  {
+    id: 15,
+    name: 'CAIPIC',
+    description: 'Cámara de Proveedores de la Industria del Calzado.',
+  },
+  {
+    id: 16,
+    name: 'CATGRA',
+    description: 'Cámara de Fabricantes de Tintas Gráficas.',
+  },
+  {
+    id: 17,
+    name: 'CASEL',
+    description: 'Cámara de Seguridad Electrónica.',
+  },
+  {
+    id: 18,
+    name: 'CEPA',
+    description: 'Centro de Empresas Procesadoras Avícolas.',
+  },
+  {
+    id: 19,
+    name: 'CIC',
+    description: 'Cámara de la Industria del Calzado.',
+  },
+  {
+    id: 20,
+    name: 'CIMA',
+    description: 'Cámara de la Industria Manufacturera del Cuero y Afines.',
+  },
+  {
+    id: 21,
+    name: 'FACAF',
+    description: 'Federación Argentina de Cámaras de Farmacias.',
+  },
+  {
+    id: 22,
+    name: 'CAEFA',
+    description: 'Cámara de Empresas de Fuegos Artificiales.',
+  },
+  {
+    id: 23,
+    name: 'CASWEATER',
+    description: 'Cámara del Sweater.',
+  },
+  {
+    id: 24,
+    name: 'ACARA',
+    description:
+      'Asociación de Concesionarios de Oficiales Automotores de Argentina.',
+  },
+  {
+    id: 25,
+    name: 'CGCYS',
+    description: 'Confederación General de Comercio y Servicios de Argentina.',
+  },
+  {
+    id: 26,
+    name: 'CAFAICYM',
+    description:
+      'Cámara Argentina de Fabricantes de Avíos e Insumos para Confección y Marroquinería.',
+  },
+  {
+    id: 27,
+    name: 'MAROLIO SA',
+    description: 'Empresa de Producción de Bienes de Consumo Masivo.',
+  },
+  {
+    id: 28,
+    name: 'FECIBA',
+    description: 'Federación Económica de la Ciudad de Buenos Aires.',
+  },
+  {
+    id: 29,
+    name: 'ROSSO ASESOR Y PROD',
+    description: 'Empresa de Seguros.',
+  },
+  {
+    id: 30,
+    name: 'ALGOSELAN FLANDRIA SA',
+    description: 'Empresa Mayorista Textil.',
+  },
+  {
+    id: 31,
+    name: 'CAEDE',
+    description: 'Cámara Argentina de Empresas Demoladoras y Excavadoras.',
+  },
+  {
+    id: 32,
+    name: 'CECAF',
+    description: 'Cámara de Empresas de Conservación de Ascensores y Afines.',
+  },
+  {
+    id: 33,
+    name: 'PUERTO RAWSON PATAG SA',
+    description: 'Empresa de Captura y Procesamiento de Pesca.',
+  },
+  {
+    id: 34,
+    name: 'CADMIPYA',
+    description:
+      'Cámara Argentina de Distribuidores Mayoristas de Informática, Productos y Afines.',
+  },
+  {
+    id: 35,
+    name: 'CCAER',
+    description: 'Cámara de Comercio Automotor de Entre Ríos.',
+  },
+  {
+    id: 36,
+    name: 'CCARPA',
+    description: 'Cámara de Comercio Argentino-Paraguaya.',
+  },
+  {
+    id: 37,
+    name: 'BENNY PEN ARG SA',
+    description: 'Empresa de Artículos de Escritura.',
+  },
+  {
+    id: 38,
+    name: 'CAPYMA',
+    description:
+      'Cámara Argentina de Pequeñas y Medianas Empresas de la Industria Alimenticia y Bebidas.',
+  },
+  {
+    id: 39,
+    name: 'CASRECH',
+    description: 'Cámara de Autoservicios y Supermercados Residentes Chinos.',
+  },
+  {
+    id: 40,
+    name: 'GELVEZ SRL',
+    description:
+      'Empresa de Servicios Industriales, Ingeniería y Construcción.',
+  },
+  {
+    id: 41,
+    name: 'LOMAS DEL SOL SRL',
+    description: 'Empresa de Ingeniería en Nutrición Animal.',
+  },
+  {
+    id: 42,
+    name: 'FLEXATEC SRL',
+    description:
+      'Empresa de Fabricación y Distribución de Componentes para Transporte de Movimiento.',
+  },
+  {
+    id: 43,
+    name: 'CAIFA',
+    description: 'Cámara Argentina de la Industria de Fricción.',
+  },
+  {
+    id: 44,
+    name: 'CAPIPE',
+    description:
+      'Cámara Argentina de Proveedores de la Industria Petroenergética.',
+  },
+  {
+    id: 45,
+    name: 'COOPERALA',
+    description: 'Cámara de Empresas Laboratorios Farmacéuticos.',
+  },
+];
 
 // Función actualizada para manejar clics en cámaras
 // const handleChamberClick = (url) => {
@@ -1138,6 +1139,58 @@ const AboutUsPage = () => {
                   apoyándose en una expansión del mercado interno y el
                   crecimiento de las exportaciones.
                 </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      {/* Confederación General Económica de la República Argentina ( CGERA) */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="lg:text-center">
+              <Atom
+                className="mx-auto h-12 w-12 text-blue-600"
+                color="#418CBD"
+              />
+              <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl text-center">
+                Confederación General Económica de la República Argentina (
+                CGERA)
+              </h2>
+            </div>
+            <div className="mt-10">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-600">
+                    Fundada el 4 de octubre de 2007 en la Casa de la Provincia
+                    de Tucumán, con el objetivo de agrupar a cámaras empresarias
+                    que requerían una representación federal, multisectorial y
+                    enfocada en la defensa de la producción nacional y el
+                    empleo.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-600">
+                    En 2019, interpretando con lucidez la coyuntura nacional e
+                    internacional, CGERA da un paso estratégico y visionario al
+                    integrar a la histórica CGE dentro de su proyecto de
+                    transformación y fortalecimiento del Ecosistema Productivo y
+                    Comercial argentino.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-600">
+                    Este hecho no solo marcó la unificación de dos trayectorias
+                    emblemáticas del empresariado nacional, sino que consolidó
+                    un espacio común de representación federal, multisectorial y
+                    con fuerte vocación por el desarrollo económico con
+                    inclusión.
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -1506,7 +1559,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Asociaciones*/}
-      {/* <section className="py-16">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -1556,7 +1609,7 @@ const AboutUsPage = () => {
             </div>
           </motion.div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 };
