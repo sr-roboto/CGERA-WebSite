@@ -60,7 +60,7 @@ const AboutPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl opacity-90 mb-8"
           >
-            Conoce a CGERA, la organización que representa y defiende los
+            Conocé a CGERA, la organización que representa y defiende los
             intereses de las pequeñas y medianas empresas en Argentina.
           </motion.p>
         </div>

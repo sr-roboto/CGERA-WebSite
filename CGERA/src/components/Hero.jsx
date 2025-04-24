@@ -93,8 +93,8 @@ const Hero = () => {
             Desde 2019, estas dos grandes entidades gremiales han unido sus
             fuerzas con un propósito común: impulsar el desarrollo de las PYMES
             y MiPymes argentinas. Con una mirada federal y una visión
-            estratégica, trabajemos para acompañar a las empresas en su
-            crecimiento y desarrollo.
+            estratégica, trabajamos para acompañar al Sector en la
+            Transformación, Innovación y Competitividad, en todo el país.
           </p>
         </div>
       </motion.div>

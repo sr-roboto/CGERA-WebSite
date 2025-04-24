@@ -63,7 +63,7 @@ const NewsSection = () => {
                   <span className="font-bold text-gray-900">
                     Quienes somos:
                   </span>{' '}
-                  conoce quienes integran la Comisión Directiva.
+                  Conocé quienes integran la Comisión Directiva y sus Asociados.
                 </div>
               </li>
               <li className="flex items-start py-3 border-b border-gray-100">
@@ -75,16 +75,17 @@ const NewsSection = () => {
               <li className="flex items-start py-3 border-b border-gray-100">
                 <div className="text-gray-500">
                   <span className="font-bold text-gray-900">Networking:</span>{' '}
-                  Subí los datos de tu empresa, qué demandas y qué ofertas para
-                  crecer junto a la Red de Empresas de mayor impacto del país.
+                  Subí los datos de tu empresa, qué demandas y qué ofertas, del
+                  pais detectando oportunidades de negocio entre sus integrantes
+                  gracias a la IA.
                 </div>
               </li>
               <li className="flex items-start py-3">
                 <div className="text-gray-500">
                   <span className="font-bold text-gray-900">CGERA TV:</span>{' '}
                   Entrevistas y Capacitaciones, somos la voz y el oído de las
-                  PYMES Argentinas, hacete escuchar y escucha a tus pares la
-                  salida es el trabajo conjunto, la fuerza es asociativa.
+                  PYMES Argentinas, hacete escuchar y escuchá a tus pares. La
+                  salida es el trabajo conjunto. La Fuerza es Asociativa.
                 </div>
               </li>
             </ul>

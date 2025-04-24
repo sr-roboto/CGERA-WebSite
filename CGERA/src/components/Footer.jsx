@@ -13,9 +13,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <span className="text-2xl font-bold text-white">CGERA</span>
+            <span className="text-2xl font-bold text-white">CGERA - CGE</span>
             <p className="mt-4 text-gray-300">
-              empoderar, colaboración, innovación, sostenibilidad y crecimiento
+              empoderamiento, colaboración, innovación, sostenibilidad y
+              crecimiento.
             </p>
             <div className="mt-6 flex space-x-6">
               <a href="#" className="text-gray-400 hover:text-white">
