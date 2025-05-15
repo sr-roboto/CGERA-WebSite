@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Hero from './components/Hero';
@@ -14,28 +15,10 @@ import { AuthProvider } from './context/AuthContext';
 import CoursePage from './pages/CoursePage';
 
 function App() {
-  return (
-    <ChatBotProvider>
-      <AuthProvider>
-        <Router>
-          <div className="min-h-screen bg-white">
-            <NavBar />
-            <main>
-              <Routes>
-                <Route path="/" element={<LandingPage />} />\
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/news" element={<NewsPage />} />
-                <Route path="/about" element={<AboutUsPage />} />
-                <Route path="/streaming" element={<Streaming />} />
-                <Route path="/course" element={<CoursePage />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </Router>
-      </AuthProvider>
-    </ChatBotProvider>
-  );
+  useEffect(() => {
+    window.location.replace('https://cgera.net.ar');
+  }, []);
+  return <></>;
 }
 
 export default App;
